@@ -6,9 +6,9 @@ import java.io.*;;
 	public static void main (String [] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
-		int i=0;
+		
 		int pilihan, pilihan2;
-                		for(i=0; i<=2; i++){
+                		
 			
 			System.out.println("=================================================");
 			System.out.println("  Selamat datang di sistem rental alat camping          ");
@@ -23,7 +23,7 @@ import java.io.*;;
 			System.out.println("\n               Login Berhasil              ");
 			System.out.println("\n");
 			
-			i=5;	
+				
 			
 			
 			while(true){
@@ -64,7 +64,10 @@ import java.io.*;;
                                             System.out.println("=================================================");
                                             System.out.println("       ");
                                             System.out.print("      ");
-                                            
+                                            System.out.println("=================================================");
+                                            System.out.println("\n1.keluar");
+                                            System.out.println("2.Kembali");
+                                            System.out.print("\nPilih Menu : ");
                                             pilihan2 = Integer.parseInt(br.readLine());
                                             switch (pilihan2) {
                                                     case 1:
@@ -157,4 +160,4 @@ import java.io.*;;
 	} 
 	 
 	 
- }
+ 

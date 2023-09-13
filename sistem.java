@@ -7,7 +7,8 @@ import java.io.*;;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
 		
-		int pilihan, pilihan2;
+		int pilihan, pilihan2, tabung, saldo =0, index=0;
+                int[] tambah_saldo=new int[20];
                 		
 			
 			System.out.println("=================================================");
@@ -37,6 +38,7 @@ import java.io.*;;
 				System.out.println("5.Pembayaran");
 				System.out.println("6.Servis center");
                                 System.out.println("7.Pengembalian barang");
+                                System.out.println("8.pendapatan");
 				System.out.print("\nPilih Menu : ");
 				pilihan = Integer.parseInt(br.readLine());
 				switch (pilihan) {
@@ -123,7 +125,7 @@ import java.io.*;;
                                             }while(pilihan2!=2);
 					
 					break;
-					case 5:
+					case 6:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("                      Help                       ");
@@ -146,15 +148,59 @@ import java.io.*;;
                                                     
                                                     }
                                             }while(pilihan2!=2);
+                                            break;
+                                            case 5:
+					do{
+                                            System.out.println("=================================================");
+                                            System.out.println("Masukan Total Nominal Barang yang akan di pinjam ");
+                                            System.out.println("=================================================");
+                                            System.out.print("     Rp. ");
+                                            tabung = Integer.parseInt(br.readLine());
+                                            tambah_saldo[index]=tabung;
+                                            index++;
+                                            saldo += tabung;
+                                            System.out.println("  pembayaran anda berhasil ");
+                                            System.out.println("=================================================");
+                                            System.out.println("\n1.keluar");
+                                            System.out.println("2.Kembali");
+                                            System.out.print("\nPilih Menu : ");
+                                            pilihan2 = Integer.parseInt(br.readLine());
+                                            switch (pilihan2) {
+                                                    case 1:
+                                                    System.exit(0);
+                                                    break;
+                                                    
+                                                    }
+                                            }while(pilihan2!=2);
 					
 					break;
-					case 6:
+                                        
+					case 8:
+                                        do{
+                                            System.out.println("=================================================");
+                                            System.out.println("               Cek pendapatan                   ");
+                                            System.out.println("       pendapatan Anda adalah Rp. " + saldo       );
+                                            System.out.println("=================================================");
+                                            System.out.println("\n1.keluar");
+                                            System.out.println("2.Kembali");
+                                            System.out.print("\nPilih Menu : ");
+                                            pilihan2 = Integer.parseInt(br.readLine());
+                                            switch (pilihan2) {
+                                                    case 1:
+                                                    System.exit(0);
+                                                    break;
+                                                    
+                                                    }
+                                            }while(pilihan2!=2);
+					 break;
+					case 7:
 					System.exit(0);
 					break;
 					default:
 					System.exit(0);
 					break;
 					}
+                                        
 				}
 				
 			} else {

@@ -8,6 +8,8 @@ import java.io.*;;
 	
 		
 		int pilihan, pilihan2, tabung, saldo =0, index=0;
+                String nama,alamat;
+                long notelp;
                 int[] tambah_saldo=new int[20];
                 		
 			
@@ -31,18 +33,45 @@ import java.io.*;;
 				System.out.println("=================================================");
 				System.out.println("                   Menu Utama                   ");
 				System.out.println("=================================================");
-				System.out.println("\n1.Persediaan alat camping");
-				System.out.println("2.Keranjang");
-				System.out.println("3.Peminjaman barang");
-				System.out.println("4.Opsi pengiriman");
-				System.out.println("5.Pembayaran");
-				System.out.println("6.Servis center");
-                                System.out.println("7.Pengembalian barang");
-                                System.out.println("8.pendapatan");
+				System.out.println("\n1.Profil");
+                                System.out.println("2.Persediaan alat camping");
+				System.out.println("3.Keranjang");
+				System.out.println("4.Peminjaman barang");
+				System.out.println("5.Opsi pengiriman");
+				System.out.println("6.Pembayaran");
+				System.out.println("7.Servis center");
+                                System.out.println("8.Pengembalian barang");
+                                System.out.println("9.pendapatan");
 				System.out.print("\nPilih Menu : ");
 				pilihan = Integer.parseInt(br.readLine());
-				switch (pilihan) {
-					case 1:
+                                switch (pilihan) {
+                                case 1:
+					do{
+                                            System.out.println("=================================================");
+                                            System.out.println("                 Profil Customer                 ");
+                                            System.out.println("=================================================");
+                                            System.out.print("Nama    :");
+                                            nama = br.readLine();
+                                            System.out.print("Alamat  :");
+                                            alamat = br.readLine();
+                                            System.out.print("No.Telp :");
+                                            notelp = Long.parseLong(br.readLine());
+                                            System.out.println("=================================================");
+                                            System.out.println("\n1.keluar");
+                                            System.out.println("2.Kembali");
+                                            System.out.print("\nPilih Menu : ");
+                                            pilihan2 = Integer.parseInt(br.readLine());
+                                            switch (pilihan2) {
+                                                    case 1:
+                                                    System.exit(0);
+                                                    break;
+                                                    
+                                                    }
+                                            }while(pilihan2!=2);
+					
+					break;
+				
+					case 2:
                                         do{
                                             System.out.println("=================================================");
                                             System.out.println("                 Persediaan Alat                    ");
@@ -69,7 +98,7 @@ import java.io.*;;
                                                     }
                                             }while(pilihan2!=2);
 					 break;
-					case 2:
+					case 3:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("       ");
@@ -88,7 +117,7 @@ import java.io.*;;
                                             }while(pilihan2!=2);
 					
 					break;
-					case 3:
+					case 4:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("        ");
@@ -106,7 +135,7 @@ import java.io.*;;
                                                     }
                                             }while(pilihan2!=2);
 					break;
-					case 4:
+					case 5:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("                ");
@@ -125,7 +154,7 @@ import java.io.*;;
                                             }while(pilihan2!=2);
 					
 					break;
-					case 6:
+					case 7:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("                      Help                       ");
@@ -149,7 +178,7 @@ import java.io.*;;
                                                     }
                                             }while(pilihan2!=2);
                                             break;
-                                            case 5:
+                                            case 6:
 					do{
                                             System.out.println("=================================================");
                                             System.out.println("Masukan Total Nominal Barang yang akan di pinjam ");
@@ -175,7 +204,7 @@ import java.io.*;;
 					
 					break;
                                         
-					case 8:
+					case 9:
                                         do{
                                             System.out.println("=================================================");
                                             System.out.println("               Cek pendapatan                   ");
@@ -193,7 +222,7 @@ import java.io.*;;
                                                     }
                                             }while(pilihan2!=2);
 					 break;
-					case 7:
+					case 8:
 					System.exit(0);
 					break;
 					default:

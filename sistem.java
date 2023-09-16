@@ -1,4 +1,4 @@
-import java.io.*;;
+import java.io.*;  ;
  
  
  public class sistem{
@@ -8,9 +8,10 @@ import java.io.*;;
 	
 		
 		int pilihan, pilihan2, tabung, saldo =0, index=0;
-                String nama,alamat;
-                long notelp;
+                String nama = "default", alamat ="default";
+                long notelp=0;
                 int[] tambah_saldo=new int[20];
+                
                 		
 			
 			System.out.println("=================================================");
@@ -203,6 +204,26 @@ import java.io.*;;
                                             }while(pilihan2!=2);
 					
 					break;
+                                        case 8:
+					do{
+                                            System.out.println("=================================================");
+                                            System.out.println(notelp);;
+                                            System.out.println("Nama: "+ nama );
+                                            System.out.println("alamat :"+ alamat);
+                                            System.out.println("=================================================");
+                                            System.out.println("\n1.keluar");
+                                            System.out.println("2.Kembali");
+                                            System.out.print("\nPilih Menu : ");
+                                            pilihan2 = Integer.parseInt(br.readLine());
+                                            switch (pilihan2) {
+                                                    case 1:
+                                                    System.exit(0);
+                                                    break;
+                                                    
+                                                    }
+                                            }while(pilihan2!=2);
+					
+					break;
                                         
 					case 9:
                                         do{
@@ -222,7 +243,7 @@ import java.io.*;;
                                                     }
                                             }while(pilihan2!=2);
 					 break;
-					case 8:
+					case 10:
 					System.exit(0);
 					break;
 					default:

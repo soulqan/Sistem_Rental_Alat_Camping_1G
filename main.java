@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class main {
     public static int NUM_PRODUCTS = 10;
-    public static String[] namaProduk = {"Tenda gunung", "Tas Gunung", "Sleeping Bag", "Kompor Portable", "Cookingset", "FlashLight ", "Karpet tebal", "product8", "Product9", "Product10"};
+    public static String[] namaProduk = {"Tenda gunung", "Tas Gunung", "Sleeping Bag", "Kompor Portable", "Cookingset", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10"};
     public static int[] jmlBarang = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
     public static long[] harga = {250000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
@@ -41,16 +41,16 @@ public class main {
                     Persediaan();
                     break;
                 case 2:
-                    addProductToCart(scanner);
+                    tambahkanProdukKeranjang(scanner);
                     break;
                 case 3:
-                    removeProductFromCart(scanner);
+                    hapusProdukDariKeranjang(scanner);
                     break;
                 case 4:
-                    displayCartItems();
+                    rincian();
                     break;
                 case 5:
-                    System.out.println("Thank you for using Ali's Online Shop. Goodbye!");
+                    System.out.println("Thank you for using Alat Rental Camping. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -78,7 +78,7 @@ public class main {
     }
 
     // Method to add a product to the cart
-    public static void addProductToCart(Scanner scanner) {
+    public static void tambahkanProdukKeranjang(Scanner scanner) {
         System.out.println("\n----- Add Product to Cart -----");
         System.out.print("Enter the product name: ");
         String Produk = scanner.next();
@@ -113,7 +113,7 @@ public class main {
     }
 
     // Method to remove a product from the cart
-    public static void removeProductFromCart(Scanner scanner) {
+    public static void hapusProdukDariKeranjang(Scanner scanner) {
         System.out.println("\n----- Remove Product from Cart -----");
         System.out.print("Enter the product name: ");
         String productName = scanner.next();
@@ -145,7 +145,7 @@ public class main {
     }
 
     // Method to display cart items and total price
-    public static void displayCartItems() {
+    public static void rincian() {
         System.out.println("\n----- Cart Items -----");
         System.out.println("Name\t\tQuantity\tPrice");
 

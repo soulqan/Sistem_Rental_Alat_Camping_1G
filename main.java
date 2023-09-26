@@ -24,7 +24,7 @@ public class main {
 			System.out.println("\n");
 
 
-
+            }
         int pilihan;
         do {
             System.out.println("\n----- Menu Utama -----");
@@ -59,9 +59,9 @@ public class main {
         } while (pilihan != 5);
 
         scanner.close();}
-    }
+    
 
-    // Method to display products in the shop
+    // Method untuk menampilkan pesanan
     public static void Persediaan() {
         System.out.println("\n----- Produk -----");
         System.out.println("Nama\t\tTersedia\tHarga");
@@ -77,7 +77,7 @@ public class main {
         }
     }
 
-    // Method to add a product to the cart
+    // method untuk menambahkan produk ke keranjang
     public static void tambahkanProdukKeranjang(Scanner scanner) {
         System.out.println("\n----- Add Product to Cart -----");
         System.out.print("Enter the product name: ");
@@ -112,7 +112,7 @@ public class main {
         }
     }
 
-    // Method to remove a product from the cart
+    //method untuk menghapus barang yang ada di keranjang
     public static void hapusProdukDariKeranjang(Scanner scanner) {
         System.out.println("\n----- Remove Product from Cart -----");
         System.out.print("Enter the product name: ");
@@ -144,7 +144,7 @@ public class main {
         }
     }
 
-    // Method to display cart items and total price
+    // Method untuk menunjukkan total pembayaran dan barang apa saja yang disewa
     public static void rincian() {
         System.out.println("\n----- Cart Items -----");
         System.out.println("Name\t\tQuantity\tPrice");

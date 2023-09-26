@@ -1,11 +1,12 @@
-import java.io.*;  ;
+import java.io.*;
+import java.util.Scanner;  ;
  
  
  public class sistem{
 	 
 	public static void main (String [] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	
+                Scanner scanner=new Scanner(System.in);
 		
 		int pilihan, pilihan2, tabung, saldo =0, index=0;
                 String nama = "default", alamat ="default";
@@ -52,11 +53,11 @@ import java.io.*;  ;
                                             System.out.println("                 Profil Customer                 ");
                                             System.out.println("=================================================");
                                             System.out.print("Nama    :");
-                                            nama = br.readLine();
+                                            nama = scanner.nextLine();
                                             System.out.print("Alamat  :");
-                                            alamat = br.readLine();
+                                            alamat = scanner.nextLine();
                                             System.out.print("No.Telp :");
-                                            notelp = Long.parseLong(br.readLine());
+                                            notelp = scanner.nextLong();
                                             System.out.println("=================================================");
                                             System.out.println("\n1.keluar");
                                             System.out.println("2.Kembali");

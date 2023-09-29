@@ -88,9 +88,10 @@ public class test {
             System.out.println("                 Profil Customer                 ");
             System.out.println("=================================================");
             System.out.print("Nama    :");
-            nama = scanner.next  ();
+            nama= scanner.nextLine();
+            nama = scanner.nextLine();
             System.out.print("Alamat  :");
-            alamat = scanner.next();
+            alamat = scanner.nextLine();
             System.out.print("No.Telp :");
             notelp = scanner.nextLong();
             System.out.println("=================================================");
@@ -122,7 +123,8 @@ public class test {
             System.out.println("                    keranjang                 ");
             System.out.println("=================================================");
             System.out.println("Masukkan barang yang akan disewa:");
-            String barang= scanner.next();
+            String barang= scanner.nextLine();
+            barang=scanner.nextLine();
 
             int indexBarang =-1;
             for(int i = 0; i < NUM_PRODUCTS; i++){

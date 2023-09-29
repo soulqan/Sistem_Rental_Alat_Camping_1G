@@ -4,6 +4,8 @@ public class test {
     public static String []produk ={"Tenda camping","Tas Gunung","Slepping Bag","Kompor portable","cooking set","FlashLight", "Karpet tebal", "product8", "Product9", "Product10"};
     public static int [] jumulah={5,5,5,5,5,5,5,5,5,5};
     public static long[] harga = {250000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
+    public static String nama,alamat;
+    public static long notelp;
 
 
 
@@ -38,8 +40,10 @@ public class test {
             System.out.println("7.Servis center");
                             System.out.println("8.Pengembalian barang");
                             System.out.println("9.pendapatan");
+                            System.out.println("10.exit");
             System.out.print("\nPilih Menu : ");
             pilihan = scanner.nextInt();
+            
 
             switch (pilihan) {
                 case 1:
@@ -66,31 +70,27 @@ public class test {
                 case 8 :
                     pengembalian();
                 case 9 :
-                    pendapatan();
+                    pendapatan(scanner);
                 case 10:
-                    System.out.println("Thank you for using Alat Rental Camping. Goodbye!");
+                    exit();
                     break;
-                default:
+                default:  
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
-        } while (pilihan != 8);
+        } while (pilihan != 10);
 
         scanner.close();}
 
         //Method untuk profil
         public static void Profil(Scanner scanner) {
-            String nama; 
-            String alamat;
-            long notelp;
-
             System.out.println("=================================================");
             System.out.println("                 Profil Customer                 ");
             System.out.println("=================================================");
             System.out.print("Nama    :");
-            nama = scanner.nextLine();
+            nama = scanner.next  ();
             System.out.print("Alamat  :");
-            alamat = scanner.nextLine();
+            alamat = scanner.next();
             System.out.print("No.Telp :");
             notelp = scanner.nextLong();
             System.out.println("=================================================");
@@ -119,7 +119,7 @@ public class test {
         //Method untuk keranjang
         public static void Keranjang(Scanner scanner){
             System.out.println("=================================================");
-            System.out.println("                 Profil Customer                 ");
+            System.out.println("                    keranjang                 ");
             System.out.println("=================================================");
             System.out.println("Masukkan barang yang akan disewa:");
             String barang= scanner.next();
@@ -142,9 +142,9 @@ public class test {
                     if (jumlahBarang > jumulah[indexBarang]) {
                         System.out.println("Barang yang di sewa tidak mencukupi");
                     }else {
-                        itemKeranjang[indexBarang]=barang;
-                        jmlBarangKeranjang[indexBarang]+=jumlahBarang;
-                        totalHarga += harga[indexBarang]*jumlahBarang;
+                        //itemKeranjang[indexBarang]=barang;
+                        //jmlBarangKeranjang[indexBarang]+=jumlahBarang;
+                        //totalHarga += harga[indexBarang]*jumlahBarang;
 
                         jumulah[indexBarang] -= jumlahBarang;
                         System.out.println("barang telah dimasukkan kedalam keranjang");
@@ -172,14 +172,42 @@ public class test {
         }
         // method untuk service center
         public static void service() {
-            
+            System.out.println("=================================================");
+            System.out.println("                 Customer Service                ");
+            System.out.println("=================================================");
+            System.out.println();
+            System.out.println();
+            System.out.println();
         }
         // method untuk pengembalian barang
         public static void pengembalian(){
 
         }
         // method untuk pendapatan
-        public static void pendapatan() {
-            
+        public static void pendapatan(Scanner scanner) {
+            System.out.println("=================================================");
+			System.out.println("                   login pendapatan          ");
+            System.out.println("=================================================");
+			System.out.print("masukan user: ");
+			String user =scanner.next();
+			System.out.print("masukan password: ");
+			int password = scanner.nextInt();
+			
+			if( (user.equalsIgnoreCase("admin")) && (password==123) ){
+			
+			System.out.println("\n               login berhasil              ");
+			System.out.println("\n");  
+            System.out.println("=================================================");
+			System.out.println("                    pendapatan          ");
+            System.out.println("=================================================");
+            System.out.println();  
+        }else {
+            System.out.println("Username atau password anda salah");
         }
+        
+}
+public static void exit() {
+    System.out.println("Thank you for using Alat Rental Camping. Goodbye!");
+    
+}
 }

@@ -6,7 +6,10 @@ public class test {
     public static long[] harga = {250000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
     public static String nama,alamat;
     public static long notelp;
-
+    public static String[] itemKeranjang = new String[NUM_PRODUCTS];
+    public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
+    public static long totalHarga=0,saldo;
+    public static int estimasi;
 
 
     public static void main(String[] args) {
@@ -56,7 +59,7 @@ public class test {
                     Keranjang(scanner);
                     break;
                 case 4:
-                    peminjamanBarang();
+                    peminjamanBarang(scanner);
                     break;
                 case 5:
                     pengiriman();
@@ -144,11 +147,12 @@ public class test {
                     if (jumlahBarang > jumulah[indexBarang]) {
                         System.out.println("Barang yang di sewa tidak mencukupi");
                     }else {
-                        //itemKeranjang[indexBarang]=barang;
-                        //jmlBarangKeranjang[indexBarang]+=jumlahBarang;
-                        //totalHarga += harga[indexBarang]*jumlahBarang;
+                        itemKeranjang[indexBarang]=barang;
+                        jmlBarangKeranjang[indexBarang]+=jumlahBarang;
+                        totalHarga += harga[indexBarang]*jumlahBarang;
 
                         jumulah[indexBarang] -= jumlahBarang;
+                        saldo += totalHarga;
                         System.out.println("barang telah dimasukkan kedalam keranjang");
                     }
                      
@@ -159,8 +163,13 @@ public class test {
         }
 
         //Method untuk peminjaman barang
-        public static void peminjamanBarang(){
-
+        public static void peminjamanBarang(Scanner scanner){
+             System.out.println("=================================================");
+            System.out.println("                Peminjaman Barang               ");
+            System.out.println("=================================================");
+            System.out.println("*Peminjaman Dihitung Perhari*");
+            System.out.println("Masukkan Estimasi Waktu Peminjaman :");
+            estimasi=scanner.nextInt();
         }
         
         //method untuk opsi pengiriman
@@ -170,8 +179,27 @@ public class test {
 
         //method untuk pembayaran
         public static void pembayaran() {
-            
+            System.out.println("======================================================");
+            System.out.println("                Rincian Pembayaran                ");
+            System.out.println("======================================================");
+            System.out.println("Nama   : " + nama);
+            System.out.println("Alamat : " + alamat);
+            System.out.println("No.Telp: "+ notelp);
+             System.out.println("======================================================");
+            System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi");
+
+            for (int i = 0; i < NUM_PRODUCTS; i++) {
+                if (itemKeranjang[i] != null) {
+                    System.out.print(itemKeranjang[i] + "\t");
+                    System.out.print(jmlBarangKeranjang[i] + "\t\t");
+                    System.out.println(harga[i]+"\t\t"+estimasi);                    
+                }
+            }
+    
+            System.out.println("Total Harga: " + totalHarga*estimasi);
         }
+    
+        
         // method untuk service center
         public static void service() {
             System.out.println("=================================================");
@@ -200,9 +228,9 @@ public class test {
 			System.out.println("\n               login berhasil              ");
 			System.out.println("\n");  
             System.out.println("=================================================");
-			System.out.println("                    pendapatan          ");
-            System.out.println("=================================================");
-            System.out.println();  
+            System.out.println("               Cek pendapatan                   ");
+            System.out.println("       pendapatan Anda adalah Rp. " +   saldo     );
+            System.out.println("=================================================");  
         }else {
             System.out.println("Username atau password anda salah");
         }

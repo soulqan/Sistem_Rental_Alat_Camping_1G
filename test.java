@@ -3,14 +3,14 @@ public class test {
     public static int NUM_PRODUCTS = 10;
     public static String []produk ={"Tenda camping","Tas Gunung","Slepping Bag","Kompor portable","cooking set","FlashLight", "Karpet tebal", "product8", "Product9", "Product10"};
     public static int [] jumulah={5,5,5,5,5,5,5,5,5,5};
-    public static long[] harga = {250000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
+    public static long[] harga = {250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
+    public static long[] hargaOngkir ={15000, 30000};
     public static String nama,alamat;
     public static long notelp;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga=0,saldo;
-    public static int estimasi;
-
+    public static long totalHarga=0,saldo,biayaPengiriman,totalHargaFinal=0;
+    public static int estimasi,pengiriman;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -62,10 +62,10 @@ public class test {
                     peminjamanBarang(scanner);
                     break;
                 case 5:
-                    pengiriman();
+                    pengiriman(scanner);
                     break;
                 case 6:
-                    pembayaran();
+                    pembayaran(scanner);
                     break;
                 case 7 :
                     service();
@@ -83,7 +83,8 @@ public class test {
             }
         } while (pilihan != 10);
 
-        scanner.close();}
+        scanner.close();
+    }
 
         //Method untuk profil
         public static void Profil(Scanner scanner) {
@@ -152,7 +153,6 @@ public class test {
                         totalHarga += harga[indexBarang]*jumlahBarang;
 
                         jumulah[indexBarang] -= jumlahBarang;
-                        saldo += totalHarga;
                         System.out.println("barang telah dimasukkan kedalam keranjang");
                     }
                      
@@ -173,32 +173,64 @@ public class test {
         }
         
         //method untuk opsi pengiriman
-        public static void pengiriman(){
+public static void pengiriman(Scanner scanner) {
+    System.out.println("======================================================");
+    System.out.println("                      Pengiriman                ");
+    System.out.println("======================================================");
+    System.out.println("0. JNT \n1. JNE");
+    System.out.print("Masukkan opsi pengiriman: ");
+    pengiriman = scanner.nextInt();
 
+    if (pengiriman == 0 || pengiriman == 1) {
+        // Pengiriman valid, lanjutkan dengan logika pembayaran
+        System.out.println("Pengiriman sudah di tentukan");
+    } else {
+        System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
+    }
+}
+
+       // Logika pembayaran
+public static void pembayaran(Scanner scanner) {
+    System.out.println("======================================================");
+    System.out.println("                Rincian Pembayaran                ");
+    System.out.println("======================================================");
+    System.out.println("Nama   : " + nama);
+    System.out.println("Alamat : " + alamat);
+    System.out.println("No.Telp: " + notelp);
+    System.out.println("======================================================");
+    System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi\tPengiriman");
+
+    boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam keranjang
+
+    for (int i = 0; i < NUM_PRODUCTS; i++) {
+        if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
+            System.out.print(itemKeranjang[i] + "\t");
+            System.out.print(jmlBarangKeranjang[i] + "\t\t");
+            System.out.print(harga[i] + "\t\t");
+            System.out.print(estimasi + "\t\t");
+            System.out.println(hargaOngkir[pengiriman]);
+
+            adaBarangDalamKeranjang = true; // Setel ke true jika ada barang dalam keranjang
         }
+    }
 
-        //method untuk pembayaran
-        public static void pembayaran() {
-            System.out.println("======================================================");
-            System.out.println("                Rincian Pembayaran                ");
-            System.out.println("======================================================");
-            System.out.println("Nama   : " + nama);
-            System.out.println("Alamat : " + alamat);
-            System.out.println("No.Telp: "+ notelp);
-             System.out.println("======================================================");
-            System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi");
-
-            for (int i = 0; i < NUM_PRODUCTS; i++) {
-                if (itemKeranjang[i] != null) {
-                    System.out.print(itemKeranjang[i] + "\t");
-                    System.out.print(jmlBarangKeranjang[i] + "\t\t");
-                    System.out.println(harga[i]+"\t\t"+estimasi);                    
-                }
-            }
-    
-            System.out.println("Total Harga: " + totalHarga*estimasi);
+    if (adaBarangDalamKeranjang) {
+        totalHargaFinal = totalHarga * estimasi + hargaOngkir[pengiriman];
+        System.out.println("Total Harga: " + totalHargaFinal);
+        System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
+        String jawaban = scanner.next();
+        if (jawaban.equalsIgnoreCase("y")) {
+            saldo += totalHargaFinal;
+            System.out.println("Pembayaran Berhasil");
+        } else {
+            System.out.println("Pembayaran tidak valid");
         }
-    
+    } else {
+        System.out.println("Keranjang Anda kosong. Silakan tambahkan barang ke keranjang terlebih dahulu.");
+    }
+    System.out.println("Terima kasih!");
+}
+
         
         // method untuk service center
         public static void service() {

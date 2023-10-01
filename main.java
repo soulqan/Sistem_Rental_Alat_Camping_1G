@@ -81,7 +81,8 @@ public class main {
     public static void tambahkanProdukKeranjang(Scanner scanner) {
         System.out.println("\n----- Add Product to Cart -----");
         System.out.print("Enter the product name: ");
-        String Produk = scanner.next();
+        String Produk = scanner.nextLine();
+        Produk = scanner.nextLine();
 
         int productIndex = -1;
         for (int i = 0; i < NUM_PRODUCTS; i++) {
@@ -154,10 +155,10 @@ public class main {
                 System.out.print(itemKeranjang[i] + "\t");
                 System.out.print(jmlKeranjang[i] + "\t\t");
                 System.out.println(harga[i]);
+                 System.out.println("Total Price: " + totalHarga);
             }
         }
 
-        System.out.println("Total Price: " + totalHarga);
     }
 
 }

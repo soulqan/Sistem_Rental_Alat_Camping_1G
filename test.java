@@ -9,7 +9,7 @@ public class test {
     public static long notelp;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga=0,saldo,biayaPengiriman,totalHargaFinal=0;
+    public static long totalHarga=0,saldo=0,biayaPengiriman,totalHargaFinal=0;
     public static int estimasi,pengiriman;
 
     public static void main(String[] args) {
@@ -71,9 +71,11 @@ public class test {
                     service();
                     break;
                 case 8 :
-                    pengembalian();
+                    pengembalian(scanner);
+                    break;
                 case 9 :
                     pendapatan(scanner);
+                    break;
                 case 10:
                     exit();
                     break;
@@ -177,12 +179,17 @@ public static void pengiriman(Scanner scanner) {
     System.out.println("======================================================");
     System.out.println("                      Pengiriman                ");
     System.out.println("======================================================");
-    System.out.println("0. JNT \n1. JNE");
+    System.out.println("1. JNT \n2. JNE");
     System.out.print("Masukkan opsi pengiriman: ");
     pengiriman = scanner.nextInt();
+    if (pengiriman ==1 ) {
+        pengiriman =0 ;
+    }
+    if (pengiriman == 2) {
+        pengiriman =1;
+    }
 
-    if (pengiriman == 0 || pengiriman == 1) {
-        // Pengiriman valid, lanjutkan dengan logika pembayaran
+    if (pengiriman == 1 || pengiriman == 2) {
         System.out.println("Pengiriman sudah di tentukan");
     } else {
         System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
@@ -242,9 +249,31 @@ public static void pembayaran(Scanner scanner) {
             System.out.println();
         }
         // method untuk pengembalian barang
-        public static void pengembalian(){
-
+        public static void pengembalian(Scanner scanner) {
+            System.out.println("=================================================");
+            System.out.println("                Pengembalian Barang          ");
+            System.out.println("=================================================");
+            System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang?(y/n)");
+            String kembali = scanner.next();
+        
+            if (kembali.equalsIgnoreCase("y")) {
+                for (int i = 0; i < NUM_PRODUCTS; i++) {
+                    if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
+                        // Mengembalikan semua barang yang ada di keranjang
+                        jumulah[i] += jmlBarangKeranjang[i];
+                        totalHarga -= harga[i] * jmlBarangKeranjang[i];
+                        jmlBarangKeranjang[i] = 0;
+                    
+                    }
+                }
+                System.out.println("Semua barang berhasil dikembalikan.");
+            } else {
+                System.out.println("Terima kasih!");
+            }
         }
+        
+            
+            
         // method untuk pendapatan
         public static void pendapatan(Scanner scanner) {
             System.out.println("=================================================");

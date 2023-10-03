@@ -53,7 +53,7 @@ public class test {
                     Profil(scanner);
                     break;
                 case 2:
-                    persediaan();  
+                    persediaan(scanner);  
                     break;
                 case 3:
                     Keranjang(scanner);
@@ -105,7 +105,7 @@ public class test {
         }
 
         //method untuk persediaan alat camping
-        public static void persediaan(){
+        public static void persediaan(Scanner scanner){
             System.out.println("=================================================");
             System.out.println("                 Persediaan Alat                    ");  
             System.out.println("=================================================");      
@@ -120,6 +120,17 @@ public class test {
                     System.out.print(jumulah [i] + "\t\t");
                 }
                 System.out.println(harga[i]);
+            }
+            System.out.println("\nPilih opsi untuk melanjutkan:");
+            System.out.println("1.keranjang\n2.Menu utama");
+            int next= scanner.nextInt();
+            if (next==1) {
+                Keranjang(scanner);
+            }else if (next==2) {
+            
+            }else{
+                System.out.println("Pilihan tidak tersedia");
+                persediaan(scanner);
             }
 
         }

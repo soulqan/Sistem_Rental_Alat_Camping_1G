@@ -17,9 +17,9 @@ public class test {
         System.out.println("=================================================");
 			System.out.println("  Selamat datang di sistem rental alat camping          ");
                         System.out.println("=================================================");
-			System.out.print("masukan user: ");
+			System.out.print("Masukan user: ");
 			String user =scanner.nextLine();
-			System.out.print("masukan password: ");
+			System.out.print("Masukan password: ");
 			int password = scanner.nextInt();
 			
 			if( (user.equalsIgnoreCase("admin")) && (password==123) ){

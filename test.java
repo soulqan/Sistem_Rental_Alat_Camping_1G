@@ -5,7 +5,7 @@ public class test {
     public static int [] jumulah={5,5,5,5,5,5,5,5,5,5};
     public static long[] harga = {250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
     public static long[] hargaOngkir ={15000, 30000};
-    public static String nama,alamat;
+    public static String nama,alamat, masukkan;
     public static long notelp;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
@@ -53,7 +53,7 @@ public class test {
                     Profil(scanner);
                     break;
                 case 2:
-                    persediaan();  
+                    persediaan(scanner);  
                     break;
                 case 3:
                     Keranjang(scanner);
@@ -77,7 +77,7 @@ public class test {
                     pendapatan(scanner);
                     break;
                 case 10:
-                    exit();
+                    exit(scanner);
                     break;
                 default:  
                     System.out.println("Invalid choice. Please try again.");
@@ -105,7 +105,7 @@ public class test {
         }
 
         //method untuk persediaan alat camping
-        public static void persediaan(){
+        public static void persediaan(Scanner scanner){
             System.out.println("=================================================");
             System.out.println("                 Persediaan Alat                    ");  
             System.out.println("=================================================");      
@@ -120,6 +120,17 @@ public class test {
                     System.out.print(jumulah [i] + "\t\t");
                 }
                 System.out.println(harga[i]);
+            }
+            System.out.println("\nPilih opsi untuk melanjutkan:");
+            System.out.println("1.keranjang\n2.Menu utama");
+            int next= scanner.nextInt();
+            if (next==1) {
+                Keranjang(scanner);
+            }else if (next==2) {
+            
+            }else{
+                System.out.println("Pilihan tidak tersedia");
+                persediaan(scanner);
             }
 
         }
@@ -244,9 +255,10 @@ public static void pembayaran(Scanner scanner) {
             System.out.println("=================================================");
             System.out.println("                 Customer Service                ");
             System.out.println("=================================================");
-            System.out.println();
-            System.out.println();
-            System.out.println();
+            System.out.println("Ada masalah? Hubungi kami melalui:");
+            System.out.println("No. Telpon : 082178174040");
+            System.out.println("email      : hanifahkurniasari0512@gmail.com");
+            System.out.println("");
         }
         // method untuk pengembalian barang
         public static void pengembalian(Scanner scanner) {
@@ -291,13 +303,25 @@ public static void pembayaran(Scanner scanner) {
             System.out.println("=================================================");
             System.out.println("               Cek pendapatan                   ");
             System.out.println("       pendapatan Anda adalah Rp. " +   saldo     );
-            System.out.println("=================================================");  
+            System.out.println("=================================================");
+            System.out.println("feedback:" + masukkan);  
         }else {
             System.out.println("Username atau password anda salah");
         }
         
 }
-public static void exit() {
+//method exit
+public static void exit(Scanner scanner) {
+    System.out.println("apakah anda puas?(y/n)");
+    String puas = scanner.next ();
+    if (puas=="y")
+     {    
+    }
+
+    else if(puas=="n"){
+        System.out.println("beri kami masukkan");
+        masukkan= scanner.nextLine();
+    }
     System.out.println("Thank you for using Alat Rental Camping. Goodbye!");
     
 }

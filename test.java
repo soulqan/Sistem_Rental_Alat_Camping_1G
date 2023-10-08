@@ -317,6 +317,18 @@ public static void pembayaran(Scanner scanner) {
 }
         //method tambah barang
         public static void tambahBarang(Scanner scanner) {
+            System.out.println("=================================================");
+			System.out.println("                   login pendapatan          ");
+            System.out.println("=================================================");
+			System.out.print("masukan user: ");
+			String user =scanner.next();
+			System.out.print("masukan password: ");
+			int password = scanner.nextInt();
+			
+			if( (user.equalsIgnoreCase("admin")) && (password==123) ){
+			
+			System.out.println("\n               login berhasil              ");
+			System.out.println("\n");  
         // Periksa apakah array produk sudah penuh
         // Memastikan panjang array selalu lebih besar atau sama dengan NUM_PRODUCTS
         if (NUM_PRODUCTS >= produk.length) {
@@ -365,7 +377,9 @@ public static void pembayaran(Scanner scanner) {
         NUM_PRODUCTS++;
 
         System.out.println("Barang baru berhasil ditambahkan ke persediaan.");
-        }
+        }else{
+            System.out.println(" login gagal ");
+        }}
 
 }
 //method exit

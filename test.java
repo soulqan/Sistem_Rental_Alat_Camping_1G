@@ -5,8 +5,8 @@ public class test {
     public static int [] jumlah={5,5,5,5,5,5,5,5,5,5};
     public static long[] harga = {250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
     public static long[] hargaOngkir ={15000, 30000};
-    public static String nama,alamat, masukkan;
-    public static long notelp;
+    public static String nama,alamat, masukkan,notelp;
+    
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga=0,saldo=0,biayaPengiriman,totalHargaFinal=0;
@@ -22,7 +22,7 @@ public class test {
 			System.out.print("Masukan password: ");
 			int password = scanner.nextInt();
 			
-			if( (user.equalsIgnoreCase("admin")) && (password==123) ){
+			if( (user.equalsIgnoreCase("customer")) && (password==123) ){
 			
 			System.out.println("\n               Login Berhasil              ");
 			System.out.println("\n");
@@ -103,10 +103,11 @@ public class test {
             System.out.println("=================================================");
             System.out.print("Nama    :");
             nama = scanner.nextLine();
+            nama=scanner.nextLine();
             System.out.print("Alamat  :");
             alamat = scanner.nextLine();
             System.out.print("No.Telp :");
-            notelp = scanner.nextLong();
+            notelp = scanner.nextLine();
             System.out.println("=================================================");
             
         }

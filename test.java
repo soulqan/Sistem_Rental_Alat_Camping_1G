@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class test {
     public static int NUM_PRODUCTS = 10;
-    public static String []produk ={"Tenda camping","Tas Gunung","Slepping Bag","Kompor portable","cooking set","FlashLight", "Karpet tebal", "product8", "Product9", "Product10"};
-    public static int [] jumulah={5,5,5,5,5,5,5,5,5,5};
+    public static String []produk ={"Tenda camping","Tas Gunung","Slepping Bag","Kompor portable","Cooking set","FlashLight", "Karpet tebal", "product8", "Product9", "Product10"};
+    public static int [] jumlah={5,5,5,5,5,5,5,5,5,5};
     public static long[] harga = {250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000};
     public static long[] hargaOngkir ={15000, 30000};
     public static String nama,alamat, masukkan;
@@ -41,9 +41,10 @@ public class test {
             System.out.println("5.Opsi pengiriman");
             System.out.println("6.Pembayaran");
             System.out.println("7.Servis center");
-                            System.out.println("8.Pengembalian barang");
-                            System.out.println("9.pendapatan");
-                            System.out.println("10.exit");
+            System.out.println("8.Pengembalian barang");
+            System.out.println("9.Pendapatan");
+            System.out.println("10.Penambahan barang baru");
+            System.out.println("11.Exit");
             System.out.print("\nPilih Menu : ");
             pilihan = scanner.nextInt();
             
@@ -77,13 +78,17 @@ public class test {
                     pendapatan(scanner);
                     break;
                 case 10:
+                    tambahBarang(scanner);
+                    break;
+                case 11:
                     exit(scanner);
                     break;
+                
                 default:  
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
-        } while (pilihan != 10);
+        } while (pilihan != 11);
 
         scanner.close();
     }
@@ -94,7 +99,6 @@ public class test {
             System.out.println("                 Profil Customer                 ");
             System.out.println("=================================================");
             System.out.print("Nama    :");
-            nama= scanner.nextLine();
             nama = scanner.nextLine();
             System.out.print("Alamat  :");
             alamat = scanner.nextLine();
@@ -114,10 +118,10 @@ public class test {
 
             for (int i = 0; i < NUM_PRODUCTS; i++) {
                 System.out.print(produk[i] + "\t");
-                if (jumulah[i] == 0) {
+                if (jumlah[i] == 0) {
                     System.out.print("Sold out\t");
                 } else {
-                    System.out.print(jumulah [i] + "\t\t");
+                    System.out.print(jumlah [i] + "\t\t");
                 }
                 System.out.println(harga[i]);
             }
@@ -152,20 +156,20 @@ public class test {
                 }
                 if (indexBarang ==-1) {
                     System.out.println("produk tidak ditemukan");
-                    }else if(jumulah[indexBarang]==0){
+                    }else if(jumlah[indexBarang]==0){
                         System.out.println("sold out");
                     }else{
                         System.out.println("Masukkan jumlah barang yang akan di sewa:");
                         int jumlahBarang=scanner.nextInt();
                     
-                    if (jumlahBarang > jumulah[indexBarang]) {
+                    if (jumlahBarang > jumlah[indexBarang]) {
                         System.out.println("Barang yang di sewa tidak mencukupi");
                     }else {
                         itemKeranjang[indexBarang]=barang;
                         jmlBarangKeranjang[indexBarang]+=jumlahBarang;
                         totalHarga += harga[indexBarang]*jumlahBarang;
 
-                        jumulah[indexBarang] -= jumlahBarang;
+                        jumlah[indexBarang] -= jumlahBarang;
                         System.out.println("barang telah dimasukkan kedalam keranjang");
                     }
                      
@@ -272,7 +276,7 @@ public static void pembayaran(Scanner scanner) {
                 for (int i = 0; i < NUM_PRODUCTS; i++) {
                     if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
                         // Mengembalikan semua barang yang ada di keranjang
-                        jumulah[i] += jmlBarangKeranjang[i];
+                        jumlah[i] += jmlBarangKeranjang[i];
                         totalHarga -= harga[i] * jmlBarangKeranjang[i];
                         jmlBarangKeranjang[i] = 0;
                     
@@ -308,7 +312,61 @@ public static void pembayaran(Scanner scanner) {
         }else {
             System.out.println("Username atau password anda salah");
         }
+
         
+}
+        //method tambah barang
+        public static void tambahBarang(Scanner scanner) {
+        // Periksa apakah array produk sudah penuh
+        // Memastikan panjang array selalu lebih besar atau sama dengan NUM_PRODUCTS
+        if (NUM_PRODUCTS >= produk.length) {
+        // Jika sudah penuh, buat array baru dengan ukuran yang lebih besar
+        int newLength = produk.length + 1;
+
+        String[] newProduk = new String[newLength];
+        int[] newJumlah = new int[newLength];
+        long[] newHarga = new long[newLength];
+
+        // Salin elemen-elemen dari array lama ke array baru
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+        newProduk[i] = produk[i];
+        newJumlah[i] = jumlah[i];
+        newHarga[i] = harga[i];
+        }
+
+        // Ganti array lama dengan array baru
+        produk = newProduk;
+        jumlah = newJumlah;
+        harga = newHarga;
+        }
+
+        // Lanjutkan dengan menambahkan barang seperti yang sudah Anda lakukan
+        System.out.print("Apakah Anda ingin menambahkan barang baru? (y/n): ");
+        String tambahBarang = scanner.next();
+
+        if (tambahBarang.equalsIgnoreCase("y") && NUM_PRODUCTS < produk.length) {
+        // ... kode penambahan barang ...
+        System.out.print("Masukkan nama barang baru: ");
+        String namaBarangBaru = scanner.nextLine();
+        namaBarangBaru = scanner.nextLine();
+
+        System.out.print("Masukkan jumlah barang yang tersedia: ");
+        int jumlahBarangBaru = scanner.nextInt();
+
+        System.out.print("Masukkan harga barang baru: ");
+        long hargaBarangBaru = scanner.nextLong();
+
+        // Menambahkan barang baru ke array produk
+        produk[NUM_PRODUCTS] = namaBarangBaru;
+        jumlah[NUM_PRODUCTS] = jumlahBarangBaru;
+        harga[NUM_PRODUCTS] = hargaBarangBaru;
+
+        // Menginkrementasi NUM_PRODUCTS
+        NUM_PRODUCTS++;
+
+        System.out.println("Barang baru berhasil ditambahkan ke persediaan.");
+        }
+
 }
 //method exit
 public static void exit(Scanner scanner) {

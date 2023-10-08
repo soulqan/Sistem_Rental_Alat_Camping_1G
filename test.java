@@ -26,9 +26,7 @@ public class test {
 			
 			System.out.println("\n               Login Berhasil              ");
 			System.out.println("\n");
-
-
-            }
+            
         int pilihan;
         do {
             System.out.println("=================================================");
@@ -89,9 +87,14 @@ public class test {
                     break;
             }
         } while (pilihan != 11);
-
+    
         scanner.close();
-    }
+            }else{
+                System.out.println("Login Gagal");
+                main(args);
+            }
+        }
+
 
         //Method untuk profil
         public static void Profil(Scanner scanner) {
@@ -318,7 +321,7 @@ public static void pembayaran(Scanner scanner) {
         //method tambah barang
         public static void tambahBarang(Scanner scanner) {
             System.out.println("=================================================");
-			System.out.println("                   login pendapatan          ");
+			System.out.println("              login penambahan barang         ");
             System.out.println("=================================================");
 			System.out.print("masukan user: ");
 			String user =scanner.next();

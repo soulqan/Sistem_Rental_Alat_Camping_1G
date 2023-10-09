@@ -8,7 +8,6 @@ public class test {
     public static long[] harga = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
     public static long[] hargaOngkir = { 15000, 30000 };
     public static String nama, alamat, masukkan, notelp;
-
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
@@ -42,7 +41,7 @@ public class test {
                 System.out.println("6.Pembayaran");
                 System.out.println("7.Servis center");
                 System.out.println("8.Pengembalian barang");
-                System.out.println("9.Pendapatan");
+                System.out.println("9.Pendapatan dan feedback");
                 System.out.println("10.Penambahan barang baru");
                 System.out.println("11.Exit");
                 System.out.print("\nPilih Menu : ");
@@ -68,7 +67,7 @@ public class test {
                         pembayaran(scanner);
                         break;
                     case 7:
-                        service();
+                        service(scanner);
                         break;
                     case 8:
                         pengembalian(scanner);
@@ -80,7 +79,7 @@ public class test {
                         tambahBarang(scanner);
                         break;
                     case 11:
-                        exit(scanner);
+                        exit();
                         break;
 
                     default:
@@ -257,14 +256,26 @@ public class test {
     }
 
     // method untuk service center
-    public static void service() {
+    public static void service(Scanner scanner) {
         System.out.println("=================================================");
         System.out.println("                 Customer Service                ");
         System.out.println("=================================================");
         System.out.println("Ada masalah? Hubungi kami melalui:");
         System.out.println("No. Telpon : 082178174040");
         System.out.println("email      : hanifahkurniasari0512@gmail.com");
-        System.out.println("");
+        System.out.println("ingin memberi masukkan?(y/n)");
+        String masukan=scanner.nextLine();
+        masukan=scanner.nextLine();
+        if (masukan.equals("y")) {
+            System.out.println("Beri Masukkan Anda: ");
+            masukkan= scanner.nextLine();
+            System.out.println("terima kasih telah memberi masukkan");
+
+        }else if(masukan =="n"){          
+        
+        }else{
+            System.out.println("pemilihan tidak tersedia!");
+        }
     }
 
     // method untuk pengembalian barang
@@ -392,17 +403,7 @@ public class test {
     }
 
     // method exit
-    public static void exit(Scanner scanner) {
-        System.out.println("apakah anda puas?(y/n)");
-        String puas = scanner.next();
-        if (puas == "y") {
+    public static void exit() {
+        System.exit(0);
         }
-
-        else if (puas == "n") {
-            System.out.println("beri kami masukkan");
-            masukkan = scanner.nextLine();
-        }
-        System.out.println("Thank you for using Alat Rental Camping. Goodbye!");
-
-    }
 }

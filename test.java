@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class test {
     public static int NUM_PRODUCTS = 10;
-    public static String[] produk = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set",
-            "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
+    public static String[] produk = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
     public static int[] jumlah = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] harga = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
     public static long[] hargaOngkir = { 15000, 30000 };
@@ -404,6 +403,7 @@ public class test {
 
     // method exit
     public static void exit() {
+        System.out.println("Terima kasih telah menggunakan sistem rental alat camping!");
         System.exit(0);
         }
 }

@@ -35,14 +35,15 @@ public class test {
                 System.out.println("\n1.Profil");
                 System.out.println("2.Persediaan alat camping");
                 System.out.println("3.Keranjang");
-                System.out.println("4.Peminjaman barang");
-                System.out.println("5.Opsi pengiriman");
-                System.out.println("6.Pembayaran");
-                System.out.println("7.Servis center");
-                System.out.println("8.Pengembalian barang");
-                System.out.println("9.Pendapatan dan feedback");
-                System.out.println("10.Penambahan barang baru");
-                System.out.println("11.Exit");
+                System.out.println("4.Hapus Barang dari Keranjang");
+                System.out.println("5.Peminjaman barang");
+                System.out.println("6.Opsi pengiriman");
+                System.out.println("7.Pembayaran");
+                System.out.println("8.Servis center");
+                System.out.println("9.Pengembalian barang");
+                System.out.println("10.Pendapatan dan feedback");
+                System.out.println("11.Penambahan barang baru");
+                System.out.println("12.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
 
@@ -57,27 +58,30 @@ public class test {
                         Keranjang(scanner);
                         break;
                     case 4:
-                        peminjamanBarang(scanner);
+                        hapusProdukDariKeranjang(scanner);
                         break;
                     case 5:
-                        pengiriman(scanner);
+                        peminjamanBarang(scanner);
                         break;
                     case 6:
-                        pembayaran(scanner);
+                        pengiriman(scanner);
                         break;
                     case 7:
-                        service(scanner);
+                        pembayaran(scanner);
                         break;
                     case 8:
-                        pengembalian(scanner);
+                        service(scanner);
                         break;
                     case 9:
-                        pendapatan(scanner);
+                        pengembalian(scanner);
                         break;
                     case 10:
-                        tambahBarang(scanner);
+                        pendapatan(scanner);
                         break;
                     case 11:
+                        tambahBarang(scanner);
+                        break;
+                    case 12:
                         exit();
                         break;
 
@@ -85,7 +89,7 @@ public class test {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 11);
+            } while (pilihan != 12);
 
             scanner.close();
         } else {
@@ -177,6 +181,39 @@ public class test {
 
         }
 
+    }
+     //method hapus barang dari keranjang
+    public static void hapusProdukDariKeranjang(Scanner scanner) {
+        System.out.println("=================================================");
+        System.out.println("           Hapus Produk Dari Keranjang                 ");
+        System.out.println("=================================================");
+        System.out.print("Masukan nama produk: ");
+        String productName = scanner.nextLine();
+        productName=scanner.nextLine();
+
+        int productIndex = -1;
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            if (itemKeranjang[i] != null && itemKeranjang[i].equalsIgnoreCase(productName)) {
+                productIndex = i;
+                
+            }else if (productIndex == -1) {
+                System.out.println("Produk tidak di temukan di keranjang.");
+            } else {
+                System.out.print("Masukan jumlah yang ingin di buang : ");
+                int jmlBarang = scanner.nextInt();
+    
+                if (jmlBarang > jmlBarangKeranjang [productIndex]) {
+                    System.out.println("Jumlah tidak valid.");
+                } else {
+                    jmlBarangKeranjang[productIndex] -= jmlBarang;
+                    totalHarga -= harga[productIndex] * jmlBarang;
+    
+                    jumlah[productIndex] += jmlBarang;
+                    System.out.println("Produk telah dibuang dari keranjang.");
+                    return;
+        }
+    }
+}
     }
 
     // Method untuk peminjaman barang
@@ -406,4 +443,5 @@ public class test {
         System.out.println("Terima kasih telah menggunakan sistem rental alat camping!");
         System.exit(0);
         }
+
 }

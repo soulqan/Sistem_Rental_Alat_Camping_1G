@@ -117,7 +117,8 @@ public class main {
     public static void hapusProdukDariKeranjang(Scanner scanner) {
         System.out.println("\n----- Remove Product from Cart -----");
         System.out.print("Enter the product name: ");
-        String productName = scanner.next();
+        String productName = scanner.nextLine();
+        productName= scanner.nextLine();
 
         int productIndex = -1;
         for (int i = 0; i < NUM_PRODUCTS; i++) {

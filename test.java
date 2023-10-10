@@ -195,11 +195,13 @@ public class test {
         for (int i = 0; i < NUM_PRODUCTS; i++) {
             if (itemKeranjang[i] != null && itemKeranjang[i].equalsIgnoreCase(productName)) {
                 productIndex = i;
-                
-            }else if (productIndex == -1) {
-                System.out.println("Produk tidak di temukan di keranjang.");
-            } else {
-                System.out.print("Masukan jumlah yang ingin di buang : ");
+                break;
+            }
+        }
+        if (productIndex == -1) {
+            System.out.println("Produk tidak di temukan.");
+        } else {
+            System.out.print("Masukan jumlah produk : ");
                 int jmlBarang = scanner.nextInt();
     
                 if (jmlBarang > jmlBarangKeranjang [productIndex]) {
@@ -214,7 +216,7 @@ public class test {
         }
     }
 }
-    }
+    
 
     // Method untuk peminjaman barang
     public static void peminjamanBarang(Scanner scanner) {

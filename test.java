@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class test {
     public static int NUM_PRODUCTS = 10;
-    public static String[] produk = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
-    public static int[] jumlah = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    public static long[] harga = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
+    public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    public static long[] hargaid = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
     public static long[] hargaOngkir = { 15000, 30000 };
     public static String nama, alamat, masukkan, notelp;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
@@ -122,13 +122,13 @@ public class test {
         System.out.println("Nama\t\tTersedia\tHarga");
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
-            System.out.print(produk[i] + "\t");
-            if (jumlah[i] == 0) {
+            System.out.print(produkid[i] + "\t");
+            if (jumlahid[i] == 0) {
                 System.out.print("Sold out\t");
             } else {
-                System.out.print(jumlah[i] + "\t\t");
+                System.out.print(jumlahid[i] + "\t\t");
             }
-            System.out.println(harga[i]);
+            System.out.println(hargaid[i]);
         }
         System.out.println("\nPilih opsi untuk melanjutkan:");
         System.out.println("1.keranjang\n2.Menu utama");
@@ -155,27 +155,27 @@ public class test {
 
         int indexBarang = -1;
         for (int i = 0; i < NUM_PRODUCTS; i++) {
-            if (produk[i].equalsIgnoreCase(barang)) {
+            if (produkid[i].equalsIgnoreCase(barang)) {
                 indexBarang = i;
                 break;
             }
         }
         if (indexBarang == -1) {
-            System.out.println("produk tidak ditemukan");
-        } else if (jumlah[indexBarang] == 0) {
+            System.out.println("produkid tidak ditemukan");
+        } else if (jumlahid[indexBarang] == 0) {
             System.out.println("sold out");
         } else {
-            System.out.println("Masukkan jumlah barang yang akan di sewa:");
+            System.out.println("Masukkan jumlahid barang yang akan di sewa:");
             int jumlahBarang = scanner.nextInt();
 
-            if (jumlahBarang > jumlah[indexBarang]) {
+            if (jumlahBarang > jumlahid[indexBarang]) {
                 System.out.println("Barang yang di sewa tidak mencukupi");
             } else {
                 itemKeranjang[indexBarang] = barang;
                 jmlBarangKeranjang[indexBarang] += jumlahBarang;
-                totalHarga += harga[indexBarang] * jumlahBarang;
+                totalHarga += hargaid[indexBarang] * jumlahBarang;
 
-                jumlah[indexBarang] -= jumlahBarang;
+                jumlahid[indexBarang] -= jumlahBarang;
                 System.out.println("barang telah dimasukkan kedalam keranjang");
             }
 
@@ -187,7 +187,7 @@ public class test {
         System.out.println("=================================================");
         System.out.println("           Hapus Produk Dari Keranjang                 ");
         System.out.println("=================================================");
-        System.out.print("Masukan nama produk: ");
+        System.out.print("Masukan nama produkid: ");
         String productName = scanner.nextLine();
         productName=scanner.nextLine();
 
@@ -201,16 +201,16 @@ public class test {
         if (productIndex == -1) {
             System.out.println("Produk tidak di temukan.");
         } else {
-            System.out.print("Masukan jumlah produk : ");
+            System.out.print("Masukan jumlahid produkid : ");
                 int jmlBarang = scanner.nextInt();
     
                 if (jmlBarang > jmlBarangKeranjang [productIndex]) {
                     System.out.println("Jumlah tidak valid.");
                 } else {
                     jmlBarangKeranjang[productIndex] -= jmlBarang;
-                    totalHarga -= harga[productIndex] * jmlBarang;
+                    totalHarga -= hargaid[productIndex] * jmlBarang;
     
-                    jumlah[productIndex] += jmlBarang;
+                    jumlahid[productIndex] += jmlBarang;
                     System.out.println("Produk telah dibuang dari keranjang.");
                     return;
         }
@@ -268,7 +268,7 @@ public class test {
             if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
                 System.out.print(itemKeranjang[i] + "\t");
                 System.out.print(jmlBarangKeranjang[i] + "\t\t");
-                System.out.print(harga[i] + "\t\t");
+                System.out.print(hargaid[i] + "\t\t");
                 System.out.print(estimasi + "\t\t");
                 System.out.println(hargaOngkir[pengiriman]);
 
@@ -279,7 +279,7 @@ public class test {
         if (adaBarangDalamKeranjang) {
             totalHargaFinal = totalHarga * estimasi + hargaOngkir[pengiriman];
             System.out.println("Total Harga: " + totalHargaFinal);
-            System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
+            System.out.println("Apakah anda ingin membayar sesuai hargaid yang tertera? (y/n)");
             String jawaban = scanner.next();
             if (jawaban.equalsIgnoreCase("y")) {
                 saldo += totalHargaFinal;
@@ -328,8 +328,8 @@ public class test {
             for (int i = 0; i < NUM_PRODUCTS; i++) {
                 if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
                     // Mengembalikan semua barang yang ada di keranjang
-                    jumlah[i] += jmlBarangKeranjang[i];
-                    totalHarga -= harga[i] * jmlBarangKeranjang[i];
+                    jumlahid[i] += jmlBarangKeranjang[i];
+                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];
                     jmlBarangKeranjang[i] = 0;
 
                 }
@@ -379,11 +379,11 @@ public class test {
 
             System.out.println("\n               login berhasil              ");
             System.out.println("\n");
-            // Periksa apakah array produk sudah penuh
+            // Periksa apakah array produkid sudah penuh
             // Memastikan panjang array selalu lebih besar atau sama dengan NUM_PRODUCTS
-            if (NUM_PRODUCTS >= produk.length) {
+            if (NUM_PRODUCTS >= produkid.length) {
                 // Jika sudah penuh, buat array baru dengan ukuran yang lebih besar
-                int newLength = produk.length + 1;
+                int newLength = produkid.length + 1;
 
                 String[] newProduk = new String[newLength];
                 int[] newJumlah = new int[newLength];
@@ -393,9 +393,9 @@ public class test {
 
                 // Salin elemen-elemen dari array lama ke array baru
                 for (int i = 0; i < NUM_PRODUCTS; i++) {
-                    newProduk[i] = produk[i];
-                    newJumlah[i] = jumlah[i];
-                    newHarga[i] = harga[i];
+                    newProduk[i] = produkid[i];
+                    newJumlah[i] = jumlahid[i];
+                    newHarga[i] = hargaid[i];
                     newItem[i]= itemKeranjang[i];
                     newJmlBarang[i]= jmlBarangKeranjang[i];
 
@@ -403,9 +403,9 @@ public class test {
                 }
 
                 // Ganti array lama dengan array baru
-                produk = newProduk;
-                jumlah = newJumlah;
-                harga = newHarga;
+                produkid = newProduk;
+                jumlahid = newJumlah;
+                hargaid = newHarga;
                 jmlBarangKeranjang = newJmlBarang;
                 itemKeranjang=newItem;
             }
@@ -414,22 +414,22 @@ public class test {
             System.out.print("Apakah Anda ingin menambahkan barang baru? (y/n): ");
             String tambahBarang = scanner.next();
 
-            if (tambahBarang.equalsIgnoreCase("y") && NUM_PRODUCTS < produk.length) {
+            if (tambahBarang.equalsIgnoreCase("y") && NUM_PRODUCTS < produkid.length) {
                 // ... kode penambahan barang ...
                 System.out.print("Masukkan nama barang baru: ");
                 String namaBarangBaru = scanner.nextLine();
                 namaBarangBaru = scanner.nextLine();
 
-                System.out.print("Masukkan jumlah barang yang tersedia: ");
+                System.out.print("Masukkan jumlahid barang yang tersedia: ");
                 int jumlahBarangBaru = scanner.nextInt();
 
-                System.out.print("Masukkan harga barang baru: ");
+                System.out.print("Masukkan hargaid barang baru: ");
                 long hargaBarangBaru = scanner.nextLong();
 
-                // Menambahkan barang baru ke array produk
-                produk[NUM_PRODUCTS] = namaBarangBaru;
-                jumlah[NUM_PRODUCTS] = jumlahBarangBaru;
-                harga[NUM_PRODUCTS] = hargaBarangBaru;
+                // Menambahkan barang baru ke array produkid
+                produkid[NUM_PRODUCTS] = namaBarangBaru;
+                jumlahid[NUM_PRODUCTS] = jumlahBarangBaru;
+                hargaid[NUM_PRODUCTS] = hargaBarangBaru;
 
                 // Menginkrementasi NUM_PRODUCTS
                 NUM_PRODUCTS++;
@@ -445,5 +445,6 @@ public class test {
         System.out.println("Terima kasih telah menggunakan sistem rental alat camping!");
         System.exit(0);
         }
+    }
 
-}
+       

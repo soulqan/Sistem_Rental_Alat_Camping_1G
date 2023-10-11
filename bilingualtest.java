@@ -5,7 +5,7 @@ public class bilingualtest {
     public static String[] produk = { "Camping Tent", "Mountain Backpack", "Sleeping Bag", "Portable Stove", "Cooking Set", "Flashlight", "Thick Carpet", "Product 8", "Product 9", "Product 10" };
     public static int[] jumlah = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] harga = { 250000, 35000, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public static long[] hargaOngkir = { 15000, 30000 };
+    public static long[] hargaOngkir = { 1000, 30000 };
     public static String nama, alamat, input, notelp;
     public static String[] cartItems = new String[NUM_PRODUCTS];
     public static int[] cartItemQuantities = new int[NUM_PRODUCTS];
@@ -205,7 +205,7 @@ public class bilingualtest {
         }
 
     }
-    //method untuking menghapus barang yang ada di keranjang
+    //method for delete items in the cart
     public static void removeProduct(Scanner scanner) {
         System.out.println("=================================================");
         System.out.println("           Remove Product From Cart                 ");
@@ -255,22 +255,23 @@ public class bilingualtest {
         System.out.println("======================================================");
         System.out.println("                Delivery Options                ");
         System.out.println("======================================================");
-        System.out.println("1. JNT \n2. JNE");
+        System.out.println("1. Pick Up In Store     : 1000 \n2. Courier     : 30000");
         System.out.print("Select a delivery option: ");
         deliveryOption = scanner.nextInt();
         if (deliveryOption == 1) {
             deliveryOption = 0;
+            System.out.println("Delivery option set");
         }
-        if (deliveryOption == 2) {
+        else if (deliveryOption == 2) {
             deliveryOption = 1;
+            System.out.println("Delivery option set");
         }
 
-        if (deliveryOption == 1 || deliveryOption == 2) {
-            System.out.println("Delivery option set");
-        } else {
+        else {
             System.out.println("Invalid delivery option. Please select a valid option.");
         }
     }
+
 
     // Payment logic
     public static void Payment(Scanner scanner) {

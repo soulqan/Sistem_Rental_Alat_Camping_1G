@@ -9,6 +9,13 @@
             "name": "bilingualtest",
             "request": "launch",
             "mainClass": "bilingualtest",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_54efd01f"
+        },
+        {
+            "type": "java",
+            "name": "bilingualtest",
+            "request": "launch",
+            "mainClass": "bilingualtest",
             "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
         },
         {

@@ -14,7 +14,7 @@ public class bilingualtest {
     public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
-    public static long[] hargaOngkirid = { 15000, 30000 };
+    public static long[] hargaOngkirid = { 1000, 30000 };
     public static String namaid, alamatid, masukkan, notelpid;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
@@ -684,22 +684,21 @@ public class bilingualtest {
         System.out.println("======================================================");
         System.out.println("                      Pengiriman                ");
         System.out.println("======================================================");
-        System.out.println("1. JNT \n2. JNE");
+        System.out.println("1. Ambil Di tempat   :1000 \n2. Kurir             :30000");
         System.out.print("Masukkan opsi pengiriman: ");
         pengiriman = scanner.nextInt();
         if (pengiriman == 1) {
             pengiriman = 0;
-        }
-        if (pengiriman == 2) {
-            pengiriman = 1;
-        }
-
-        if (pengiriman == 1 || pengiriman == 2) {
             System.out.println("Pengiriman sudah di tentukan");
-        } else {
+        }else if (pengiriman == 2) {
+            pengiriman = 1;
+            System.out.println("Pengiriman sudah di tentukan");
+        }
+         else {
             System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
         }
     }
+
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {

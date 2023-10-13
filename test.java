@@ -247,7 +247,7 @@ public static void pembayaran(Scanner scanner) {
         } else {
             System.out.println("Pembayaran tidak valid");
         }
-    } else {
+        } else {
         System.out.println("Keranjang Anda kosong. Silakan tambahkan barang ke keranjang terlebih dahulu.");
     }
     System.out.println("Terima kasih!");

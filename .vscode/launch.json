@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ai",
+            "request": "launch",
+            "mainClass": "ai",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
             "name": "bilingualtest",
             "request": "launch",
             "mainClass": "bilingualtest",

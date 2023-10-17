@@ -35,21 +35,19 @@ public class bilingualtest {
     }
 
     public static void maineng(String[] args) {
-        
+        Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Welcome to the Camping Equipment Rental System  ");
         System.out.println("=================================================");
         System.out.print("Enter username: ");
         String user = scanner.nextLine();
-        user =scanner.nextLine();
         System.out.print("Enter password: ");
         int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("customer")) && (password == 123) || user.equalsIgnoreCase("admin") && (password == 123)) {
-
-            System.out.println("\n               Login Successful              ");
+    
+        if ((user.equalsIgnoreCase("customer") && password == 123)) {
+            System.out.println("\n               Login Successful (Customer)              ");
             System.out.println("\n");
-
+    
             int choice;
             do {
                 System.out.println("=================================================");
@@ -64,12 +62,10 @@ public class bilingualtest {
                 System.out.println("7. Payment");
                 System.out.println("8. Customer Service");
                 System.out.println("9. Return Equipment");
-                System.out.println("10. Earnings and Feedback");
-                System.out.println("11. Add New Item");
-                System.out.println("12. Exit");
+                System.out.println("10. Exit");
                 System.out.print("\nSelect an option: ");
                 choice = scanner.nextInt();
-
+    
                 switch (choice) {
                     case 1:
                         Profile(scanner);
@@ -99,7 +95,67 @@ public class bilingualtest {
                         ReturnEquipment(scanner);
                         break;
                     case 10:
-                        EarningsAndFeedback(scanner);
+                        Exit();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } while (choice != 10);
+        } else if (user.equalsIgnoreCase("admin") && password == 123) {
+            System.out.println("\n               Login Successful (Admin)              ");
+            System.out.println("\n");
+    
+            int choice;
+            do {
+                System.out.println("=================================================");
+                System.out.println ("                   Main Menu                   ");
+                System.out.println("=================================================");
+                System.out.println("\n1. Profile");
+                System.out.println("2. Camping Equipment Inventory");
+                System.out.println("3. Cart");
+                System.out.println("4. Remove Product from Cart");
+                System.out.println("5. Rent Equipment");
+                System.out.println("6. Delivery Options");
+                System.out.println("7. Payment");
+                System.out.println("8. Customer Service");
+                System.out.println("9. Return Equipment");
+                System.out.println("10. Earnings and Feedback");
+                System.out.println("11. Add New Item");
+                System.out.println("12. Exit");
+                System.out.print("\nSelect an option: ");
+                choice = scanner.nextInt();
+    
+                switch (choice) {
+                    case 1:
+                        Profile(scanner);
+                        break;
+                    case 2:
+                        Inventory(scanner);
+                        break;
+                    case 3:
+                        Cart(scanner);
+                        break;
+                    case 4:
+                        removeProduct(scanner);
+                        break;
+                    case 5:
+                        RentEquipment(scanner);
+                        break;
+                    case 6:
+                        DeliveryOptions(scanner);
+                        break;
+                    case 7:
+                        Payment(scanner);
+                        break;
+                    case 8:
+                        CustomerService(scanner);
+                        break;
+                    case 9:
+                        ReturnEquipment(scanner);
+                        break;
+                    case 10:
+                        EarningsAndFeedback();
                         break;
                     case 11:
                         AddNewItem(scanner);
@@ -107,19 +163,16 @@ public class bilingualtest {
                     case 12:
                         Exit();
                         break;
-
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
             } while (choice != 12);
-
-            scanner.close();
         } else {
             System.out.println("Login Failed");
-            main(args);
         }
     }
+    
 
     // Method for profile
     public static void Profile(Scanner scanner) {
@@ -255,7 +308,7 @@ public class bilingualtest {
         System.out.println("======================================================");
         System.out.println("                Delivery Options                ");
         System.out.println("======================================================");
-        System.out.println("1. Pick Up In Store     : 1000 \n2. Courier     : 30000");
+        System.out.println("1. Pick Up In Store     : 1000 \n2. Courier              : 30000");
         System.out.print("Select a delivery option: ");
         deliveryOption = scanner.nextInt();
         if (deliveryOption == 1) {
@@ -361,44 +414,22 @@ public class bilingualtest {
     }
 
     // Method for earnings
-    public static void EarningsAndFeedback(Scanner scanner) {
+    public static void EarningsAndFeedback() {
         System.out.println("=================================================");
         System.out.println("            Earnings and Feedback               ");
         System.out.println("=================================================");
-        System.out.print("Enter username: ");
-        String user = scanner.next();
-        System.out.print("Enter password: ");
-        int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("admin")) && (password == 123)) {
-
-            System.out.println("\n               Login Successful              ");
-            System.out.println("\n");
-            System.out.println("=================================================");
-            System.out.println("            Check Earnings                ");
-            System.out.println("Your earnings are Rp. " + balance);
-            System.out.println("=================================================");
-            System.out.println("Feedback: " + input);
-        } else {
-            System.out.println("Invalid username or password.");
+        System.out.println("            Check Earnings                ");
+        System.out.println("Your earnings are Rp. " + balance);
+        System.out.println("=================================================");
+        System.out.println("Feedback: " + input);
         }
 
-    }
 
     // Method to add a new item
     public static void AddNewItem(Scanner scanner) {
         System.out.println("=================================================");
-        System.out.println("              Add New Item               ");
+        System.out.println("                  Add New Item                   ");
         System.out.println("=================================================");
-        System.out.print("Enter username: ");
-        String user = scanner.next();
-        System.out.print("Enter password: ");
-        int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("admin")) && (password == 123)) {
-
-            System.out.println("\n               Login Successful              ");
-            System.out.println("\n");
             // Check if the produk array is full
             // Ensure that the length of the array is always greater than or equal to NUM_PRODUCTS
             if (NUM_PRODUCTS >= produk.length) {
@@ -455,7 +486,6 @@ public class bilingualtest {
             }
         }
 
-    }
 
     // Exit method
     public static void Exit() {
@@ -466,39 +496,36 @@ public class bilingualtest {
 
     public static void mainid(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("=================================================");
-        System.out.println("  Selamat datang di sistem rental alat camping          ");
-        System.out.println("=================================================");
-        System.out.print("Masukan user: ");
-        String user = scanner.nextLine();
-        System.out.print("Masukan password: ");
-        int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("customer")) && (password == 123)|| user.equalsIgnoreCase("admin")&&(password == 123)) {
-
-            System.out.println("\n               Login Berhasil              ");
+            System.out.println("=================================================");
+            System.out.println("  Selamat datang di sistem rental alat camping          ");
+            System.out.println("=================================================");
+            System.out.print("Masukan user: ");
+            String user =scanner.nextLine();
+            System.out.print("Masukan password: ");
+            int password = scanner.nextInt();
+        
+        if ((user.equalsIgnoreCase("customer") && password == 123)) {
+            System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
-
+    
             int pilihan;
             do {
-                System.out.println("=================================================");
-                System.out.println("                   Menu Utama                   ");
-                System.out.println("=================================================");
-                System.out.println("\n1.Profil");
-                System.out.println("2.Persediaan alat camping");
-                System.out.println("3.Keranjang");
-                System.out.println("4.Hapus Produk Dari Keranjang ");
-                System.out.println("5.Peminjaman barang");
-                System.out.println("6.Opsi pengiriman");
-                System.out.println("7.Pembayaran");
-                System.out.println("8.Servis center");
-                System.out.println("9.Pengembalian barang");
-                System.out.println("10.Pendapatan dan feedback");
-                System.out.println("11.Penambahan barang baru");
-                System.out.println("12.Exit");
-                System.out.print("\nPilih Menu : ");
+               System.out.println("=================================================");
+                    System.out.println("                   Menu Utama                   ");
+                    System.out.println("=================================================");
+                    System.out.println("\n1.Profil");
+                    System.out.println("2.Persediaan alat camping");
+                    System.out.println("3.Keranjang");
+                    System.out.println("4.Hapus Produk Dari Keranjang ");
+                    System.out.println("5.Peminjaman barang");
+                    System.out.println("6.Opsi pengiriman");
+                    System.out.println("7.Pembayaran");
+                    System.out.println("8.Servis center");
+                    System.out.println("9.Pengembalian barang");
+                    System.out.println("10.Exit");
+                    System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
-
+                
                 switch (pilihan) {
                     case 1:
                         Profil(scanner);
@@ -528,7 +555,67 @@ public class bilingualtest {
                         pengembalian(scanner);
                         break;
                     case 10:
-                        pendapatan(scanner);
+                        exit();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } while (pilihan != 8);
+        } else if (user.equalsIgnoreCase("admin") && password == 123) {
+            System.out.println("\n               Login Berhasil (Admin)              ");
+            System.out.println("\n");
+    
+            int pilihan;
+            do {
+                System.out.println("=================================================");
+                    System.out.println("                   Menu Utama                   ");
+                    System.out.println("=================================================");
+                    System.out.println("\n1.Profil");
+                    System.out.println("2.Persediaan alat camping");
+                    System.out.println("3.Keranjang");
+                    System.out.println("4.Hapus Produk Dari Keranjang ");
+                    System.out.println("5.Peminjaman barang");
+                    System.out.println("6.Opsi pengiriman");
+                    System.out.println("7.Pembayaran");
+                    System.out.println("8.Servis center");
+                    System.out.println("9.Pengembalian barang");
+                    System.out.println("10.Pendapatan dan feedback");
+                    System.out.println("11.Penambahan barang baru");
+                    System.out.println("12.Exit");
+                    System.out.print("\nPilih Menu : ");
+                pilihan = scanner.nextInt();
+                
+                switch (pilihan) {
+                    case 1:
+                        Profil(scanner);
+                        break;
+                    case 2:
+                        persediaan(scanner);
+                        break;
+                    case 3:
+                        Keranjang(scanner);
+                        break;
+                    case 4:
+                        hapusProdukDariKeranjang(scanner);
+                        break;
+                    case 5:
+                        peminjamanBarang(scanner);
+                        break;
+                    case 6:
+                        pengiriman(scanner);
+                        break;
+                    case 7:
+                        pembayaran(scanner);
+                        break;
+                    case 8:
+                        service(scanner);
+                        break;
+                    case 9:
+                        pengembalian(scanner);
+                        break;
+                    case 10:
+                        pendapatan();
                         break;
                     case 11:
                         tambahBarang(scanner);
@@ -536,17 +623,14 @@ public class bilingualtest {
                     case 12:
                         exit();
                         break;
-
+    
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 12);
-
-            scanner.close();
+            } while (pilihan != 10);
         } else {
             System.out.println("Login Gagal");
-            main(args);
         }
     }
 
@@ -792,44 +876,21 @@ public class bilingualtest {
     }
 
     // method untuk pendapatan
-    public static void pendapatan(Scanner scanner) {
+    public static void pendapatan() {
         System.out.println("=================================================");
-        System.out.println("                   login pendapatan          ");
+        System.out.println("               pendapatan & feedback             ");
         System.out.println("=================================================");
-        System.out.print("masukan user: ");
-        String user = scanner.next();
-        System.out.print("masukan password: ");
-        int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("admin")) && (password == 123)) {
-
-            System.out.println("\n               login berhasil              ");
-            System.out.println("\n");
-            System.out.println("=================================================");
             System.out.println("               Cek pendapatan                   ");
             System.out.println("       pendapatan Anda adalah Rp. " + saldo);
             System.out.println("=================================================");
             System.out.println("feedback:" + masukkan);
-        } else {
-            System.out.println("Username atau password anda salah");
-        }
-
-    }
+        } 
 
     // method tambah barang
     public static void tambahBarang(Scanner scanner) {
         System.out.println("=================================================");
-        System.out.println("              login penambahan barang         ");
+        System.out.println("              penambahan barang         ");
         System.out.println("=================================================");
-        System.out.print("masukan user: ");
-        String user = scanner.next();
-        System.out.print("masukan password: ");
-        int password = scanner.nextInt();
-
-        if ((user.equalsIgnoreCase("admin")) && (password == 123)) {
-
-            System.out.println("\n               login berhasil              ");
-            System.out.println("\n");
             // Periksa apakah array produk sudah penuh
             // Memastikan panjang array selalu lebih besar atau sama dengan NUM_PRODUCTS
             if (NUM_PRODUCTS >= produkid.length) {
@@ -889,7 +950,7 @@ public class bilingualtest {
             }
         }
 
-    }
+    
 
     // method exit
     public static void exit() {

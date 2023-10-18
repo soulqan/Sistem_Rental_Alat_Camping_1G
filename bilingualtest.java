@@ -310,7 +310,7 @@ public class bilingualtest {
         System.out.println("======================================================");
         System.out.println("1. Pick Up In Store     : 1000 \n2. Courier              : 30000");
         System.out.print("Select a delivery option: ");
-        deliveryOption = scanner.nextInt();
+        deliveryOption = scanner.nextInt(); 
         if (deliveryOption == 1) {
             deliveryOption = 0;
             System.out.println("Delivery option set");
@@ -561,7 +561,7 @@ public class bilingualtest {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 8);
+            } while (pilihan != 10);
         } else if (user.equalsIgnoreCase("admin") && password == 123) {
             System.out.println("\n               Login Berhasil (Admin)              ");
             System.out.println("\n");
@@ -628,7 +628,7 @@ public class bilingualtest {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 10);
+            } while (pilihan != 12);
         } else {
             System.out.println("Login Gagal");
         }

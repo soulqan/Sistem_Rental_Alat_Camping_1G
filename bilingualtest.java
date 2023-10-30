@@ -724,7 +724,7 @@ public class bilingualtest {
         System.out.println("           Hapus Produk Dari Keranjang                 ");
         System.out.println("=================================================");
         System.out.print("Masukan nama produk: ");
-        String productName = scanner.nextLine();
+        String productName = scanner.nextLine();  
         productName=scanner.nextLine();
 
         int productIndex = -1;
@@ -805,14 +805,14 @@ public class bilingualtest {
                 System.out.print(jmlBarangKeranjang[i] + "\t\t");
                 System.out.print(hargaid[i] + "\t\t");
                 System.out.print(estimasi + "\t\t");
-                System.out.println(hargaOngkir[pengiriman]);
+                System.out.println(hargaOngkirid[pengiriman]);
 
                 adaBarangDalamKeranjang = true; // Setel ke true jika ada barang dalam keranjang
             }
         }
 
         if (adaBarangDalamKeranjang) {
-            totalHargaFinal = totalHarga * estimasi + hargaOngkir[pengiriman];
+            totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
             System.out.println("Total Harga: " + totalHargaFinal);
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.next();

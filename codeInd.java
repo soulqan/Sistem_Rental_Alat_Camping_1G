@@ -381,21 +381,22 @@ public static void main(String[] args) {
         System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang?(y/n)");
         String kembali = scanner.next();
 
-        if (kembali.equalsIgnoreCase("y")) {
-            for (int i = 0; i < NUM_PRODUCTS; i++) {
-                if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
+        if (kembali.equalsIgnoreCase("y")) { //jika setuju untuk mengembalikan barang maka akan menjalankan program
+            for (int i = 0; i < NUM_PRODUCTS; i++) { //jika sudah melakukan peminjaman atau transaksi maka program baru bisa berjalan dg syarat:
+                if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) { //item keranjang tidak kosong
                     // Mengembalikan semua barang yang ada di keranjang
                     jumlahid[i] += jmlBarangKeranjang[i];
-                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];
-                    jmlBarangKeranjang[i] = 0;
+                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];//sudah melakukan pembayaran
+                    jmlBarangKeranjang[i] = 0;//barang dikeranjang sudah tidak ada atau sudah dibayar
 
                 }
             }
             System.out.println("Semua barang berhasil dikembalikan.");
         } else {
             System.out.println("Terima kasih!");
-        }
+        }//code  untuk penambahan jumlah hari lagi otw, hanifah masih bingung mwehe
     }
+
 
     // method untuk pendapatan
     public static void pendapatan() {
@@ -424,6 +425,7 @@ public static void main(String[] args) {
                 long[] newHargaid = new long[newLengthid];
                 String[] newItem = new String[newLengthid];
                 int[]newJmlBarang= new int[newLengthid];
+                //array
 
                 // Salin elemen-elemen dari array lama ke array baru
                 for (int i = 0; i < NUM_PRODUCTS; i++) {
@@ -449,6 +451,7 @@ public static void main(String[] args) {
             String tambahBarang = scanner.next();
 
             if (tambahBarang.equalsIgnoreCase("y") && NUM_PRODUCTS < produkid.length) {
+                
                 // ... kode penambahan barang ...
                 System.out.print("Masukkan nama barang baru: ");
                 String namaBarangBaru = scanner.nextLine();

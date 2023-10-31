@@ -874,6 +874,23 @@ public class bilingualtest {
             System.out.println("Terima kasih!");
         }
     }
+    
+    
+       // System.out.println("ingin menambahkan hari peminjaman anda?");
+            
+            //System.out.println("Masukkan tanggal pinjam: ");
+            //tanggalPinjam = LocalDate.parse(scanner.nextLine());
+            //System.out.println("Masukkan jumlah hari peminjaman: ");
+            //jumlahHari = Integer.parseInt(scanner.nextLine());
+    
+            // Menambahkan hari peminjaman
+           // LocalDate tanggalKembali = tanggalPinjam.plusDays(jumlahHari);
+    
+            // Menampilkan hasil
+           // System.out.println("Tanggal pinjam: " + tanggalPinjam);
+           // System.out.println("Tanggal kembali: " + tanggalKembali);
+        //}
+    //}
 
     // method untuk pendapatan
     public static void pendapatan() {

@@ -4,7 +4,8 @@ Project ini dibuat untuk menyelesaikan tugas semester 1
 Ini adalah sistem rental alat camping sederhana yang dibuat oleh 3 Mahasiswa Jurusan Teknologi Informasi prodi Teknik Informatika kelas 1G kelompok 7
 
 Cara kerja nya adalah:
-1.
+
+1. 
 2.
 3.
 4.

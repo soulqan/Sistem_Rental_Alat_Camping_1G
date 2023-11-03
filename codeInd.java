@@ -5,7 +5,7 @@ public class codeInd{
     public static int NUM_PRODUCTS = 10;
     public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    public static long[] hargaid = { 250000, 35000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 };
+    public static long[] hargaid = { 250000, 35000, 60000, 20000, 40000, 15000, 30000, 0000, 0000, 0000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
     public static String namaid, alamatid, masukkan, notelpid;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];

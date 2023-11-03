@@ -6,7 +6,7 @@ Ini adalah sistem rental alat camping sederhana yang dibuat oleh 3 Mahasiswa Jur
 Cara kerja nya adalah:
 
 1. 
-2.
+2.jdfkajsdlka;ldsk;a
 3.
 4.
 5.

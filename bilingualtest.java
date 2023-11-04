@@ -21,6 +21,7 @@ public class bilingualtest {
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
     public static int estimasi, pengiriman;
     public static Scanner scanner = new Scanner(System.in);
+   
     
     public static void main(String[] args) {
         System.out.println("1. Bahasa Indonesia \n2. English Language");
@@ -871,9 +872,17 @@ public class bilingualtest {
             }
             System.out.println("Semua barang berhasil dikembalikan.");
         } else {
-            System.out.println("Terima kasih!");
+            // Menambahkan jumlah hari peminjaman
+            System.out.println("masukkan jumlah hari tambahan yang anda inginkan!");
+            int estimasiBaru = scanner.nextInt();
+            int totalestimasi= estimasiBaru+estimasi;
+            System.out.println("estimasi waktu peminjaman anda sekarang adalah: "+totalestimasi);
+            totalHargaFinal = totalHarga * (estimasi+estimasiBaru) + hargaOngkirid[pengiriman] ;
+            System.out.println("Total harga: " + totalHargaFinal);
         }
     }
+        
+    
     
     
        // System.out.println("ingin menambahkan hari peminjaman anda?");

@@ -18,9 +18,10 @@ public class bilingualtest {
     public static String namaid, alamatid, masukkan, notelpid;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
+    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0, hargaFinal=0, biayaTambahan=0;;
     public static int estimasi, pengiriman;
     public static Scanner scanner = new Scanner(System.in);
+   
    
     
     public static void main(String[] args) {
@@ -877,8 +878,10 @@ public class bilingualtest {
             int estimasiBaru = scanner.nextInt();
             int totalestimasi= estimasiBaru+estimasi;
             System.out.println("estimasi waktu peminjaman anda sekarang adalah: "+totalestimasi);
-            totalHargaFinal = totalHarga * (estimasi+estimasiBaru) + hargaOngkirid[pengiriman] ;
-            System.out.println("Total harga: " + totalHargaFinal);
+            hargaFinal = totalHargaFinal * (totalestimasi-estimasi);
+            biayaTambahan=(totalHargaFinal-totalHarga);
+            System.out.println("biaya tambahan anda adalah " + biayaTambahan);
+            
         }
     }
         

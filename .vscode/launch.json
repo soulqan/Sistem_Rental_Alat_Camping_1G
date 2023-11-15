@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "codeIng",
+            "request": "launch",
+            "mainClass": "codeIng",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_9aff78c8"
+        },
+        {
+            "type": "java",
+            "name": "test2",
+            "request": "launch",
+            "mainClass": "test2",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_9aff78c8"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_9aff78c8"
+        },
+        {
+            "type": "java",
             "name": "codeInd",
             "request": "launch",
             "mainClass": "codeInd",

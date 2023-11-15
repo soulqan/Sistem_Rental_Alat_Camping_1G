@@ -3,15 +3,24 @@ import java.util.Scanner;
 public class codeIng {
 
 public static int NUM_PRODUCTS = 10;
-    public static String[] produk = { "Camping Tent", "Mountain Backpack", "Sleeping Bag", "Portable Stove", "Cooking Set", "Flashlight", "Thick Carpet", "Product 8", "Product 9", "Product 10" };
-    public static int[] jumlah = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    public static long[] harga = { 250000, 35000, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public static long[] hargaOngkir = { 1000, 30000 };
-    public static String nama, alamat, input, notelp;
+    public static String[] product = { "Camping Tent", "Mountain Backpack", "Sleeping Bag", "Portable Stove", "Cooking Set", "Flashlight", "Thick Carpet", "Product 8", "Product 9", "Product 10" };
+    public static int[] amount = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    public static long[] price = { 250000, 35000, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public static long[] priceOfPostage = { 1000, 30000 };
+    public static String name, address, input, notelp;
     public static String[] cartItems = new String[NUM_PRODUCTS];
     public static int[] cartItemQuantities = new int[NUM_PRODUCTS];
     public static long totalPrice = 0, balance = 0, deliveryCost, finalTotalPrice = 0;
     public static int estimate, deliveryOption;
+    public static String[][] lostFines = {
+        {"Camping Tent", "2.500.000"},
+        {"Mountain Backpack", "800.000"},
+        {"Sleeping Bag", "600.000"},
+        {"Portable Stove", "200.000"},
+        {"Cooking set", "150.000"},
+        {"Flashlight", "50.000"},
+        {"Thick Carpet", "30.000"},
+    };
 
 public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +50,8 @@ public static void main(String[] args) {
                 System.out.println("7. Payment");
                 System.out.println("8. Customer Service");
                 System.out.println("9. Return Equipment");
-                System.out.println("10. Exit");
+                System.out.println("10. Fines");
+                System.out.println("11. Exit");
                 System.out.print("\nSelect an option: ");
                 choice = scanner.nextInt();
     
@@ -74,6 +84,9 @@ public static void main(String[] args) {
                         ReturnEquipment(scanner);
                         break;
                     case 10:
+                        fines(scanner);
+                        break;
+                    case 11:
                         Exit();
                         break;
                     default:
@@ -101,6 +114,7 @@ public static void main(String[] args) {
                 System.out.println("9. Return Equipment");
                 System.out.println("10. Earnings and Feedback");
                 System.out.println("11. Add New Item");
+                System.out.println("12. Fines");
                 System.out.println("12. Exit");
                 System.out.print("\nSelect an option: ");
                 choice = scanner.nextInt();
@@ -140,6 +154,9 @@ public static void main(String[] args) {
                         AddNewItem(scanner);
                         break;
                     case 12:
+                        fines(scanner);
+                        break;
+                    case 13:
                         Exit();
                         break;
                     default:
@@ -159,10 +176,10 @@ public static void main(String[] args) {
         System.out.println("                 Customer Profile                 ");
         System.out.println("=================================================");
         System.out.print("Name    : ");
-        nama = scanner.nextLine();
-        nama = scanner.nextLine();
+        name = scanner.nextLine();
+        name = scanner.nextLine();
         System.out.print("Address : ");
-        alamat = scanner.nextLine();
+        address = scanner.nextLine();
         System.out.print("Phone No: ");
         notelp = scanner.nextLine();
         System.out.println("=================================================");
@@ -177,13 +194,13 @@ public static void main(String[] args) {
         System.out.println("Name\t\tAvailable\tPrice");
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
-            System.out.print(produk[i] + "\t");
-            if (jumlah[i] == 0) {
+            System.out.print(product[i] + "\t");
+            if (amount[i] == 0) {
                 System.out.print("Sold out\t");
             } else {
-                System.out.print(jumlah[i] + "\t\t");
+                System.out.print(amount[i] + "\t\t");
             }
-            System.out.println(harga[i]);
+            System.out.println(price[i]);
         }
         System.out.println("\nSelect an option to continue:");
         System.out.println("1. Cart\n2. Main Menu");
@@ -210,27 +227,27 @@ public static void main(String[] args) {
 
         int itemIndex = -1;
         for (int i = 0; i < NUM_PRODUCTS; i++) {
-            if (produk[i].equalsIgnoreCase(item)) {
+            if (product[i].equalsIgnoreCase(item)) {
                 itemIndex = i;
                 break;
             }
         }
         if (itemIndex == -1) {
             System.out.println("Item not found");
-        } else if (jumlah[itemIndex] == 0) {
+        } else if (amount[itemIndex] == 0) {
             System.out.println("Sold out");
         } else {
             System.out.println("Enter the quantity to rent:");
             int quantity = scanner.nextInt();
 
-            if (quantity > jumlah[itemIndex]) {
+            if (quantity > amount[itemIndex]) {
                 System.out.println("Insufficient quantity available");
             } else {
                 cartItems[itemIndex] = item;
                 cartItemQuantities[itemIndex] += quantity;
-                totalPrice += harga[itemIndex] * quantity;
+                totalPrice += price[itemIndex] * quantity;
 
-                jumlah[itemIndex] -= quantity;
+                amount[itemIndex] -= quantity;
                 System.out.println("Item added to the cart.");
             }
 
@@ -261,12 +278,12 @@ public static void main(String[] args) {
             int jmlMasuking = scanner.nextInt();
 
             if (jmlMasuking > cartItemQuantities[productindexing]) {
-                System.out.println("Invalid Amount.");
+                System.out.println("Invalid amount.");
             } else {
                 cartItemQuantities[productindexing] -= jmlMasuking;
-                totalPrice -= harga[productindexing] * jmlMasuking;
+                totalPrice -= price[productindexing] * jmlMasuking;
 
-                jumlah[productindexing] += jmlMasuking;
+                amount[productindexing] += jmlMasuking;
                 System.out.println("Product Has been Remove from Cart.");
             }
         }
@@ -310,8 +327,8 @@ public static void main(String[] args) {
         System.out.println("======================================================");
         System.out.println("            Payment Details                ");
         System.out.println("======================================================");
-        System.out.println("Name   : " + nama);
-        System.out.println("Address: " + alamat);
+        System.out.println("Name   : " + name);
+        System.out.println("Address: " + address);
         System.out.println("Phone No: " + notelp);
         System.out.println("======================================================");
         System.out.println("Product\t\tQuantity\t\tPrice\t\tEstimate\tDelivery");
@@ -322,16 +339,16 @@ public static void main(String[] args) {
             if (cartItems[i] != null && cartItemQuantities[i] > 0) {
                 System.out.print(cartItems[i] + "\t");
                 System.out.print(cartItemQuantities[i] + "\t\t");
-                System.out.print(harga[i] + "\t\t");
+                System.out.print(price[i] + "\t\t");
                 System.out.print(estimate + "\t\t");
-                System.out.println(hargaOngkir[deliveryOption]);
+                System.out.println(priceOfPostage[deliveryOption]);
 
                 itemsInCart = true;
             }
         }
 
         if (itemsInCart) {
-            finalTotalPrice = totalPrice * estimate + hargaOngkir[deliveryOption];
+            finalTotalPrice = totalPrice * estimate + priceOfPostage[deliveryOption];
             System.out.println("Total Price: " + finalTotalPrice);
             System.out.println("Would you like to proceed with the displayed price? (y/n)");
             String answer = scanner.next();
@@ -381,8 +398,8 @@ public static void main(String[] args) {
             for (int i = 0; i < NUM_PRODUCTS; i++) {
                 if (cartItems[i] != null && cartItemQuantities[i] > 0) {
                     // Returning all items in the cart
-                    jumlah[i] += cartItemQuantities[i];
-                    totalPrice -= harga[i] * cartItemQuantities[i];
+                    amount[i] += cartItemQuantities[i];
+                    totalPrice -= price[i] * cartItemQuantities[i];
                     cartItemQuantities[i] = 0;
                 }
             }
@@ -409,31 +426,31 @@ public static void main(String[] args) {
         System.out.println("=================================================");
         System.out.println("                  Add New Item                   ");
         System.out.println("=================================================");
-            // Check if the produk array is full
+            // Check if the product array is full
             // Ensure that the length of the array is always greater than or equal to NUM_PRODUCTS
-            if (NUM_PRODUCTS >= produk.length) {
+            if (NUM_PRODUCTS >= product.length) {
                 // If it's full, create a new array with a larger size
-                int newLength = produk.length + 1;
+                int newLength = product.length + 1;
 
-                String[] newProduk = new String[newLength];
-                int[] newJumlah = new int[newLength];
-                long[] newHarga = new long[newLength];
+                String[] newproduct = new String[newLength];
+                int[] newamount = new int[newLength];
+                long[] newprice = new long[newLength];
                 String[] newItem = new String[newLength];
                 int[] newJmlBarang = new int[newLength];
 
                 // Copy elements from the old array to the new array
                 for (int i = 0; i < NUM_PRODUCTS; i++) {
-                    newProduk[i] = produk[i];
-                    newJumlah[i] = jumlah[i];
-                    newHarga[i] = harga[i];
+                    newproduct[i] = product[i];
+                    newamount[i] = amount[i];
+                    newprice[i] = price[i];
                     newItem[i] = cartItems[i];
                     newJmlBarang[i] = cartItemQuantities[i];
                 }
 
                 // Replace the old array with the new array
-                produk = newProduk;
-                jumlah = newJumlah;
-                harga = newHarga;
+                product = newproduct;
+                amount = newamount;
+                price = newprice;
                 cartItemQuantities = newJmlBarang;
                 cartItems = newItem;
             }
@@ -442,7 +459,7 @@ public static void main(String[] args) {
             System.out.print("Do you want to add a new item? (y/n): ");
             String addNewItem = scanner.next();
 
-            if (addNewItem.equalsIgnoreCase("y") && NUM_PRODUCTS < produk.length) {
+            if (addNewItem.equalsIgnoreCase("y") && NUM_PRODUCTS < product.length) {
                 System.out.print("Enter the name of the new item: ");
                 String newItemName = scanner.nextLine();
                 newItemName = scanner.nextLine();
@@ -453,10 +470,10 @@ public static void main(String[] args) {
                 System.out.print("Enter the price of the new item: ");
                 long newItemPrice = scanner.nextLong();
 
-                // Add the new item to the produk array
-                produk[NUM_PRODUCTS] = newItemName;
-                jumlah[NUM_PRODUCTS] = newItemQuantity;
-                harga[NUM_PRODUCTS] = newItemPrice;
+                // Add the new item to the product array
+                product[NUM_PRODUCTS] = newItemName;
+                amount[NUM_PRODUCTS] = newItemQuantity;
+                price[NUM_PRODUCTS] = newItemPrice;
 
                 // Increment NUM_PRODUCTS
                 NUM_PRODUCTS++;
@@ -464,7 +481,68 @@ public static void main(String[] args) {
                 System.out.println("New item added to inventory successfully.");
             }
         }
-
+        
+        public static void fines (Scanner scanner) {
+            String back;
+            while (true) {
+                System.out.println("=================================================");
+                System.out.println("                      Fines                      ");
+                System.out.println("=================================================");
+                System.out.println("1. Late returning items");
+                System.out.println("2. Lost items");
+                System.out.println("3. Total fines");
+                System.out.println("4. Exit");
+                System.out.print("\nChoices : ");
+                int choicesFines = scanner.nextInt();
+    
+                switch (choicesFines) {
+                    case 1:
+                        do {
+                            System.out.println("");
+                            System.out.println("Do you want to report the fines back? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("n"));
+                        break;
+                    case 2:
+                        do {
+                            for (int i = 0; i < lostFines.length; i++) {
+                                System.out.println(product[i]);
+                            }
+                            System.out.println("What items are lost?");
+                            String lost = scanner.nextLine();
+                            lost = scanner.nextLine();
+    
+                            boolean found = false;
+                            for (String[] item : lostFines) {
+                                if (item[0].equalsIgnoreCase(lost)) {
+                                    System.out.println("You must pay for the loss of the item's value " + item[1]);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
+                                System.out.println("Item not found in lost list.");
+                            }
+    
+                            System.out.println("Do you want to report the fines back? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("n"));
+                        break;
+                    case 3:
+                        do {
+                            System.out.println("The total fine you must pay: ");
+                            System.out.println("Do you want to report the fines back? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("n"));
+                        break;
+                    case 4:
+                        return;
+                    default: 
+                    System.out.println("Sorry, your choice is wrong!");
+                    continue;
+                    } 
+                }
+            }
 
     // Exit method
     public static void Exit() {

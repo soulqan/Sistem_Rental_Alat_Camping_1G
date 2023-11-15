@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class codeInd{
     //tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 35000, 60000, 20000, 40000, 15000, 30000, 0000, 0000, 0000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
@@ -12,10 +12,21 @@ public class codeInd{
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
     public static int estimasi, pengiriman;
+    public static String[][] dendaHilang = {
+        {"Tenda camping", "2.500.000"},
+        {"Tas Gunung", "800.000"},
+        {"Sleeping Bag", "600.000"},
+        {"Kompor portable", "200.000"},
+        {"Cooking set", "150.000"},
+        {"Flashlight", "50.000"},
+        {"Karpet tebal", "30.000"},
+    };
     
 
 //sebuah public static utama untuk login dan menampilkan menu
-public static void main(String[] args) {
+public static void 
+
+main(String[] args) {
         Scanner scanner = new Scanner(System.in);
             System.out.println("=================================================");
             System.out.println("  Selamat datang di sistem rental alat camping          ");
@@ -77,6 +88,9 @@ public static void main(String[] args) {
                         pengembalian(scanner);//apabila pilihan yang di input itu 9 maka dia akan memanggil sebuah method yaitu pengembalian
                         break;
                     case 10:
+                        denda(scanner);//apabila pilihan yang di input itu 9 maka dia akan memanggil sebuah method yaitu denda
+                        break;
+                    case 11:
                         exit();//apabila pilihan yang di input itu 10 maka dia akan memanggil sebuah method yaitu exit
                         break;
                     default:// pilihan default
@@ -104,7 +118,8 @@ public static void main(String[] args) {
                     System.out.println("9.Pengembalian barang");
                     System.out.println("10.Pendapatan dan feedback");
                     System.out.println("11.Penambahan barang baru");
-                    System.out.println("12.Exit");
+                    System.out.println("12.Denda");
+                    System.out.println("13.Exit");
                     System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
                 
@@ -143,6 +158,9 @@ public static void main(String[] args) {
                         tambahBarang(scanner);
                         break;
                     case 12:
+                        denda(scanner);
+                        break;
+                    case 13:
                         exit();
                         break;
     
@@ -474,15 +492,66 @@ public static void main(String[] args) {
                 System.out.println("Barang baru berhasil ditambahkan ke persediaan.");
             }
         }
-
+        public static void denda(Scanner scanner) {
+            String back;
+            while (true) {
+                System.out.println("=================================================");
+                System.out.println("              Denda         ");
+                System.out.println("=================================================");
+                System.out.println("1. Telat mengembalikan barang (diluar estimasi yang sudah ditentukan)");
+                System.out.println("2. Kehilangan barang");
+                System.out.println("3. Kerusakan barang");
+                System.out.print("\nPilihan : ");
+                int pilihanDenda = scanner.nextInt();
     
+                switch (pilihanDenda) {
+                    case 1:
+                        do {
+                            System.out.println("");
+                            System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("y"));
+                        break;
+                    case 2:
+                        do {
+                            for (int i = 0; i < dendaHilang.length; i++) {
+                                System.out.println(produkid[i]);
+                            }
+                            System.out.println("Barang apa saja yang hilang?");
+                            String hilang = scanner.nextLine();
+                            hilang = scanner.nextLine();
+    
+                            boolean found = false;
+                            for (String[] item : dendaHilang) {
+                                if (item[0].equalsIgnoreCase(hilang)) {
+                                    System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + item[1]);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
+                                System.out.println("Barang tidak ditemukan dalam daftar kehilangan.");
+                            }
+    
+                            System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("y"));
+                        break;
+                    case 3:
+                        do {
+                            System.out.println("Barang apa saja yang rusak?");
+                            System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
+                            back = scanner.next();
+                        } while (back.equalsIgnoreCase("y"));
+                        break;
+                }
+            }
+        }
+ 
 
     // method exit
     public static void exit() {
         System.out.println("Terima kasih telah menggunakan sistem rental alat camping!");
         System.exit(0);
         }
-
-
-
 }

@@ -498,7 +498,7 @@ main(String[] args) {
                 System.out.println("=================================================");
                 System.out.println("              Denda         ");
                 System.out.println("=================================================");
-                System.out.println("1. Telat mengembalikan barang (diluar estimasi yang sudah ditentukan)");
+                System.out.println("1. Telat mengembalikan barang");
                 System.out.println("2. Kehilangan barang");
                 System.out.println("3. Kerusakan barang");
                 System.out.print("\nPilihan : ");
@@ -514,8 +514,13 @@ main(String[] args) {
                         break;
                     case 2:
                         do {
+                            System.out.println("List denda barang yang hilang : \n");
                             for (int i = 0; i < dendaHilang.length; i++) {
-                                System.out.println(produkid[i]);
+                               for (int j = 0; j < dendaHilang[i].length; j++) {
+                                System.out.print(dendaHilang[i][j]);
+                                
+                               }
+                               System.out.println();
                             }
                             System.out.println("Barang apa saja yang hilang?");
                             String hilang = scanner.nextLine();

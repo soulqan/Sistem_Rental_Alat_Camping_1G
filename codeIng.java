@@ -505,9 +505,13 @@ public static void main(String[] args) {
                         break;
                     case 2:
                         do {
+                            System.out.println("List denda barang yang hilang : \n");
                             for (int i = 0; i < lostFines.length; i++) {
-                                System.out.println(product[i]);
-                            }
+                               for (int j = 0; j < lostFines[i].length; j++) {
+                                System.out.print(lostFines[i][j]);
+                                
+                               }
+                               System.out.println();
                             System.out.println("What items are lost?");
                             String lost = scanner.nextLine();
                             lost = scanner.nextLine();
@@ -523,10 +527,10 @@ public static void main(String[] args) {
                             if (!found) {
                                 System.out.println("Item not found in lost list.");
                             }
-    
+                            }
                             System.out.println("Do you want to report the fines back? (y/n)");
                             back = scanner.next();
-                        } while (back.equalsIgnoreCase("n"));
+                        }while (back.equalsIgnoreCase("n"));
                         break;
                     case 3:
                         do {

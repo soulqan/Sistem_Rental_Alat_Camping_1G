@@ -490,8 +490,7 @@ public static void main(String[] args) {
                 System.out.println("=================================================");
                 System.out.println("1. Late returning items");
                 System.out.println("2. Lost items");
-                System.out.println("3. Total fines");
-                System.out.println("4. Exit");
+                System.out.println("3. Broken items");
                 System.out.print("\nChoices : ");
                 int choicesFines = scanner.nextInt();
     
@@ -539,8 +538,6 @@ public static void main(String[] args) {
                             back = scanner.next();
                         } while (back.equalsIgnoreCase("n"));
                         break;
-                    case 4:
-                        return;
                     default: 
                     System.out.println("Sorry, your choice is wrong!");
                     continue;

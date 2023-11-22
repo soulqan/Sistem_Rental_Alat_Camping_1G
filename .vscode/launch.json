@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "codeInd",
+            "request": "launch",
+            "mainClass": "codeInd",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_9ffed083"
+        },
+        {
+            "type": "java",
             "name": "codeIng",
             "request": "launch",
             "mainClass": "codeIng",

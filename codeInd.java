@@ -21,7 +21,8 @@ public class codeInd{
         {"Flashlight", "50.000"},
         {"Karpet tebal", "30.000"},
     };
-    
+    public static String tanggalPengembalian;
+
 
 //sebuah public static utama untuk login dan menampilkan menu
 public static void 
@@ -293,16 +294,26 @@ main(String[] args) {
     }
 }
     
-
     // Method untuk peminjaman barang
     public static void peminjamanBarang(Scanner scanner) {
         System.out.println("=================================================");
         System.out.println("                Peminjaman Barang               ");
         System.out.println("=================================================");
-        System.out.println("*Peminjaman Dihitung Perhari*");
-        System.out.println("Masukkan Estimasi Waktu Peminjaman :");
+        System.out.println("Peminjaman Dihitung Perhari");
+        System.out.println("Berapa hari anda ingin meminjam barang? ");
         estimasi = scanner.nextInt();
-    }
+        System.out.println("Estimasi Waktu Peminjaman : " + estimasi + " hari");
+        
+            // Menerima input tanggal peminjaman
+            System.out.print("Tanggal Peminjaman (dd/MM/yyyy): ");
+            String tanggalPeminjaman = scanner.next();
+    
+            // Menerima input tanggal pengembalian
+            System.out.print("Tanggal Pengembalian (dd/MM/yyyy): ");
+           tanggalPengembalian = scanner.next();
+    
+        }
+    
 
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
@@ -399,21 +410,32 @@ main(String[] args) {
         System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang?(y/n)");
         String kembali = scanner.next();
 
-        if (kembali.equalsIgnoreCase("y")) { //jika setuju untuk mengembalikan barang maka akan menjalankan program
-            for (int i = 0; i < NUM_PRODUCTS; i++) { //jika sudah melakukan peminjaman atau transaksi maka program baru bisa berjalan dg syarat:
-                if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) { //item keranjang tidak kosong
+        // Deklarasikan variabel tanggal, bulan, dan tahun
+
+        if (kembali.equalsIgnoreCase("y")) { // jika setuju untuk mengembalikan barang maka akan menjalankan program
+
+            for (int i = 0; i < NUM_PRODUCTS; i++) { // jika sudah melakukan peminjaman atau transaksi maka program baru
+                                                     // bisa berjalan dg syarat:
+                if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) { // item keranjang tidak kosong
                     // Mengembalikan semua barang yang ada di keranjang
                     jumlahid[i] += jmlBarangKeranjang[i];
-                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];//sudah melakukan pembayaran
-                    jmlBarangKeranjang[i] = 0;//barang dikeranjang sudah tidak ada atau sudah dibayar
-
+                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];// sudah melakukan pembayaran
+                    jmlBarangKeranjang[i] = 0;// barang dikeranjang sudah tidak ada atau sudah dibayar
+                   System.out.println("masukkan tanggal saat anda mengembalikan barang (dd/MM/yyyy): ");
+                   String tanggalKembali=scanner.next();
+                   
+                
+                if (tanggalPengembalian.equals(tanggalKembali)) {
+                     System.out.println("barang berhasil dikembalikan");
+                } else {
+                    // Proses peminjaman
+                    System.out.println("anda melebihi batas estimasi peminjaman barang, anda terkena denda");
                 }
+       }
             }
-            System.out.println("Semua barang berhasil dikembalikan.");
-        } else {
-            System.out.println("Terima kasih!");
-        }//code  untuk penambahan jumlah hari lagi otw, hanifah masih bingung mwehe
+        }
     }
+
 
 
     // method untuk pendapatan

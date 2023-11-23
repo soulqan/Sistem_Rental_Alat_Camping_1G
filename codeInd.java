@@ -57,7 +57,8 @@ public class codeInd {
                 System.out.println("7.Pembayaran");
                 System.out.println("8.Servis center");
                 System.out.println("9.Pengembalian barang");
-                System.out.println("10.Exit");
+                System.out.println("10.Log Out");
+                System.out.println("11.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();// untuk membaca inputan yang dimasukkan
 
@@ -100,9 +101,8 @@ public class codeInd {
                                               // method yaitu pengembalian
                         break;
                     case 10:
-                        denda(scanner);// apabila pilihan yang di input itu 9 maka dia akan memanggil sebuah method
-                                       // yaitu denda
-                        break;
+                        LogOut(scanner);
+                     break;
                     case 11:
                         exit();// apabila pilihan yang di input itu 10 maka dia akan memanggil sebuah method
                                // yaitu exit
@@ -111,7 +111,7 @@ public class codeInd {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 10);// ujung dari statement do-while
+            } while (pilihan != 11);// ujung dari statement do-while
         } else if (user.equalsIgnoreCase("admin") && password == 123) {// sebuah pemilihan lain yang menuju ke admin
             System.out.println("\n               Login Berhasil (Admin)              ");
             System.out.println("\n");
@@ -133,7 +133,8 @@ public class codeInd {
                 System.out.println("10.Pendapatan dan feedback");
                 System.out.println("11.Penambahan barang baru");
                 System.out.println("12.Denda");
-                System.out.println("13.Exit");
+                System.out.println("13.Log Out");
+                System.out.println("14.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
 
@@ -175,6 +176,9 @@ public class codeInd {
                         denda(scanner);
                         break;
                     case 13:
+                        LogOut(scanner);
+                        break;
+                    case 14:
                         exit();
                         break;
 
@@ -182,7 +186,7 @@ public class codeInd {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 12);
+            } while (pilihan != 14);
         } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
                 // yang di gunakan
             System.out.println("Login Gagal");
@@ -591,6 +595,24 @@ public class codeInd {
             }
         }
     }
+    // Method untuk Log Out
+    public static void LogOut(Scanner scanner){
+        System.out.println("Apakah anad ingin Log Out? (y/n) ");
+        String logout = scanner.next();
+        if (logout.equalsIgnoreCase("y")) {
+            System.out.println("Sampai jumpa lagi "+namaid);
+            System.out.println();
+            System.out.println();
+            main(new String[]{});
+    }
+    else if (logout.equalsIgnoreCase("n")) {
+        
+    }
+    else{
+        System.out.println("pilihan tidak tersedia");
+        LogOut(scanner);
+    }
+}
 
     // method exit
     public static void exit() {

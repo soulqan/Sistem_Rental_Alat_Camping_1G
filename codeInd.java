@@ -3,6 +3,15 @@ import java.util.Scanner;
 public class codeInd{
     //tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
+    public static int jumlahPesanan = 0;
+    public static String[] riwayatNama = new String[100];
+    public static String[] riwayatAlamat = new String[100];
+    public static String[] riwayatNoHp = new String[100];
+    public static String[][] riwayatBarang = new String[100][10];
+    public static int[][] riwayatJumlah = new int[100][10];
+    public static int[] riwayatEstimasi = new int[100];
+    public static int[] riwayatPengiriman = new int[100];
+    public static long[] riwayatTotalHarga = new long[100];
     public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 35000, 60000, 20000, 40000, 15000, 30000, 0000, 0000, 0000 };
@@ -104,7 +113,8 @@ public static void main(String[] args) {
                     System.out.println("9.Pengembalian barang");
                     System.out.println("10.Pendapatan dan feedback");
                     System.out.println("11.Penambahan barang baru");
-                    System.out.println("12.Exit");
+                    System.out.println("12.Riwayat pemesanan");
+                    System.out.println("13.Exit");
                     System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
                 
@@ -143,6 +153,9 @@ public static void main(String[] args) {
                         tambahBarang(scanner);
                         break;
                     case 12:
+                    cetakRiwayatPemesanan();
+                    break;
+                    case 13:
                         exit();
                         break;
     
@@ -150,7 +163,7 @@ public static void main(String[] args) {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
-            } while (pilihan != 12);
+            } while (pilihan != 13);
         } else {//apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir yang di gunakan
             System.out.println("Login Gagal");
         }
@@ -347,7 +360,33 @@ public static void main(String[] args) {
         } else {
             System.out.println("Keranjang Anda kosong. Silakan tambahkan barang ke keranjang terlebih dahulu.");
         }
+         riwayatNama[jumlahPesanan] = namaid;
+        riwayatAlamat[jumlahPesanan] = alamatid;
+        riwayatNoHp[jumlahPesanan] = notelpid;
+        riwayatEstimasi[jumlahPesanan] = estimasi;
+        riwayatPengiriman[jumlahPesanan] = pengiriman;
+        riwayatTotalHarga[jumlahPesanan] = totalHargaFinal;
+
+        for (int i = 0; i < itemKeranjang.length; i++) {
+            riwayatBarang[jumlahPesanan][i] = itemKeranjang[i];
+            riwayatJumlah[jumlahPesanan][i] = jmlBarangKeranjang[i];
+        }
+
+        jumlahPesanan++;
+
+
         System.out.println("Terima kasih!");
+        namaid =null;
+        alamatid =null;
+        notelpid =null;
+        estimasi = 0;
+        pengiriman = 0;
+        totalHarga = 0;
+        totalHargaFinal =0;
+        itemKeranjang = new String[NUM_PRODUCTS];
+        jmlBarangKeranjang = new int[NUM_PRODUCTS];
+
+
     }
 
     // method untuk service center
@@ -475,6 +514,29 @@ public static void main(String[] args) {
             }
         }
 
+    
+        // method riwayat pesanan
+        public static void cetakRiwayatPemesanan() {
+            System.out.println("=======================================");
+            System.out.println("         Riwayat Pemesanan             ");
+            System.out.println("=======================================");
+            for (int i = 0; i < jumlahPesanan; i++) {
+                System.out.println("Nomor Pesanan: " + (i + 1));
+                System.out.println("Nama         : " + riwayatNama[i]);
+                System.out.println("Alamat       : " + riwayatAlamat[i]);
+                System.out.println("No. HP       : " + riwayatNoHp[i]);
+                System.out.println("Barang       :");
+                for (int j = 0; j < riwayatBarang[i].length; j++) {
+                    if (riwayatBarang[i][j] != null) {
+                        System.out.println("   - " + riwayatBarang[i][j] + " (Jumlah: " + riwayatJumlah[i][j] + ")");
+                    }
+                }
+                System.out.println("Estimasi Hari: " + riwayatEstimasi[i]);
+                System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
+                System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
+                System.out.println("---------------------------------------");
+            }
+        }
     
 
     // method exit

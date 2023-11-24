@@ -224,30 +224,32 @@ public class codeInd {
 
     // method untuk persediaan alat camping
     public static void persediaan(Scanner scanner) {
-        System.out.println("=================================================");
+        System.out.println("======================================================");
         System.out.println("                 Persediaan Alat                    ");
-        System.out.println("=================================================");
-        System.out.println("Nama\t\tTersedia\tHarga");
+        System.out.println("======================================================");
+        System.out.println("------------------------------------------------------");
+        System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
+        System.out.println("------------------------------------------------------");
 
-        for (int i = 0; i < NUM_PRODUCTS; i++) {// sebuah perulangan yang nilai NUM_PRODUCT nya adalah 10
-            System.out.print(produkid[i] + "\t\t");
-            if (jumlahid[i] == 0) {// jika jumlahid mempunyai nilai 0 maka akan dijalankan program tersebut
-                System.out.print("Sold out\t");
-            } else {// jika tidak sama dengan 0 maka akan dijalankan program berikut
-                System.out.print(jumlahid[i] + "\t\t");
-            }
-            System.out.println(hargaid[i]);
+    for (int i = 0; i < NUM_PRODUCTS; i++) {
+        if (jumlahid[i] == 0) {
+            System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+        } else {
+            System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
         }
+    }
+    System.out.println("------------------------------------------------------");
+
         System.out.println("\nPilih opsi untuk melanjutkan:");
         System.out.println("1.keranjang\n2.Menu utama");
         int next = scanner.nextInt();
-        if (next == 1) {// sebuah pemilihan untuk menuju ke method selanjutnya
+        if (next == 1) {//sebuah pemilihan untuk menuju ke method selanjutnya
             Keranjang(scanner);
         } else if (next == 2) {
 
         } else {
             System.out.println("Pilihan tidak tersedia");
-            persediaan(scanner);// untuk kembali ke method persediaan
+            persediaan(scanner);//untuk kembali ke method persediaan
         }
 
     }

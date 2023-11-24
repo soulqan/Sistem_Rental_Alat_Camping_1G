@@ -12,10 +12,9 @@ public class codeInd {
     public static int[] riwayatEstimasi = new int[100];
     public static int[] riwayatPengiriman = new int[100];
     public static long[] riwayatTotalHarga = new long[100];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Cooking set",
-            "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    public static long[] hargaid = { 250000, 35000, 60000, 20000, 40000, 15000, 30000, 0000, 0000, 0000 };
+    public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
     public static String namaid, alamatid, masukkan, notelpid;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
@@ -27,8 +26,8 @@ public class codeInd {
             { "Tas Gunung", "800.000" },
             { "Sleeping Bag", "600.000" },
             { "Kompor portable", "200.000" },
-            { "Cooking set", "150.000" },
-            { "Flashlight", "50.000" },
+            { "Alat memasak", "150.000" },
+            { "Senter", "50.000" },
             { "Karpet tebal", "30.000" },
     };
     public static String tanggalPengembalian;
@@ -51,7 +50,7 @@ public class codeInd {
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
-
+            
             int pilihan; // deklarasi untuk pilihan
             do {// apabila if sesuai maka akan di lakukan sebuah do while
                 System.out.println("=================================================");
@@ -231,7 +230,7 @@ public class codeInd {
         System.out.println("Nama\t\tTersedia\tHarga");
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {// sebuah perulangan yang nilai NUM_PRODUCT nya adalah 10
-            System.out.print(produkid[i] + "\t");
+            System.out.print(produkid[i] + "\t\t");
             if (jumlahid[i] == 0) {// jika jumlahid mempunyai nilai 0 maka akan dijalankan program tersebut
                 System.out.print("Sold out\t");
             } else {// jika tidak sama dengan 0 maka akan dijalankan program berikut
@@ -574,66 +573,75 @@ public class codeInd {
         }
     }
 
-    public static void denda(Scanner scanner) {
-        String back;
-        while (true) {
-            System.out.println("=================================================");
-            System.out.println("              Denda         ");
-            System.out.println("=================================================");
-            System.out.println("1. Telat mengembalikan barang");
-            System.out.println("2. Kehilangan barang");
-            System.out.println("3. Kerusakan barang");
-            System.out.print("\nPilihan : ");
-            int pilihanDenda = scanner.nextInt();
+        public static void denda(Scanner scanner) {
+            String back;
+            boolean denda = true;
+            while (denda) {
+                System.out.println("=================================================");
+                System.out.println("|                      DENDA                    |");
+                System.out.println("=================================================");
+                System.out.println("1. Telat mengembalikan barang");
+                System.out.println("2. Kehilangan barang");
+                System.out.println("3. Kerusakan barang");
+                System.out.println("4. Keluar ");
+                System.out.print("\nPilihan : ");
+                int pilihanDenda = scanner.nextInt();
 
-            switch (pilihanDenda) {
-                case 1:
-                    do {
-                        System.out.println("");
-                        System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
-                        back = scanner.next();
-                    } while (back.equalsIgnoreCase("y"));
-                    break;
-                case 2:
-                    do {
-                        System.out.println("List denda barang yang hilang : \n");
-                        for (int i = 0; i < dendaHilang.length; i++) {
-                            for (int j = 0; j < dendaHilang[i].length; j++) {
-                                System.out.print(dendaHilang[i][j]);
+                if (pilihanDenda == 1) {
+                    System.out.println("");
+                    System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
+                    back = scanner.next();
 
-                            }
-                            System.out.println();
+                    if (back.equalsIgnoreCase("y")) {
+                
+                    } else {
+                    denda = false; 
+                    }
+                } else if (pilihanDenda == 2) {
+                System.out.println("List denda barang yang hilang : \n");
+                for (int i = 0; i < dendaHilang.length; i++) {
+                    for (int j = 0; j < dendaHilang[i].length; j++) {
+                        System.out.print(dendaHilang[i][j]);
                         }
-                        System.out.println("Barang apa saja yang hilang?");
-                        String hilang = scanner.nextLine();
-                        hilang = scanner.nextLine();
+                        System.out.println();
+                        }
+                System.out.println("Barang apa saja yang hilang?");
+                String hilang = scanner.nextLine();
+                hilang = scanner.nextLine();
 
-                        boolean found = false;
-                        for (String[] item : dendaHilang) {
-                            if (item[0].equalsIgnoreCase(hilang)) {
-                                System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + item[1]);
-                                found = true;
-                                break;
+                boolean found = false;
+                for (String[] item : dendaHilang) {
+                    if (item[0].equalsIgnoreCase(hilang)) {
+                        System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + item[1]);
+                        found = true;
+                        break;
                             }
                         }
                         if (!found) {
                             System.out.println("Barang tidak ditemukan dalam daftar kehilangan.");
                         }
 
-                        System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
+                        System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                         back = scanner.next();
-                    } while (back.equalsIgnoreCase("y"));
-                    break;
-                case 3:
-                    do {
-                        System.out.println("Barang apa saja yang rusak?");
-                        System.out.println("Apakah anda ingin melaporkan kesalahan kembali? (y/n)");
-                        back = scanner.next();
-                    } while (back.equalsIgnoreCase("y"));
-                    break;
-            }
-        }
+                        if (back.equalsIgnoreCase("y")) {
+                            
+                        } else {
+                        denda = false;   
+                        }
+                }else if (pilihanDenda == 3) {
+                System.out.println("Barang apa saja yang rusak?");
+                System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
+                back = scanner.next();
+                if (back.equalsIgnoreCase("y")) {
+                            
+                } else {
+                denda = false;     
+                }
+                } else if (pilihanDenda == 4) {
+                denda = false; 
+         }  
     }
+}
     // Method untuk Log Out
     public static void LogOut(Scanner scanner){
         System.out.println("Apakah anad ingin Log Out? (y/n) ");

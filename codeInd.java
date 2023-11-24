@@ -381,7 +381,7 @@ public class codeInd {
         System.out.println("Alamat : " + alamatid);
         System.out.println("No.Telp: " + notelpid);
         System.out.println("======================================================");
-        System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi\tPengiriman");
+        System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi");
 
         boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam
                                                  // keranjang
@@ -391,12 +391,14 @@ public class codeInd {
                 System.out.print(itemKeranjang[i] + "\t");
                 System.out.print(jmlBarangKeranjang[i] + "\t\t");
                 System.out.print(hargaid[i] + "\t\t");
-                System.out.print(estimasi + "\t\t");
-                System.out.println(hargaOngkirid[pengiriman]);
+                System.out.print(estimasi+"\n");
 
                 adaBarangDalamKeranjang = true; // Setel ke true jika ada barang dalam keranjang
             }
         }
+        System.out.println("======================================================");
+        System.out.println("Harga Ongkir : "+ hargaOngkirid[pengiriman]);
+         System.out.println("======================================================");
 
         if (adaBarangDalamKeranjang) {
             totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
@@ -670,6 +672,7 @@ public class codeInd {
         System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
         System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
         System.out.println("---------------------------------------");
+        
     }
 }
 

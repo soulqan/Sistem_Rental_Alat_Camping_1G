@@ -61,21 +61,23 @@ public class main {
         scanner.close();}
     
 
-    // Method untuk menampilkan pesanan
-    public static void Persediaan() {
-        System.out.println("\n----- Produk -----");
-        System.out.println("Nama\t\tTersedia\tHarga");
+   // Method untuk menampilkan pesanan
+public static void Persediaan() {
+    System.out.println("\n----- Produk Tersedia -----");
+    System.out.println("------------------------------------------------------");
+    System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
+    System.out.println("------------------------------------------------------");
 
-        for (int i = 0; i < NUM_PRODUCTS; i++) {
-            System.out.print(namaProduk[i] + "\t");
-            if (jmlBarang[i] == 0) {
-                System.out.print("Sold out\t");
-            } else {
-                System.out.print(jmlBarang[i] + "\t\t");
-            }
-            System.out.println(harga[i]);
+    for (int i = 0; i < NUM_PRODUCTS; i++) {
+        if (jmlBarang[i] == 0) {
+            System.out.printf("%-20s %-10s %-15s\n", namaProduk[i], "Sold out", "");
+        } else {
+            System.out.printf("%-20s %-10d %-15d\n", namaProduk[i], jmlBarang[i], harga[i]);
         }
     }
+    System.out.println("------------------------------------------------------");
+}
+
 
     // method untuk menambahkan produk ke keranjang
     public static void tambahkanProdukKeranjang(Scanner scanner) {

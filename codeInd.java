@@ -12,7 +12,7 @@ public class codeInd{
     public static int[] riwayatEstimasi = new int[100];
     public static int[] riwayatPengiriman = new int[100];
     public static long[] riwayatTotalHarga = new long[100];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "product8", "Product9", "Product10" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Slepping Bag", "Kompor portable", "Cooking set", "FlashLight", "Karpet tebal", "senter", "obat obatan dan P3k", "Product10" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 35000, 60000, 20000, 40000, 15000, 30000, 0000, 0000, 0000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
@@ -187,20 +187,22 @@ public static void main(String[] args) {
 
     // method untuk persediaan alat camping
     public static void persediaan(Scanner scanner) {
-        System.out.println("=================================================");
+        System.out.println("======================================================");
         System.out.println("                 Persediaan Alat                    ");
-        System.out.println("=================================================");
-        System.out.println("Nama\t\tTersedia\tHarga");
+        System.out.println("======================================================");
+        System.out.println("------------------------------------------------------");
+    System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
+    System.out.println("------------------------------------------------------");
 
-        for (int i = 0; i < NUM_PRODUCTS; i++) {// sebuah perulangan yang nilai NUM_PRODUCT nya adalah 10
-            System.out.print(produkid[i] + "\t");
-            if (jumlahid[i] == 0) {//jika jumlahid mempunyai nilai 0 maka akan dijalankan program tersebut
-                System.out.print("Sold out\t");
-            } else {//jika tidak sama dengan 0 maka akan dijalankan program berikut
-                System.out.print(jumlahid[i] + "\t\t");
-            }
-            System.out.println(hargaid[i]);
+    for (int i = 0; i < NUM_PRODUCTS; i++) {
+        if (jumlahid[i] == 0) {
+            System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+        } else {
+            System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
         }
+    }
+    System.out.println("------------------------------------------------------");
+
         System.out.println("\nPilih opsi untuk melanjutkan:");
         System.out.println("1.keranjang\n2.Menu utama");
         int next = scanner.nextInt();

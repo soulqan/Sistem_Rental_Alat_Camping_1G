@@ -12,6 +12,8 @@ public class codeInd {
     public static int[] riwayatEstimasi = new int[100];
     public static int[] riwayatPengiriman = new int[100];
     public static long[] riwayatTotalHarga = new long[100];
+    public static String[] itemKeranjang2 = new String[NUM_PRODUCTS];
+    public static int[] jmlBarangKeranjang2 = new int[NUM_PRODUCTS];
     public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
@@ -425,6 +427,9 @@ public class codeInd {
         for (int i = 0; i < itemKeranjang.length; i++) {
             riwayatBarang[jumlahPesanan][i] = itemKeranjang[i];
             riwayatJumlah[jumlahPesanan][i] = jmlBarangKeranjang[i];
+            itemKeranjang2[i] = itemKeranjang[i];
+            jmlBarangKeranjang2[i] = jmlBarangKeranjang[i];
+            
         }
 
         jumlahPesanan++;
@@ -479,11 +484,13 @@ public class codeInd {
 
             for (int i = 0; i < NUM_PRODUCTS; i++) { // jika sudah melakukan peminjaman atau transaksi maka program baru
                                                      // bisa berjalan dg syarat:
-                if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) { // item keranjang tidak kosong
+                if (itemKeranjang2[i] != null && jmlBarangKeranjang2[i] > 0) { // item keranjang tidak kosong
                     // Mengembalikan semua barang yang ada di keranjang
-                    jumlahid[i] += jmlBarangKeranjang[i];
-                    totalHarga -= hargaid[i] * jmlBarangKeranjang[i];// sudah melakukan pembayaran
-                    jmlBarangKeranjang[i] = 0;// barang dikeranjang sudah tidak ada atau sudah dibayar
+                    jumlahid[i] += jmlBarangKeranjang2[i];
+                    totalHarga -= hargaid[i] * jmlBarangKeranjang2[i];// sudah melakukan pembayaran
+                    jmlBarangKeranjang2[i] = 0;
+                    itemKeranjang2[i]=null;
+                    // barang dikeranjang sudah tidak ada atau sudah dibayar
                     System.out.println("masukkan tanggal saat anda mengembalikan barang (dd/MM/yyyy): ");
                     String tanggalKembali = scanner.next();
 

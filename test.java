@@ -184,40 +184,47 @@ public static void main(String[] args) {
         System.out.print("No.Telp :");
         notelpid = scanner.nextLine();
         System.out.println("=================================================");
-
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            persediaan(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
 
-    // method untuk persediaan alat camping
+    
+    // Method Persediaan Alat
     public static void persediaan(Scanner scanner) {
         System.out.println("======================================================");
         System.out.println("                 Persediaan Alat                    ");
         System.out.println("======================================================");
         System.out.println("------------------------------------------------------");
-    System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
-    System.out.println("------------------------------------------------------");
-
-    for (int i = 0; i < NUM_PRODUCTS; i++) {
-        if (jumlahid[i] == 0) {
-            System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
-        } else {
-            System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
+        System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
+        System.out.println("------------------------------------------------------");
+    
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            if (jumlahid[i] == 0) {
+                System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+            } else {
+                System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
+            }
         }
-    }
-    System.out.println("------------------------------------------------------");
-
-        System.out.println("\nPilih opsi untuk melanjutkan:");
-        System.out.println("1.keranjang\n2.Menu utama");
-        int next = scanner.nextInt();
-        if (next == 1) {//sebuah pemilihan untuk menuju ke method selanjutnya
+        System.out.println("------------------------------------------------------");
+    
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
             Keranjang(scanner);
-        } else if (next == 2) {
-
         } else {
-            System.out.println("Pilihan tidak tersedia");
-            persediaan(scanner);//untuk kembali ke method persediaan
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
-
     }
+    
 
     // Method untuk keranjang
     public static void Keranjang(Scanner scanner) {
@@ -225,8 +232,7 @@ public static void main(String[] args) {
         System.out.println("                    keranjang                 ");
         System.out.println("=================================================");
         System.out.println("Masukkan barang yang akan disewa:");
-        String barang = scanner.nextLine();
-        barang = scanner.nextLine();//inputan barang
+        String barang = scanner.nextLine();//inputan barang
 
         int indexBarang = -1;//deklarasi untuk sebuah indexBarang yang bernilai -1 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
@@ -255,8 +261,18 @@ public static void main(String[] args) {
             }
 
         }
-
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            peminjamanBarang(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+
      //method hapus barang dari keranjang
      public static void hapusProdukDariKeranjang(Scanner scanner) {
         System.out.println("=================================================");
@@ -301,7 +317,19 @@ public static void main(String[] args) {
         System.out.println("*Peminjaman Dihitung Perhari*");
         System.out.println("Masukkan Estimasi Waktu Peminjaman :");
         estimasi = scanner.nextInt();
+        System.out.println();
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            pengiriman(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+    
 
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
@@ -320,7 +348,20 @@ public static void main(String[] args) {
         }
          else {
             System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
+            pengiriman(scanner);
         }
+        System.out.println();
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            pembayaran(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
+    
     }
 
 

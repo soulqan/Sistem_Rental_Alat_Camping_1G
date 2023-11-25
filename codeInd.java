@@ -72,6 +72,7 @@ public class codeInd {
                 System.out.println("11.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();// untuk membaca inputan yang dimasukkan
+                scanner.nextLine();
 
                 switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
                                   // dengan sebuah inputan berupa angka
@@ -144,8 +145,8 @@ public class codeInd {
                 System.out.println("10.Pendapatan dan feedback");
                 System.out.println("11.Penambahan barang baru");
                 System.out.println("12.Denda");
-                System.out.println("13.Log Out");
-                System.out.println("14.Riwayat Pemesanan");
+                System.out.println("13.Riwayat Pemesanan");
+                System.out.println("14.Log Out");
                 System.out.println("15.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
@@ -188,10 +189,10 @@ public class codeInd {
                     case 12:
                         denda(scanner);
                         break;
-                    case 13:
+                    case 14:
                         LogOut(scanner);
                         break;
-                    case 14:
+                    case 13:
                         cetakRiwayatPemesanan();
                         break;
                     case 15:

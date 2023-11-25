@@ -23,7 +23,7 @@ public class codeInd {
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
-    public static int estimasi, pengiriman;
+    public static int estimasi, pengiriman, saldoCst;
     public static String[][] dendaHilang = {
             { "Tenda camping", "2.500.000" },
             { "Tas Gunung", "800.000" },
@@ -446,9 +446,13 @@ public class codeInd {
             System.out.println("Total Harga: " + totalHargaFinal);
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
-            if (jawaban.equalsIgnoreCase("y")) {
-                saldo += totalHargaFinal;
-                System.out.println("Pembayaran Berhasil");
+           if (jawaban.equalsIgnoreCase("y")) {
+                System.out.println("masukkan saldo anda: ");
+                saldoCst = scanner.nextInt();
+                saldo += (saldoCst-totalHargaFinal);
+                  System.out.println("---------------------------------------------------");
+                System.out.println("Pembayaran Berhasil, sisa saldo anda adalah "+ (saldoCst-totalHargaFinal));
+                  System.out.println("---------------------------------------------------");
             } else {
                 System.out.println("Pembayaran tidak valid");
             }

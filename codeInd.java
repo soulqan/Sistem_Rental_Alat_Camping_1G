@@ -148,6 +148,7 @@ public class codeInd {
                 System.out.println("15.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
+                scanner.nextLine();
 
                 switch (pilihan) {
                     case 1:
@@ -215,14 +216,23 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.print("Nama    :");
         namaid = scanner.nextLine();
-        namaid = scanner.nextLine();
         System.out.print("Alamat  :");
         alamatid = scanner.nextLine();
         System.out.print("No.Telp :");
         notelpid = scanner.nextLine();
         System.out.println("=================================================");
-
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            persediaan(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+
+    
 
     // method untuk persediaan alat camping
     public static void persediaan(Scanner scanner) {
@@ -242,19 +252,18 @@ public class codeInd {
     }
     System.out.println("------------------------------------------------------");
 
-        System.out.println("\nPilih opsi untuk melanjutkan:");
-        System.out.println("1.keranjang\n2.Menu utama");
-        int next = scanner.nextInt();
-        if (next == 1) {//sebuah pemilihan untuk menuju ke method selanjutnya
-            Keranjang(scanner);
-        } else if (next == 2) {
+    System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+    System.out.println("Tekan selain enter untuk ke menu utama...");
 
-        } else {
-            System.out.println("Pilihan tidak tersedia");
-            persediaan(scanner);//untuk kembali ke method persediaan
-        }
-
+    String input = scanner.nextLine();
+    if (input.isEmpty()) { // Jika input kosong (hanya enter)
+        Keranjang(scanner);
+    } else {
+        // Kembali ke menu utama atau lakukan apa yang diperlukan
     }
+}
+
+    
 
     // Method untuk keranjang
     public static void Keranjang(Scanner scanner) {
@@ -262,8 +271,7 @@ public class codeInd {
         System.out.println("                    keranjang                 ");
         System.out.println("=================================================");
         System.out.println("Masukkan barang yang akan disewa:");
-        String barang = scanner.nextLine();
-        barang = scanner.nextLine();// inputan barang
+        String barang = scanner.nextLine();// inputan barang
 
         int indexBarang = -1;// deklarasi untuk sebuah indexBarang yang bernilai -1
         for (int i = 0; i < NUM_PRODUCTS; i++) {
@@ -298,8 +306,18 @@ public class codeInd {
             }
 
         }
-
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            peminjamanBarang(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+    
 
     // method hapus barang dari keranjang
     public static void hapusProdukDariKeranjang(Scanner scanner) {
@@ -353,8 +371,20 @@ public class codeInd {
         // Menerima input tanggal pengembalian
         System.out.print("Tanggal Pengembalian (dd/MM/yyyy): ");
         tanggalPengembalian = scanner.next();
-
+        System.out.println();
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            pengiriman(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+
+    
 
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
@@ -373,7 +403,19 @@ public class codeInd {
         } else {
             System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
         }
+        System.out.println();
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+    
+        String input = scanner.nextLine();
+        input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            pembayaran(scanner);
+        } else {
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
+        }
     }
+    
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
@@ -407,7 +449,7 @@ public class codeInd {
             totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
             System.out.println("Total Harga: " + totalHargaFinal);
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
-            String jawaban = scanner.next();
+            String jawaban = scanner.nextLine();
             if (jawaban.equalsIgnoreCase("y")) {
                 saldo += totalHargaFinal;
                 System.out.println("Pembayaran Berhasil");

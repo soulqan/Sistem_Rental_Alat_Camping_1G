@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class codeInd {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
-    public static int jumlahPesanan=0;
+    public static int jumlahPesanan = 0;
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
     public static String[] riwayatNoHp = new String[100];
@@ -14,7 +14,8 @@ public class codeInd {
     public static long[] riwayatTotalHarga = new long[100];
     public static String[] itemKeranjang2 = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang2 = new int[NUM_PRODUCTS];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable",
+            "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
@@ -52,7 +53,7 @@ public class codeInd {
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
-            
+
             int pilihan; // deklarasi untuk pilihan
             do {// apabila if sesuai maka akan di lakukan sebuah do while
                 System.out.println("=================================================");
@@ -112,7 +113,7 @@ public class codeInd {
                         break;
                     case 10:
                         LogOut(scanner);
-                     break;
+                        break;
                     case 11:
                         exit();// apabila pilihan yang di input itu 10 maka dia akan memanggil sebuah method
                                // yaitu exit
@@ -221,9 +222,10 @@ public class codeInd {
         System.out.print("No.Telp :");
         notelpid = scanner.nextLine();
         System.out.println("=================================================");
-        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println();
+        System.out.println("Tekan enter untuk ke menu selanjutnya...");
         System.out.println("Tekan selain enter untuk ke menu utama...");
-    
+
         String input = scanner.nextLine();
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
             persediaan(scanner);
@@ -231,8 +233,6 @@ public class codeInd {
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
-
-    
 
     // method untuk persediaan alat camping
     public static void persediaan(Scanner scanner) {
@@ -243,27 +243,25 @@ public class codeInd {
         System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
         System.out.println("------------------------------------------------------");
 
-    for (int i = 0; i < NUM_PRODUCTS; i++) {
-        if (jumlahid[i] == 0) {
-            System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            if (jumlahid[i] == 0) {
+                System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+            } else {
+                System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
+            }
+        }
+        System.out.println("------------------------------------------------------");
+
+        System.out.println("\nTekan enter untuk ke menu selanjutnya...");
+        System.out.println("Tekan selain enter untuk ke menu utama...");
+
+        String input = scanner.nextLine();
+        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+            Keranjang(scanner);
         } else {
-            System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
+            // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
-    System.out.println("------------------------------------------------------");
-
-    System.out.println("\nTekan enter untuk ke menu selanjutnya...");
-    System.out.println("Tekan selain enter untuk ke menu utama...");
-
-    String input = scanner.nextLine();
-    if (input.isEmpty()) { // Jika input kosong (hanya enter)
-        Keranjang(scanner);
-    } else {
-        // Kembali ke menu utama atau lakukan apa yang diperlukan
-    }
-}
-
-    
 
     // Method untuk keranjang
     public static void Keranjang(Scanner scanner) {
@@ -289,7 +287,7 @@ public class codeInd {
                 // dijalankan program ini
             System.out.println("Masukkan jumlah barang yang akan di sewa:");
             int jumlahBarang = scanner.nextInt();// berguna untuk menginput dengan nama jumlahBarang
-
+            scanner.nextLine();
             if (jumlahBarang > jumlahid[indexBarang]) {// jika jumlahBarang lebih dari array jumlahid maka akan
                                                        // dejalankan program tersebut
                 System.out.println("Barang yang di sewa tidak mencukupi");
@@ -306,18 +304,20 @@ public class codeInd {
             }
 
         }
+        System.out.println("--------------------------------------------");
         System.out.println("\nTekan enter untuk ke menu selanjutnya...");
-        System.out.println("Tekan selain enter untuk ke menu utama...");
-    
+        System.out.println("Tekan B untuk memesan lagi...");
+        System.out.println("Tekan lainnya untuk ke menu utama...");
+
         String input = scanner.nextLine();
-        input = scanner.nextLine();
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
             peminjamanBarang(scanner);
-        } else {
+        }else if (input.equalsIgnoreCase("b")) {
+            Keranjang(scanner);
+        }else {
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
-    
 
     // method hapus barang dari keranjang
     public static void hapusProdukDariKeranjang(Scanner scanner) {
@@ -371,10 +371,10 @@ public class codeInd {
         // Menerima input tanggal pengembalian
         System.out.print("Tanggal Pengembalian (dd/MM/yyyy): ");
         tanggalPengembalian = scanner.next();
-        System.out.println();
+        System.out.println("------------------------------------------");
         System.out.println("\nTekan enter untuk ke menu selanjutnya...");
         System.out.println("Tekan selain enter untuk ke menu utama...");
-    
+
         String input = scanner.nextLine();
         input = scanner.nextLine();
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
@@ -383,8 +383,6 @@ public class codeInd {
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
-
-    
 
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
@@ -403,10 +401,10 @@ public class codeInd {
         } else {
             System.out.println("Opsi pengiriman tidak valid. Silakan pilih opsi yang valid.");
         }
-        System.out.println();
+        System.out.println("------------------------------------------");
         System.out.println("\nTekan enter untuk ke menu selanjutnya...");
         System.out.println("Tekan selain enter untuk ke menu utama...");
-    
+
         String input = scanner.nextLine();
         input = scanner.nextLine();
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
@@ -415,7 +413,6 @@ public class codeInd {
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
-    
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
@@ -426,24 +423,22 @@ public class codeInd {
         System.out.println("Alamat : " + alamatid);
         System.out.println("No.Telp: " + notelpid);
         System.out.println("======================================================");
-        System.out.println("Produk\t\tJumlah\t\tHarga\t\tEstimasi");
+        System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
+
 
         boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam
                                                  // keranjang
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
             if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
-                System.out.print(itemKeranjang[i] + "\t");
-                System.out.print(jmlBarangKeranjang[i] + "\t\t");
-                System.out.print(hargaid[i] + "\t\t");
-                System.out.print(estimasi+"\n");
-
-                adaBarangDalamKeranjang = true; // Setel ke true jika ada barang dalam keranjang
+                System.out.printf("%-20s %-10d %-10d %-10s\n", itemKeranjang[i], jmlBarangKeranjang[i], hargaid[i],
+                        estimasi);
+                adaBarangDalamKeranjang = true;
             }
         }
         System.out.println("======================================================");
-        System.out.println("Harga Ongkir : "+ hargaOngkirid[pengiriman]);
-         System.out.println("======================================================");
+        System.out.println("Harga Ongkir : " + hargaOngkirid[pengiriman]);
+        System.out.println("======================================================");
 
         if (adaBarangDalamKeranjang) {
             totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
@@ -471,19 +466,19 @@ public class codeInd {
             riwayatJumlah[jumlahPesanan][i] = jmlBarangKeranjang[i];
             itemKeranjang2[i] = itemKeranjang[i];
             jmlBarangKeranjang2[i] = jmlBarangKeranjang[i];
-            
+
         }
 
         jumlahPesanan++;
 
         System.out.println("Terima kasih!");
-        namaid =null;
-        alamatid =null;
-        notelpid =null;
+        namaid = null;
+        alamatid = null;
+        notelpid = null;
         estimasi = 0;
         pengiriman = 0;
         totalHarga = 0;
-        totalHargaFinal =0;
+        totalHargaFinal = 0;
         itemKeranjang = new String[NUM_PRODUCTS];
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
 
@@ -531,7 +526,7 @@ public class codeInd {
                     jumlahid[i] += jmlBarangKeranjang2[i];
                     totalHarga -= hargaid[i] * jmlBarangKeranjang2[i];// sudah melakukan pembayaran
                     jmlBarangKeranjang2[i] = 0;
-                    itemKeranjang2[i]=null;
+                    itemKeranjang2[i] = null;
                     // barang dikeranjang sudah tidak ada atau sudah dibayar
                     System.out.println("masukkan tanggal saat anda mengembalikan barang (dd/MM/yyyy): ");
                     String tanggalKembali = scanner.next();
@@ -541,7 +536,8 @@ public class codeInd {
                         System.out.println("barang berhasil dikembalikan");
                     } else {
                         // Proses peminjaman
-                        System.out.println("anda melebihi batas estimasi peminjaman barang, silahkan pergi ke menu denda");
+                        System.out.println(
+                                "anda melebihi batas estimasi peminjaman barang, silahkan pergi ke menu denda");
                     }
                 }
             }
@@ -624,38 +620,38 @@ public class codeInd {
         }
     }
 
-        public static void denda(Scanner scanner) {
-            String back;
-            boolean denda = true;
-            while (denda) {
-                System.out.println("=================================================");
-                System.out.println("|                      DENDA                    |");
-                System.out.println("=================================================");
-                System.out.println("1. Telat mengembalikan barang");
-                System.out.println("2. Kehilangan barang");
-                System.out.println("3. Kerusakan barang");
-                System.out.println("4. Keluar ");
-                System.out.print("\nPilihan : ");
-                int pilihanDenda = scanner.nextInt();
+    public static void denda(Scanner scanner) {
+        String back;
+        boolean denda = true;
+        while (denda) {
+            System.out.println("=================================================");
+            System.out.println("|                      DENDA                    |");
+            System.out.println("=================================================");
+            System.out.println("1. Telat mengembalikan barang");
+            System.out.println("2. Kehilangan barang");
+            System.out.println("3. Kerusakan barang");
+            System.out.println("4. Keluar ");
+            System.out.print("\nPilihan : ");
+            int pilihanDenda = scanner.nextInt();
 
-                if (pilihanDenda == 1) {
-                    System.out.println("");
-                    System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
-                    back = scanner.next();
+            if (pilihanDenda == 1) {
+                System.out.println("");
+                System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
+                back = scanner.next();
 
-                    if (back.equalsIgnoreCase("y")) {
-                
-                    } else {
-                    denda = false; 
-                    }
-                } else if (pilihanDenda == 2) {
+                if (back.equalsIgnoreCase("y")) {
+
+                } else {
+                    denda = false;
+                }
+            } else if (pilihanDenda == 2) {
                 System.out.println("List denda barang yang hilang : \n");
                 for (int i = 0; i < dendaHilang.length; i++) {
                     for (int j = 0; j < dendaHilang[i].length; j++) {
                         System.out.print(dendaHilang[i][j]);
-                        }
-                        System.out.println();
-                        }
+                    }
+                    System.out.println();
+                }
                 System.out.println("Barang apa saja yang hilang?");
                 String hilang = scanner.nextLine();
                 hilang = scanner.nextLine();
@@ -666,75 +662,74 @@ public class codeInd {
                         System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + item[1]);
                         found = true;
                         break;
-                            }
-                        }
-                        if (!found) {
-                            System.out.println("Barang tidak ditemukan dalam daftar kehilangan.");
-                        }
+                    }
+                }
+                if (!found) {
+                    System.out.println("Barang tidak ditemukan dalam daftar kehilangan.");
+                }
 
-                        System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
-                        back = scanner.next();
-                        if (back.equalsIgnoreCase("y")) {
-                            
-                        } else {
-                        denda = false;   
-                        }
-                }else if (pilihanDenda == 3) {
+                System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
+                back = scanner.next();
+                if (back.equalsIgnoreCase("y")) {
+
+                } else {
+                    denda = false;
+                }
+            } else if (pilihanDenda == 3) {
                 System.out.println("Barang apa saja yang rusak?");
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                 back = scanner.next();
                 if (back.equalsIgnoreCase("y")) {
-                            
+
                 } else {
-                denda = false;     
+                    denda = false;
                 }
-                } else if (pilihanDenda == 4) {
-                denda = false; 
-         }  
+            } else if (pilihanDenda == 4) {
+                denda = false;
+            }
+        }
     }
-}
+
     // Method untuk Log Out
-    public static void LogOut(Scanner scanner){
+    public static void LogOut(Scanner scanner) {
         System.out.println("Apakah anad ingin Log Out? (y/n) ");
         String logout = scanner.next();
         if (logout.equalsIgnoreCase("y")) {
             System.out.println("Sampai jumpa lagi !");
             System.out.println();
             System.out.println();
-            main(new String[]{});
-    }
-    else if (logout.equalsIgnoreCase("n")) {
-        
-    }
-    else{
-        System.out.println("pilihan tidak tersedia");
-        LogOut(scanner);
-    }
-}
- // method riwayat pesanan
- public static void cetakRiwayatPemesanan() {
-    System.out.println("=======================================");
-    System.out.println("         Riwayat Pemesanan             ");
-    System.out.println("=======================================");
-    for (int i = 0; i < jumlahPesanan; i++) {
-        System.out.println("Nomor Pesanan: " + (i + 1));
-        System.out.println("Nama         : " + riwayatNama[i]);
-        System.out.println("Alamat       : " + riwayatAlamat[i]);
-        System.out.println("No. HP       : " + riwayatNoHp[i]);
-        System.out.println("Barang       :");
-        for (int j = 0; j < riwayatBarang[i].length; j++) {
-            if (riwayatBarang[i][j] != null) {
-                System.out.println("   - " + riwayatBarang[i][j] + " (Jumlah: " + riwayatJumlah[i][j] + ")");
-            }
-        }
-        System.out.println("Estimasi Hari: " + riwayatEstimasi[i]);
-        System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
-        System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
-        System.out.println("---------------------------------------");
-        
-    }
-}
+            main(new String[] {});
+        } else if (logout.equalsIgnoreCase("n")) {
 
+        } else {
+            System.out.println("pilihan tidak tersedia");
+            LogOut(scanner);
+        }
+    }
+
+    // method riwayat pesanan
+    public static void cetakRiwayatPemesanan() {
+        System.out.println("=======================================");
+        System.out.println("         Riwayat Pemesanan             ");
+        System.out.println("=======================================");
+        for (int i = 0; i < jumlahPesanan; i++) {
+            System.out.println("Nomor Pesanan: " + (i + 1));
+            System.out.println("Nama         : " + riwayatNama[i]);
+            System.out.println("Alamat       : " + riwayatAlamat[i]);
+            System.out.println("No. HP       : " + riwayatNoHp[i]);
+            System.out.println("Barang       :");
+            for (int j = 0; j < riwayatBarang[i].length; j++) {
+                if (riwayatBarang[i][j] != null) {
+                    System.out.println("   - " + riwayatBarang[i][j] + " (Jumlah: " + riwayatJumlah[i][j] + ")");
+                }
+            }
+            System.out.println("Estimasi Hari: " + riwayatEstimasi[i]);
+            System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
+            System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
+            System.out.println("---------------------------------------");
+
+        }
+    }
 
     // method exit
     public static void exit() {

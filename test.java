@@ -1,9 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class test {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
+    public static LocalDate tanggalPeminjaman;
+    public static LocalDate tanggalPengembalian;
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
     public static String[] riwayatNoHp = new String[100];
@@ -33,7 +38,6 @@ public class test {
             { "Senter", "50.000" },
             { "Karpet tebal", "30.000" },
     };
-    public static String tanggalPengembalian;
 
     // sebuah public static utama untuk login dan menampilkan menu
     public static void
@@ -357,33 +361,47 @@ public class test {
 
     // Method untuk peminjaman barang
     public static void peminjamanBarang(Scanner scanner) {
+        // Menampilkan judul layar untuk proses peminjaman barang
         System.out.println("=================================================");
         System.out.println("                Peminjaman Barang               ");
         System.out.println("=================================================");
+        
+        // Menampilkan informasi bahwa peminjaman dihitung per hari
         System.out.println("Peminjaman Dihitung Perhari");
+        
+        // Meminta estimasi hari peminjaman dari pengguna
         System.out.println("Berapa hari anda ingin meminjam barang? ");
-        estimasi = scanner.nextInt();
+        estimasi = scanner.nextInt(); // Membaca input jumlah hari
         System.out.println("Estimasi Waktu Peminjaman : " + estimasi + " hari");
-
-        // Menerima input tanggal peminjaman
-        System.out.print("Tanggal Peminjaman (dd/MM/yyyy): ");
-        String tanggalPeminjaman = scanner.next();
-
-        // Menerima input tanggal pengembalian
-        System.out.print("Tanggal Pengembalian (dd/MM/yyyy): ");
-        tanggalPengembalian = scanner.next();
+    
+        // Menerima input tanggal peminjaman dari pengguna
+        System.out.print("Masukkan Tanggal Peminjaman (dd/MM/yyyy): ");
+        String inputTanggalPeminjaman = scanner.next(); // Membaca input tanggal
+        // Parsing input tanggal peminjaman menjadi objek LocalDate
+        
+        tanggalPeminjaman = LocalDate.parse(inputTanggalPeminjaman, formatter);
+        System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal peminjaman
+    
+        // Menghitung dan menampilkan tanggal pengembalian berdasarkan estimasi hari
+        tanggalPengembalian = tanggalPeminjaman.plusDays(estimasi);
+        System.out.println("Tanggal Pengembalian: " + tanggalPengembalian.format(formatter));
+    
+        // Memberikan instruksi kepada pengguna untuk melanjutkan atau kembali ke menu utama
         System.out.println("------------------------------------------");
         System.out.println("\nTekan enter untuk ke menu selanjutnya...");
         System.out.println("Tekan selain enter untuk ke menu utama...");
-
-        String input = scanner.nextLine();
-        input = scanner.nextLine();
-        if (input.isEmpty()) { // Jika input kosong (hanya enter)
-            pengiriman(scanner);
+    
+        // Membaca input dari pengguna untuk menentukan aksi selanjutnya
+        String input = scanner.nextLine(); // Membersihkan karakter baru yang tersisa
+        input = scanner.nextLine(); // Membaca input pengguna
+        if (input.isEmpty()) {
+            pengiriman(scanner); // Jika input kosong (hanya enter), lanjut ke menu pengiriman
         } else {
-            // Kembali ke menu utama atau lakukan apa yang diperlukan
+            // Kembali ke menu utama atau lakukan apa yang diperlukan sesuai dengan logika yang belum diimplementasikan di sini
         }
     }
+    
+
 
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
@@ -439,6 +457,8 @@ public class test {
         }
         System.out.println("======================================================");
         System.out.println("Harga Ongkir : " + hargaOngkirid[pengiriman]);
+        System.out.println("Tanggal Peminjaman: "+tanggalPeminjaman.format(formatter));
+        System.out.println("Tanggal Pengembalian: "+tanggalPengembalian.format(formatter));
         System.out.println("======================================================");
 
         if (adaBarangDalamKeranjang) {
@@ -512,42 +532,40 @@ public class test {
         }
     }
 
-    // method untuk pengembalian barang
     public static void pengembalian(Scanner scanner) {
         System.out.println("=================================================");
-        System.out.println("                Pengembalian Barang          ");
+        System.out.println("            Pengembalian Barang               ");
         System.out.println("=================================================");
-        System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang?(y/n)");
+        System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang? (y/n)");
         String kembali = scanner.next();
-
-        // Deklarasikan variabel tanggal, bulan, dan tahun
-
-        if (kembali.equalsIgnoreCase("y")) { // jika setuju untuk mengembalikan barang maka akan menjalankan program
-
-            for (int i = 0; i < NUM_PRODUCTS; i++) { // jika sudah melakukan peminjaman atau transaksi maka program baru
-                                                     // bisa berjalan dg syarat:
-                if (itemKeranjang2[i] != null && jmlBarangKeranjang2[i] > 0) { // item keranjang tidak kosong
-                    // Mengembalikan semua barang yang ada di keranjang
+    
+        if (kembali.equalsIgnoreCase("y")) {
+            for (int i = 0; i < NUM_PRODUCTS; i++) {
+                if (itemKeranjang2[i] != null && jmlBarangKeranjang2[i] > 0) {
                     jumlahid[i] += jmlBarangKeranjang2[i];
-                    totalHarga -= hargaid[i] * jmlBarangKeranjang2[i];// sudah melakukan pembayaran
+                    totalHarga -= hargaid[i] * jmlBarangKeranjang2[i];
                     jmlBarangKeranjang2[i] = 0;
                     itemKeranjang2[i] = null;
-                    // barang dikeranjang sudah tidak ada atau sudah dibayar
-                    System.out.println("masukkan tanggal saat anda mengembalikan barang (dd/MM/yyyy): ");
+    
+                    System.out.print("Masukkan tanggal saat anda mengembalikan barang (dd/MM/yyyy): ");
                     String tanggalKembali = scanner.next();
-
-                    // if (tanggalPengembalian.equals(tanggalKembali) ) {
-                    if (tanggalPengembalian.compareTo(tanggalKembali) >= 0) {
-                        System.out.println("barang berhasil dikembalikan");
+    
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
+                    
+                    if (tanggalPengembalian.isEqual(tanggalPengembalian2)) {
+                        System.out.println("Barang berhasil dikembalikan tepat waktu.");
+                    } else if (tanggalPengembalian.isBefore(tanggalPengembalian2)) {
+                        System.out.println("Anda telat mengembalikan barang.");
+                        System.out.println("Silahkan pergi ke menu denda untuk proses selanjutnya.");
                     } else {
-                        // Proses peminjaman
-                        System.out.println(
-                                "anda melebihi batas estimasi peminjaman barang, silahkan pergi ke menu denda");
+                        System.out.println("Anda telah melakukan pengembalian tepat waktu.");
                     }
                 }
             }
         }
-    }
+    }  
+    
 
     // method untuk pendapatan
     public static void pendapatan() {

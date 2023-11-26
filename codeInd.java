@@ -34,6 +34,7 @@ public class codeInd {
             { "Karpet tebal", "30.000" },
     };
     public static String tanggalPengembalian;
+    public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
 
     // sebuah public static utama untuk login dan menampilkan menu
     public static void
@@ -655,20 +656,25 @@ public class codeInd {
                 System.out.println("");
                 System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
                 back = scanner.next();
-
                 if (back.equalsIgnoreCase("y")) {
 
                 } else {
                     denda = false;
                 }
-            } else if (pilihanDenda == 2) {
-                System.out.println("List denda barang yang hilang : \n");
+                } else if (pilihanDenda == 2) {
+                System.out.println("======================================");
+                System.out.println("|    List denda barang yang hilang   |");
+                System.out.println("======================================");
                 for (int i = 0; i < dendaHilang.length; i++) {
                     for (int j = 0; j < dendaHilang[i].length; j++) {
                         System.out.print(dendaHilang[i][j]);
+                        if (j < dendaHilang[i].length - 1) {
+                            System.out.print(" - ");
+                        }
                     }
                     System.out.println();
                 }
+                System.out.println("--------------------------------------");
                 System.out.println("Barang apa saja yang hilang?");
                 String hilang = scanner.nextLine();
                 hilang = scanner.nextLine();
@@ -692,8 +698,23 @@ public class codeInd {
                 } else {
                     denda = false;
                 }
-            } else if (pilihanDenda == 3) {
-                System.out.println("Barang apa saja yang rusak?");
+                } else if (pilihanDenda == 3) {
+                    System.out.println("=====================================");
+                    System.out.println("|    List denda barang yang rusak   |");
+                    System.out.println("=====================================");
+                    for (int i = 0; i < produkid.length; i++) {
+                        System.out.println(produkid[i]);
+                    }
+                    System.out.println("--------------------------------------");
+                    System.out.println("Barang apa saja yang rusak?");
+                    String rusak = scanner.nextLine();
+                    rusak = scanner.nextLine();
+                    for (int i = 0; i < dendaRusak.length; i++) {
+                        if (rusak.equalsIgnoreCase(produkid[i])) {
+                            System.out.println("Denda kerusakan yang harus anda bayar sebesar "+ dendaRusak[i]);
+                            System.out.println("Untuk lebih detail harganya akan di cek pada saat pengembalian");
+                        }
+                    }
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                 back = scanner.next();
                 if (back.equalsIgnoreCase("y")) {
@@ -701,12 +722,11 @@ public class codeInd {
                 } else {
                     denda = false;
                 }
-            } else if (pilihanDenda == 4) {
+                } else if (pilihanDenda == 4) {
                 denda = false;
-            }
+                }
         }
     }
-
     // Method untuk Log Out
     public static void LogOut(Scanner scanner) {
         System.out.println("Apakah anad ingin Log Out? (y/n) ");

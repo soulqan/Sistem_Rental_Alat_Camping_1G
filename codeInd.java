@@ -561,70 +561,82 @@ public class codeInd {
     }
 
     // method tambah barang
+    // method tambah barang
     public static void tambahBarang(Scanner scanner) {
         System.out.println("=================================================");
         System.out.println("              penambahan barang         ");
         System.out.println("=================================================");
-        // Periksa apakah array produk sudah penuh
-        // Memastikan panjang array selalu lebih besar atau sama dengan NUM_PRODUCTS
-        if (NUM_PRODUCTS >= produkid.length) {
-            // Jika sudah penuh, buat array baru dengan ukuran yang lebih besar
-            int newLengthid = produkid.length + 1;
-
-            String[] newProdukid = new String[newLengthid];
-            int[] newJumlahid = new int[newLengthid];
-            long[] newHargaid = new long[newLengthid];
-            String[] newItem = new String[newLengthid];
-            int[] newJmlBarang = new int[newLengthid];
-            // array
-
-            // Salin elemen-elemen dari array lama ke array baru
-            for (int i = 0; i < NUM_PRODUCTS; i++) {
-                newProdukid[i] = produkid[i];
-                newJumlahid[i] = jumlahid[i];
-                newHargaid[i] = hargaid[i];
-                newItem[i] = itemKeranjang[i];
-                newJmlBarang[i] = jmlBarangKeranjang[i];
-
-            }
-
-            // Ganti array lama dengan array baru
-            produkid = newProdukid;
-            jumlahid = newJumlahid;
-            hargaid = newHargaid;
-            jmlBarangKeranjang = newJmlBarang;
-            itemKeranjang = newItem;
-        }
-
-        // Lanjutkan dengan menambahkan barang seperti yang sudah Anda lakukan
         System.out.print("Apakah Anda ingin menambahkan barang baru? (y/n): ");
         String tambahBarang = scanner.next();
-
-        if (tambahBarang.equalsIgnoreCase("y") && NUM_PRODUCTS < produkid.length) {
-
-            // ... kode penambahan barang ...
+    
+        if (tambahBarang.equalsIgnoreCase("y")) {
+            if (NUM_PRODUCTS >= produkid.length) {
+                int newLengthid = produkid.length + 1;
+    
+                String[] newProdukid = new String[newLengthid];
+                int[] newJumlahid = new int[newLengthid];
+                long[] newHargaid = new long[newLengthid];
+                String[] newItem = new String[newLengthid];
+                int[] newJmlBarang = new int[newLengthid];
+    
+                for (int i = 0; i < NUM_PRODUCTS; i++) {
+                    newProdukid[i] = produkid[i];
+                    newJumlahid[i] = jumlahid[i];
+                    newHargaid[i] = hargaid[i];
+                    newItem[i] = itemKeranjang[i];
+                    newJmlBarang[i] = jmlBarangKeranjang[i];
+                }
+    
+                produkid = newProdukid;
+                jumlahid = newJumlahid;
+                hargaid = newHargaid;
+                jmlBarangKeranjang = newJmlBarang;
+                itemKeranjang = newItem;
+            }
+            
             System.out.print("Masukkan nama barang baru: ");
             String namaBarangBaru = scanner.nextLine();
             namaBarangBaru = scanner.nextLine();
-
-            System.out.print("Masukkan jumlah barang yang tersedia: ");
-            int jumlahBarangBaru = scanner.nextInt();
-
-            System.out.print("Masukkan harga barang baru: ");
-            long hargaBarangBaru = scanner.nextLong();
-
-            // Menambahkan barang baru ke array produk
-            produkid[NUM_PRODUCTS] = namaBarangBaru;
-            jumlahid[NUM_PRODUCTS] = jumlahBarangBaru;
-            hargaid[NUM_PRODUCTS] = hargaBarangBaru;
-
-            // Menginkrementasi NUM_PRODUCTS
-            NUM_PRODUCTS++;
-
-            System.out.println("Barang baru berhasil ditambahkan ke persediaan.");
+    
+            int indexBarang = -1;
+            for (int i = 0; i < NUM_PRODUCTS; i++) {
+                if (produkid[i].equalsIgnoreCase(namaBarangBaru)) {
+                    indexBarang = i;
+                    break;
+                }
+            }
+    
+            if (indexBarang != -1) {
+                System.out.print("Barang sudah ada dalam inventaris. Masukkan jumlah barang baru: ");
+                int jumlahBarangBaru = scanner.nextInt();
+                jumlahid[indexBarang] += jumlahBarangBaru;
+    
+                System.out.print("Masukkan harga barang baru: ");
+                long hargaBarangBaru = scanner.nextLong();
+                hargaid[indexBarang] = hargaBarangBaru;
+    
+                System.out.println("Jumlah dan harga barang berhasil diperbarui.");
+            } else {
+                System.out.print("Masukkan jumlah barang yang tersedia: ");
+                int jumlahBarangBaru = scanner.nextInt();
+    
+                System.out.print("Masukkan harga barang baru: ");
+                long hargaBarangBaru = scanner.nextLong();
+    
+                produkid[NUM_PRODUCTS] = namaBarangBaru;
+                jumlahid[NUM_PRODUCTS] = jumlahBarangBaru;
+                hargaid[NUM_PRODUCTS] = hargaBarangBaru;
+    
+                NUM_PRODUCTS++;
+    
+                System.out.println("Barang baru berhasil ditambahkan ke persediaan.");
+            }
+        } else {
+            System.out.println("Penambahan barang dibatalkan.");
         }
     }
 
+    // method untuk denda
     public static void denda(Scanner scanner) {
         String back;
         boolean denda = true;

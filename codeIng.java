@@ -21,6 +21,7 @@ public static int NUM_PRODUCTS = 10;
         {"Flashlight", "50.000"},
         {"Thick Carpet", "30.000"},
     };
+    public static int[] brokenFines = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
 
 public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -481,70 +482,95 @@ public static void main(String[] args) {
                 System.out.println("New item added to inventory successfully.");
             }
         }
-        
-        public static void fines (Scanner scanner) {
+        public static void fines(Scanner scanner) {
             String back;
-            while (true) {
+            boolean fines = true;
+            while (fines) {
                 System.out.println("=================================================");
-                System.out.println("                      Fines                      ");
+                System.out.println("|                      FINES                    |");
                 System.out.println("=================================================");
                 System.out.println("1. Late returning items");
-                System.out.println("2. Lost items");
-                System.out.println("3. Broken items");
-                System.out.print("\nChoices : ");
-                int choicesFines = scanner.nextInt();
+                System.out.println("2. Lost Items");
+                System.out.println("3. Broken Items");
+                System.out.println("4. Exit ");
+                System.out.print("\nPilihan : ");
+                int finesOPtions = scanner.nextInt();
     
-                switch (choicesFines) {
-                    case 1:
-                        do {
-                            System.out.println("");
+                if (finesOPtions == 1) {
+                    System.out.println("");
+                    System.out.println("Do you want to report the fines back? (y/n)");
+                    back = scanner.next();
+                    if (back.equalsIgnoreCase("y")) {
+    
+                    } else {
+                        fines = false;
+                    }
+                    } else if (finesOPtions == 2) {
+                    System.out.println("=====================================");
+                    System.out.println("|    list of fines for lost items   |");
+                    System.out.println("=====================================");
+                    for (int i = 0; i < lostFines.length; i++) {
+                        for (int j = 0; j < lostFines[i].length; j++) {
+                            System.out.print(lostFines[i][j]);
+                            if (j < lostFines[i].length - 1) {
+                                System.out.print(" - ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                    System.out.println("--------------------------------------");
+                    System.out.println("What items are lost?");
+                    String lost = scanner.nextLine();
+                    lost = scanner.nextLine();
+    
+                    boolean found = false;
+                    for (String[] item : lostFines) {
+                        if (item[0].equalsIgnoreCase(lost)) {
+                            System.out.println("You must pay for the loss of the item's value " + item[1]);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Item not found in lost list.");
+                    }
+    
+                    System.out.println("Do you want to report the fines back? (y/n)");
+                    back = scanner.next();
+                    if (back.equalsIgnoreCase("y")) {
+    
+                    } else {
+                        fines = false;
+                    }
+                    } else if (finesOPtions == 3) {
+                        System.out.println("=======================================");
+                        System.out.println("|    list of fines for broken items   |");
+                        System.out.println("=======================================");
+                        for (int i = 0; i < product.length; i++) {
+                            System.out.println(product[i]);
+                        }
+                        System.out.println("--------------------------------------");
+                        System.out.println("What items are broken?");
+                        String rusak = scanner.nextLine();
+                        rusak = scanner.nextLine();
+                        for (int i = 0; i < brokenFines.length; i++) {
+                            if (rusak.equalsIgnoreCase(product[i])) {
+                                System.out.println("The broken fines you have to pay is "+ brokenFines[i]);
+                                System.out.println("For more details, the price will be checked when returning the items");
+                            }
+                        }
                             System.out.println("Do you want to report the fines back? (y/n)");
                             back = scanner.next();
-                        } while (back.equalsIgnoreCase("n"));
-                        break;
-                    case 2:
-                        do {
-                            System.out.println("List denda barang yang hilang : \n");
-                            for (int i = 0; i < lostFines.length; i++) {
-                               for (int j = 0; j < lostFines[i].length; j++) {
-                                System.out.print(lostFines[i][j]);
+                            if (back.equalsIgnoreCase("y")) {
                                 
-                               }
-                               System.out.println();
-                            System.out.println("What items are lost?");
-                            String lost = scanner.nextLine();
-                            lost = scanner.nextLine();
-    
-                            boolean found = false;
-                            for (String[] item : lostFines) {
-                                if (item[0].equalsIgnoreCase(lost)) {
-                                    System.out.println("You must pay for the loss of the item's value " + item[1]);
-                                    found = true;
-                                    break;
-                                }
+                            } else {
+                            fines = false;     
                             }
-                            if (!found) {
-                                System.out.println("Item not found in lost list.");
-                            }
-                            }
-                            System.out.println("Do you want to report the fines back? (y/n)");
-                            back = scanner.next();
-                        }while (back.equalsIgnoreCase("n"));
-                        break;
-                    case 3:
-                        do {
-                            System.out.println("The total fine you must pay: ");
-                            System.out.println("Do you want to report the fines back? (y/n)");
-                            back = scanner.next();
-                        } while (back.equalsIgnoreCase("n"));
-                        break;
-                    default: 
-                    System.out.println("Sorry, your choice is wrong!");
-                    continue;
-                    } 
-                }
+                    } else if (finesOPtions == 4) {
+                    fines = false;
+                    }
             }
-
+        }
     // Exit method
     public static void Exit() {
         System.out.println("Thank you for using the Camping Equipment Rental System!");

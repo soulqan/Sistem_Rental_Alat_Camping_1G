@@ -489,8 +489,8 @@ public class test2 {
         riwayatEstimasi[jumlahPesanan] = estimasi;
         riwayatPengiriman[jumlahPesanan] = pengiriman;
         riwayatTotalHarga[jumlahPesanan] = totalHargaFinal;
-        riwayatTanggalPeminjaman[jumlahPesanan]=tanggalPeminjaman;
-        riwayatTanggalPengembalian[jumlahPesanan]=tanggalPengembalian;
+        riwayatTanggalPeminjaman[jumlahPesanan] = tanggalPeminjaman;
+        riwayatTanggalPengembalian[jumlahPesanan] = tanggalPengembalian;
 
         for (int i = 0; i < itemKeranjang.length; i++) {
             riwayatBarang[jumlahPesanan][i] = itemKeranjang[i];
@@ -512,8 +512,8 @@ public class test2 {
         totalHargaFinal = 0;
         itemKeranjang = new String[NUM_PRODUCTS];
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
-        tanggalPeminjaman=null;
-        tanggalPengembalian=null;
+        tanggalPeminjaman = null;
+        tanggalPengembalian = null;
     }
 
     // method untuk service center
@@ -546,7 +546,7 @@ public class test2 {
         System.out.println("=================================================");
         System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang? (y/n)");
         String kembali = scanner.next();
-    
+
         if (kembali.equalsIgnoreCase("y")) {
             // Menampilkan daftar pesanan yang tersedia untuk pengembalian
             System.out.println("Daftar Pesanan yang Tersedia untuk Pengembalian:");
@@ -554,22 +554,23 @@ public class test2 {
                 System.out.println("Nomor Pesanan: " + (i + 1));
                 // Tampilkan informasi lainnya yang relevan jika diperlukan
             }
-    
+
             // Meminta pengguna memilih nomor pesanan yang ingin dikembalikan
             System.out.print("Pilih nomor pesanan yang ingin Anda kembalikan: ");
             int nomorPesanan = scanner.nextInt();
-    
+
             // Memastikan nomor pesanan yang dipilih valid
             if (nomorPesanan <= 0 || nomorPesanan > jumlahPesanan) {
                 System.out.println("Nomor pesanan tidak valid.");
                 return;
             }
-    
-            // Ambil informasi dari array riwayat peminjaman sesuai nomor pesanan yang dipilih
+
+            // Ambil informasi dari array riwayat peminjaman sesuai nomor pesanan yang
+            // dipilih
             String[] barangDipinjam = riwayatBarang[nomorPesanan - 1];
             int[] jumlahDipinjam = riwayatJumlah[nomorPesanan - 1];
             LocalDate estimasiPeminjaman = riwayatTanggalPengembalian[nomorPesanan - 1];
-    
+
             // Menampilkan informasi pesanan sesuai nomor yang dipilih
             System.out.println("Informasi Pesanan Nomor " + nomorPesanan + ":");
             System.out.println("-------------------------------------");
@@ -587,7 +588,7 @@ public class test2 {
             String tanggalKembali = scanner.next();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
-    
+
             // Perbandingan tanggal pengembalian dengan estimasi waktu peminjaman
             if (estimasiPeminjaman.isEqual(tanggalPengembalian2)) {
                 // Barang dikembalikan tepat waktu
@@ -610,7 +611,6 @@ public class test2 {
             }
         }
     }
-    
 
     // method untuk pendapatan
     public static void pendapatan() {
@@ -804,15 +804,15 @@ public class test2 {
                 }
             }
             System.out.println("Estimasi Hari: " + riwayatEstimasi[i]);
-            System.out.println("Tanggal Peminjaman: "+riwayatTanggalPeminjaman[i].format(formatter));
-            System.out.println("Tanggal Pengembalian: "+riwayatTanggalPengembalian[i].format(formatter));
+            System.out.println("Tanggal Peminjaman: " + riwayatTanggalPeminjaman[i].format(formatter));
+            System.out.println("Tanggal Pengembalian: " + riwayatTanggalPengembalian[i].format(formatter));
             System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
             System.out.println("---------------------------------------");
             System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
             System.out.println("---------------------------------------");
-            if (statusPengembalian[i]!=null) {
-            System.out.println("Status Pengembalian: " + statusPengembalian[i]);
-            }else{
+            if (statusPengembalian[i] != null) {
+                System.out.println("Status Pengembalian: " + statusPengembalian[i]);
+            } else {
                 System.out.println("Status Pengembalian: Belum Dikembalikan");
             }
             System.out.println("---------------------------------------");

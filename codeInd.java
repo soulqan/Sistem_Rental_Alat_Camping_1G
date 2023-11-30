@@ -42,7 +42,7 @@ public class codeInd {
             { "Senter", "50.000" },
             { "Karpet tebal", "30.000" },
     };
-
+    public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
     // sebuah public static utama untuk login dan menampilkan menu
     public static void
 

@@ -384,8 +384,7 @@ public class codeInd {
         // Parsing input tanggal peminjaman menjadi objek LocalDate
 
         tanggalPeminjaman = LocalDate.parse(inputTanggalPeminjaman, formatter);
-        System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal
-                                                                                          // peminjaman
+        System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal peminjaman
 
         // Menghitung dan menampilkan tanggal pengembalian berdasarkan estimasi hari
         tanggalPengembalian = tanggalPeminjaman.plusDays(estimasi);
@@ -449,8 +448,7 @@ public class codeInd {
         System.out.println("======================================================") ;
         System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
 
-        boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam
-                                                 // keranjang
+        boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam keranjang
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
             if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
@@ -766,7 +764,22 @@ public class codeInd {
                     denda = false;
                 }
             } else if (pilihanDenda == 3) {
-                System.out.println("Barang apa saja yang rusak?");
+                    System.out.println("=====================================");
+                    System.out.println("|    List denda barang yang rusak   |");
+                    System.out.println("=====================================");
+                    for (int i = 0; i < produkid.length; i++) {
+                        System.out.println(produkid[i]);
+                    }
+                    System.out.println("--------------------------------------");
+                    System.out.println("Barang apa saja yang rusak?");
+                    String rusak = scanner.nextLine();
+                    rusak = scanner.nextLine();
+                    for (int i = 0; i < dendaRusak.length; i++) {
+                        if (rusak.equalsIgnoreCase(produkid[i])) {
+                            System.out.println("Denda kerusakan yang harus anda bayar sebesar "+ dendaRusak[i]);
+                            System.out.println("Untuk lebih detail harganya akan di cek pada saat pengembalian");
+                        }
+                    }
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                 back = scanner.next();
                 if (back.equalsIgnoreCase("y")) {

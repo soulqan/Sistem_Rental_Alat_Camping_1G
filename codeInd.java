@@ -737,6 +737,9 @@ public class codeInd {
                 for (int i = 0; i < dendaHilang.length; i++) {
                     for (int j = 0; j < dendaHilang[i].length; j++) {
                         System.out.print(dendaHilang[i][j]);
+                        if (j < dendaHilang[i].length - 1) {
+                            System.out.print(" - ");
+                        }
                     }
                     System.out.println();
                 }

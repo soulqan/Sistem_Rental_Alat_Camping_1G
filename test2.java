@@ -44,9 +44,7 @@ public class test2 {
     };
 
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void
-
-            main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");

@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "member",
+            "request": "launch",
+            "mainClass": "member",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "KasirrRestoran05",
+            "request": "launch",
+            "mainClass": "KasirrRestoran05",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "denda",
+            "request": "launch",
+            "mainClass": "denda",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
             "name": "tugas2_P9",
             "request": "launch",
             "mainClass": "tugas2_P9",

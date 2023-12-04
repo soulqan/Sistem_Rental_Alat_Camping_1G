@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class test2 {
+public class pengembalian {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
@@ -32,7 +32,7 @@ public class test2 {
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
-    public static int estimasi, pengiriman, saldoCst;
+    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst=saldoCst-=totalHarga;
     public static String[][] dendaHilang = {
             { "Tenda camping", "2.500.000" },
             { "Tas Gunung", "800.000" },
@@ -42,9 +42,11 @@ public class test2 {
             { "Senter", "50.000" },
             { "Karpet tebal", "30.000" },
     };
-
+    public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void main(String[] args) {
+    public static void
+
+            main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");
@@ -382,8 +384,7 @@ public class test2 {
         // Parsing input tanggal peminjaman menjadi objek LocalDate
 
         tanggalPeminjaman = LocalDate.parse(inputTanggalPeminjaman, formatter);
-        System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal
-                                                                                          // peminjaman
+        System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal peminjaman
 
         // Menghitung dan menampilkan tanggal pengembalian berdasarkan estimasi hari
         tanggalPengembalian = tanggalPeminjaman.plusDays(estimasi);
@@ -444,11 +445,10 @@ public class test2 {
         System.out.println("Nama   : " + namaid);
         System.out.println("Alamat : " + alamatid);
         System.out.println("No.Telp: " + notelpid);
-        System.out.println("======================================================");
+        System.out.println("======================================================") ;
         System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
 
-        boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam
-                                                 // keranjang
+        boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang dalam keranjang
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
             if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
@@ -468,27 +468,39 @@ public class test2 {
             System.out.println("Total Harga: " + totalHargaFinal);
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
-            if (jawaban.equalsIgnoreCase("y")) {
-                System.out.println("masukkan saldo anda: ");
+                if (jawaban.equalsIgnoreCase("y")) {
+                System.out.println("masukkan jumlah uang anda");
                 saldoCst = scanner.nextInt();
                 saldo += (saldoCst - totalHargaFinal);
-                System.out.println("---------------------------------------------------");
+        
+                if (saldoCst == totalHargaFinal) {
+                    System.out.println("uang anda pas");
+                } else if (saldoCst > totalHarga) {
+                    System.out.println("Ambil kembalian? (y/n): ");
+                    String pilihan = scanner.next();
+                    if (pilihan.equalsIgnoreCase("y")) {
+                        System.out.println("Uang kembalian Anda: " + (saldoCst - totalHargaFinal));
+                    } else {
+                        // ga ambil kembalian
+                        System.out.println("Sisa saldo Anda: " + (saldoCst - totalHargaFinal));
+                    }
+                } else {
+                    System.out.println("Uang Anda kurang"+ (saldoCst - totalHargaFinal));
+                } 
+                if (saldoCst==totalHargaFinal||saldoCst>totalHargaFinal){
+                    System.out.println("---------------------------------------------------");
                 System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - totalHargaFinal));
                 System.out.println("---------------------------------------------------");
-            } else {
-                System.out.println("Pembayaran tidak valid");
-            }
-        } else {
-            System.out.println("Keranjang Anda kosong. Silakan tambahkan barang ke keranjang terlebih dahulu.");
-        }
+                }}
+      
         riwayatNama[jumlahPesanan] = namaid;
         riwayatAlamat[jumlahPesanan] = alamatid;
         riwayatNoHp[jumlahPesanan] = notelpid;
         riwayatEstimasi[jumlahPesanan] = estimasi;
         riwayatPengiriman[jumlahPesanan] = pengiriman;
         riwayatTotalHarga[jumlahPesanan] = totalHargaFinal;
-        riwayatTanggalPeminjaman[jumlahPesanan] = tanggalPeminjaman;
-        riwayatTanggalPengembalian[jumlahPesanan] = tanggalPengembalian;
+        riwayatTanggalPeminjaman[jumlahPesanan]=tanggalPeminjaman;
+        riwayatTanggalPengembalian[jumlahPesanan]=tanggalPengembalian;
 
         for (int i = 0; i < itemKeranjang.length; i++) {
             riwayatBarang[jumlahPesanan][i] = itemKeranjang[i];
@@ -500,7 +512,7 @@ public class test2 {
 
         jumlahPesanan++;
 
-        System.out.println("Terima kasih!");
+    
         namaid = null;
         alamatid = null;
         notelpid = null;
@@ -510,10 +522,9 @@ public class test2 {
         totalHargaFinal = 0;
         itemKeranjang = new String[NUM_PRODUCTS];
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
-        tanggalPeminjaman = null;
-        tanggalPengembalian = null;
-    }
-
+        tanggalPeminjaman=null;
+        tanggalPengembalian=null;}}
+    
     // method untuk service center
     public static void service(Scanner scanner) {
         System.out.println("=================================================");
@@ -544,7 +555,7 @@ public class test2 {
         System.out.println("=================================================");
         System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang? (y/n)");
         String kembali = scanner.next();
-
+    
         if (kembali.equalsIgnoreCase("y")) {
             // Menampilkan daftar pesanan yang tersedia untuk pengembalian
             System.out.println("Daftar Pesanan yang Tersedia untuk Pengembalian:");
@@ -552,23 +563,22 @@ public class test2 {
                 System.out.println("Nomor Pesanan: " + (i + 1));
                 // Tampilkan informasi lainnya yang relevan jika diperlukan
             }
-
+    
             // Meminta pengguna memilih nomor pesanan yang ingin dikembalikan
             System.out.print("Pilih nomor pesanan yang ingin Anda kembalikan: ");
             int nomorPesanan = scanner.nextInt();
-
+    
             // Memastikan nomor pesanan yang dipilih valid
             if (nomorPesanan <= 0 || nomorPesanan > jumlahPesanan) {
                 System.out.println("Nomor pesanan tidak valid.");
                 return;
             }
-
-            // Ambil informasi dari array riwayat peminjaman sesuai nomor pesanan yang
-            // dipilih
+    
+            // Ambil informasi dari array riwayat peminjaman sesuai nomor pesanan yang dipilih
             String[] barangDipinjam = riwayatBarang[nomorPesanan - 1];
             int[] jumlahDipinjam = riwayatJumlah[nomorPesanan - 1];
             LocalDate estimasiPeminjaman = riwayatTanggalPengembalian[nomorPesanan - 1];
-
+    
             // Menampilkan informasi pesanan sesuai nomor yang dipilih
             System.out.println("Informasi Pesanan Nomor " + nomorPesanan + ":");
             System.out.println("-------------------------------------");
@@ -579,14 +589,14 @@ public class test2 {
                     jumlahid[i] += jumlahDipinjam[i];
                 }
             }
-            System.out.println("Estimasi Peminjaman: " + estimasiPeminjaman.format(formatter));
+            
             System.out.println("-------------------------------------");
             // Meminta pengguna memasukkan tanggal pengembalian
             System.out.print("\nMasukkan tanggal pengembalian (dd/MM/yyyy): ");
             String tanggalKembali = scanner.next();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
-
+    
             // Perbandingan tanggal pengembalian dengan estimasi waktu peminjaman
             if (estimasiPeminjaman.isEqual(tanggalPengembalian2)) {
                 // Barang dikembalikan tepat waktu
@@ -609,6 +619,7 @@ public class test2 {
             }
         }
     }
+    
 
     // method untuk pendapatan
     public static void pendapatan() {
@@ -726,6 +737,9 @@ public class test2 {
                 for (int i = 0; i < dendaHilang.length; i++) {
                     for (int j = 0; j < dendaHilang[i].length; j++) {
                         System.out.print(dendaHilang[i][j]);
+                        if (j < dendaHilang[i].length - 1) {
+                            System.out.print(" - ");
+                        }
                     }
                     System.out.println();
                 }
@@ -753,7 +767,22 @@ public class test2 {
                     denda = false;
                 }
             } else if (pilihanDenda == 3) {
-                System.out.println("Barang apa saja yang rusak?");
+                    System.out.println("=====================================");
+                    System.out.println("|    List denda barang yang rusak   |");
+                    System.out.println("=====================================");
+                    for (int i = 0; i < produkid.length; i++) {
+                        System.out.println(produkid[i]);
+                    }
+                    System.out.println("--------------------------------------");
+                    System.out.println("Barang apa saja yang rusak?");
+                    String rusak = scanner.nextLine();
+                    rusak = scanner.nextLine();
+                    for (int i = 0; i < dendaRusak.length; i++) {
+                        if (rusak.equalsIgnoreCase(produkid[i])) {
+                            System.out.println("Denda kerusakan yang harus anda bayar sebesar "+ dendaRusak[i]);
+                            System.out.println("Untuk lebih detail harganya akan di cek pada saat pengembalian");
+                        }
+                    }
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                 back = scanner.next();
                 if (back.equalsIgnoreCase("y")) {
@@ -802,15 +831,15 @@ public class test2 {
                 }
             }
             System.out.println("Estimasi Hari: " + riwayatEstimasi[i]);
-            System.out.println("Tanggal Peminjaman: " + riwayatTanggalPeminjaman[i].format(formatter));
-            System.out.println("Tanggal Pengembalian: " + riwayatTanggalPengembalian[i].format(formatter));
+            System.out.println("Tanggal Peminjaman: "+riwayatTanggalPeminjaman[i].format(formatter));
+            System.out.println("Tanggal Pengembalian: "+riwayatTanggalPengembalian[i].format(formatter));
             System.out.println("Pengiriman   : " + (riwayatPengiriman[i] == 1 ? "Kurir" : "Ambil Di Tempat"));
             System.out.println("---------------------------------------");
             System.out.println("Total Harga  : " + riwayatTotalHarga[i]);
             System.out.println("---------------------------------------");
-            if (statusPengembalian[i] != null) {
-                System.out.println("Status Pengembalian: " + statusPengembalian[i]);
-            } else {
+            if (statusPengembalian[i]!=null) {
+            System.out.println("Status Pengembalian: " + statusPengembalian[i]);
+            }else{
                 System.out.println("Status Pengembalian: Belum Dikembalikan");
             }
             System.out.println("---------------------------------------");

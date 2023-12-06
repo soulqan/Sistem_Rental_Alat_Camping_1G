@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class bilingualtest {
     
     public static int NUM_PRODUCTS = 10;
-    public static String[] produk = { "Camping Tent", "Mountain Backpack", "Sleeping Bag", "Portable Stove", "Cooking Set", "Flashlight", "Thick Carpet", "Product 8", "Product 9", "Product 10" };
+    public static String[] produk = { "Camping Tent", "Mountain Backpack", "Sleeping Bag", "Portable Stove", "Cooking Set", "Flashlight", "Thick Carpet", "senter", "Product 9", "Product 10" };
     public static int[] jumlah = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] harga = { 250000, 35000, 0, 0, 0, 0, 0, 0, 0, 0 };
     public static long[] hargaOngkir = { 1000, 30000 };

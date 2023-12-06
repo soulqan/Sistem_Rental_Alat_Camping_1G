@@ -10,7 +10,7 @@ public class member {
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public static String [][]member=new String[100][3];
+    public static String [][]member=new String[100][2];
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
     public static String[] riwayatNoHp = new String[100];
@@ -53,10 +53,10 @@ public class member {
         System.out.print("Masukan user: ");
         String user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
         System.out.print("Masukan password: ");
-        int password = scanner.nextInt();// untuk membaca sebuah password yang di masukkan
+        String password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
 
-        if ((user.equalsIgnoreCase("customer") && password == 123))// sebuah pemilihan yang akan dilakukan jika user dan
-                                                                   // password sama dengan yang tertera
+          for (int i = 0; i < member.length; i++) {
+        if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))||(user.equalsIgnoreCase("customer")&& password.equalsIgnoreCase("123")))
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
@@ -66,7 +66,8 @@ public class member {
                 System.out.println("=================================================");
                 System.out.println("                   Menu Utama                   ");
                 System.out.println("=================================================");
-                System.out.println("\n1.Profil");
+                System.out.println("\n0. Membership");
+                System.out.println("1.Profil");
                 System.out.println("2.Persediaan alat camping");
                 System.out.println("3.Keranjang");
                 System.out.println("4.Hapus Produk Dari Keranjang ");
@@ -83,6 +84,10 @@ public class member {
 
                 switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
                                   // dengan sebuah inputan berupa angka
+                    case 0:
+                        membership(scanner);
+
+                        break;
                     case 1:
                         Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method
                                         // yaitu profil
@@ -131,7 +136,7 @@ public class member {
                         break;
                 }
             } while (pilihan != 11);// ujung dari statement do-while
-        } else if (user.equalsIgnoreCase("admin") && password == 123) {// sebuah pemilihan lain yang menuju ke admin
+        } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain yang menuju ke admin
             System.out.println("\n               Login Berhasil (Admin)              ");
             System.out.println("\n");
 
@@ -214,7 +219,29 @@ public class member {
         } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
                 // yang di gunakan
             System.out.println("Login Gagal");
+          }  }
+    }
+
+
+    // method untuk membership
+
+    public static void membership(Scanner scanner){         
+        System.out.println("Apakah anda ingin join membership? (y/n)");
+        String join=scanner.nextLine();
+        if (join.equalsIgnoreCase("y")) { 
+        System.out.println("Masukkan username anda: ");
+        String username= scanner.nextLine();
+        System.out.println("Masukkan password: ");
+        String pass = scanner.nextLine();  
+        for (int i = 0; i < member.length; i++) {
+            member[i][0]=username;
+            member[i][1]=pass;
         }
+        System.out.println("anda menjadi member premium Silahkan login ulang");
+        main(itemKeranjang);
+    }else{
+        System.out.println("Anda menjadi Member biasa");
+    }
     }
 
     // Method untuk profil
@@ -223,25 +250,12 @@ public class member {
         System.out.println("=================================================");
         System.out.println("                 Profil Customer                 ");
         System.out.println("=================================================");
-        System.out.println("Apakah anda ingin join member? (y/n)");
-        String join=scanner.nextLine();
         System.out.print("Nama    :");
         namaid = scanner.nextLine();
         System.out.print("Alamat  :");
         alamatid = scanner.nextLine();
         System.out.print("No.Telp :");
         notelpid = scanner.nextLine();
-        if (join.equalsIgnoreCase("y")) {  
-        for (int i = 0; i < member.length; i++) {
-            member[i][0]=namaid;
-            member[i][1]=alamatid;
-            member[i][2]=notelpid;
-            
-        }
-        System.out.println("anda menjadi member premium");
-    }else{
-        System.out.println("Anda menjadi Member biasa");
-    }
         System.out.println("=================================================");
         System.out.println();
         System.out.println("Tekan enter untuk ke menu selanjutnya...");

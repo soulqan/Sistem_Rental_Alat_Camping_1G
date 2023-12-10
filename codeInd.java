@@ -10,6 +10,7 @@ public class codeInd {
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String[][]identitasMember = new String[100][3];
     public static String [][] member =new String[100][2];
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
@@ -28,7 +29,7 @@ public class codeInd {
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
-    public static String namaid, alamatid, masukkan, notelpid;
+    public static String namaid, alamatid, masukkan, notelpid, user, password;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
@@ -45,15 +46,15 @@ public class codeInd {
     public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
     
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void main(String[] args) {
+    public static void main(String[] args)          {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");
         System.out.println("=================================================");
         System.out.print("Masukan username: ");
-        String user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
+        user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
         System.out.print("Masukan password: ");
-        String password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
+        password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
         for (int i = 0; i < member.length; i++) {
             if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
             System.out.println("\n               Login Berhasil (Member)              ");
@@ -279,51 +280,75 @@ public class codeInd {
         } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
                 // yang di gunakan
             System.out.println("Login Gagal");
+            main(args);
         }
     }
 
     // Method untuk profil
     public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
-        System.out.println("=================================================");
-        System.out.println("                 Profil Customer                 ");
-        System.out.println("=================================================");
-        System.out.print("Nama    :");
-        namaid = scanner.nextLine();
-        System.out.print("Alamat  :");
-        alamatid = scanner.nextLine();
-        System.out.print("No.Telp :");
-        notelpid = scanner.nextLine();
-        System.out.println("=================================================");
-        System.out.println();
-        System.out.println("Apakah anda sudah memiliki membership?");
-        System.out.println("[Y] Ya / [N] Tidak");
-        System.out.println("=================================================");
-        System.out.print("pilihan: ");
-        String pilihanMember = scanner.nextLine();
-        if (pilihanMember.equalsIgnoreCase("n")) {
-            System.out.println("Apakah anda ingin join member?");
-            System.out.println("[Y] Ya / [N] Tidak");
-            System.out.println("=================================================");
-            System.out.print("pilihan: ");
-            String pilihanJoin = scanner.nextLine();
-            if (pilihanJoin.equalsIgnoreCase("y")) {
-                membership(scanner);
-                
-            } else {
-                System.out.println("Selamat berbelanja sebagai customer reguler!");
+        for (int i = 0; i < member.length; i++) {
+            if (user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")||user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
+                System.out.println("=================================================");
+                System.out.println("                 Profil Customer                 ");
+                System.out.println("=================================================");
+                System.out.print("Nama    :");
+                namaid = scanner.nextLine();
+                System.out.print("Alamat  :");
+                alamatid = scanner.nextLine();
+                System.out.print("No.Telp :");
+                notelpid = scanner.nextLine();
+                System.out.println("=================================================");
+                System.out.println();
+                System.out.println("Apakah anda sudah memiliki membership?");
+                System.out.println("[Y] Ya / [N] Tidak");
+                System.out.println("=================================================");
+                System.out.print("pilihan: ");
+                String pilihanMember = scanner.nextLine();
+                if (pilihanMember.equalsIgnoreCase("n")) {
+                    System.out.println("Apakah anda ingin join member?");
+                    System.out.println("[Y] Ya / [N] Tidak");
+                    System.out.println("=================================================");
+                    System.out.print("pilihan: ");
+                    String pilihanJoin = scanner.nextLine();
+                    if (pilihanJoin.equalsIgnoreCase("y")) {
+                        membership(scanner);  
+                    } else {
+                        System.out.println("Selamat berbelanja sebagai customer reguler!");
+                        System.out.println("=================================================");
+                        System.out.println("Tekan enter untuk ke menu selanjutnya...");
+                        System.out.println("Tekan selain enter untuk ke menu utama...");
+                        String input = scanner.nextLine();
+                        if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                        persediaan(scanner);
+                        } else {
+                        // Kembali ke menu utama atau lakukan apa yang diperlukan
+                        }
+                    } 
+                } else {
+                    System.out.println("Masukkann username dan password member anda!");
+                    main(itemKeranjang);
+                }
+            } else if (user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1])) {
+                System.out.println("=================================================");
+                System.out.println("                 Profil Member                 ");
+                System.out.println("=================================================");
+                System.out.println("Nama: "+identitasMember[i][0]);
+                System.out.println("Alamat: "+identitasMember[i][1]);
+                System.out.println("No HP: "+identitasMember[i][2]);
+                namaid=identitasMember[i][0];
+                alamatid=identitasMember[i][1];
+                notelpid=identitasMember[i][2];
+                System.out.println("Selamat berbelanja sebagai member!");
                 System.out.println("=================================================");
                 System.out.println("Tekan enter untuk ke menu selanjutnya...");
                 System.out.println("Tekan selain enter untuk ke menu utama...");
                 String input = scanner.nextLine();
                 if (input.isEmpty()) { // Jika input kosong (hanya enter)
-                persediaan(scanner);
+                    persediaan(scanner);
                 } else {
                 // Kembali ke menu utama atau lakukan apa yang diperlukan
                 }
             } 
-        } else {
-            System.out.println("Masukkann username dan password member anda!");
-            main(itemKeranjang);
         }
     }
 
@@ -386,10 +411,8 @@ public class codeInd {
                 System.out.println("Barang yang di sewa tidak mencukupi");
             } else {// jika tiidak ada pemilihan yang sesuai maka jalankan program tersebut
                 itemKeranjang[indexBarang] = barang;// array itemKeranjang diisi dengan barang
-                jmlBarangKeranjang[indexBarang] += jumlahBarang;// nilai awal array jumlahBarangKeranjang akan ditambah
-                                                                // sama dengan jumlahBarang
-                totalHarga += hargaid[indexBarang] * jumlahBarang;// nilai awal total harga akan ditambah sama dengan
-                                                                  // array hargaid di kali jumlahBarang
+                jmlBarangKeranjang[indexBarang] += jumlahBarang;// nilai awal array jumlahBarangKeranjang akan ditambah sama dengan jumlahBarang
+                totalHarga += hargaid[indexBarang] * jumlahBarang;// nilai awal total harga akan ditambah sama dengan array hargaid di kali jumlahBarang
 
                 jumlahid[indexBarang] -= jumlahBarang;// nilai awal array jumlahid akan dikurang sama dengan
                                                       // jumlahBarang yang di input
@@ -882,25 +905,24 @@ public class codeInd {
     public static void membership(Scanner scanner) {
         System.out.println("=================================================");
         System.out.println("|                   JOIN MEMBER                 |");
-        System.out.println("=================================================");
-        System.out.println("Nama: " + namaid);
-        System.out.println("No.Telp: " + notelpid);
-        System.out.print("Masukkan username baru anda: ");
-        String userMember = scanner.nextLine();
-        System.out.print("Masukkan password baru anda: ");
-        String passwordMember = scanner.nextLine();
-        for (int i = 0; i < member.length; i++) {
-            member[i][0]=userMember;
-            member[i][1]=passwordMember;
-        }
+            System.out.println("=================================================");
+            System.out.println("Nama: " + namaid);
+            System.out.println("No.Telp: " + notelpid);
+            System.out.print("Masukkan username baru anda: ");
+            String userMember = scanner.nextLine();
+            System.out.print("Masukkan password baru anda: ");
+            String passwordMember = scanner.nextLine();
+            for (int i = 0; i < member.length; i++) {
+                member[i][0]=userMember;
+                member[i][1]=passwordMember;
+            }
         double diskon=0.1;
         System.out.println("\nSelamat! Anda berhasil bergabung sebagai anggota.");
         System.out.println("Terima kasih, " + namaid + "! Anda mendapatkan diskon " + (diskon * 100) + "% \npada pembelian berikutnya dengan memasukkan \nusername dan password member anda.");
         System.out.println("=================================================");
         System.out.println("      Memasukkan Username & Password kembali     ");
         main(itemKeranjang);
-    } 
-    
+    }
 
     // Method untuk Log Out
     public static void LogOut(Scanner scanner) {
@@ -917,7 +939,9 @@ public class codeInd {
             System.out.println("pilihan tidak tersedia");
             LogOut(scanner);
         }
-    }
+        }
+
+    
 
     // method riwayat pesanan
     public static void cetakRiwayatPemesanan() {

@@ -1,26 +1,29 @@
 import java.util.Scanner;
 
 public class kasir {
-    static int nilai=0;
-    static  String[]daftarMakanan={
-        "Nasi Goreng","Sate Ayam","Gado-gado","Telur Bawang Merah",
+
+    static int nilai = 0;
+    static String[] daftarMakanan = {
+            "Nasi Goreng", "Sate Ayam", "Gado-gado", "Telur Bawang Merah", "Ayam geprek", "Bakso Daging",
+            "Ayam Teriyaki", "Ayam Lada Hitam", "Chicken Bulgogi", "Kwetiau Goreng"
     };
-    static int[]hargaMakanan={
-        1500,2000,3000,4000
+    static int[] hargaMakanan = {
+            35000, 20000, 22000, 25000, 28000, 20000, 32000, 36000, 28000, 34000
     };
-    static String[]daftarMinuman={
-        "esteh","kopi"
+    static String[] daftarMinuman = {
+            "Es Teh", "Kopi", "Es Jeruk", "Jus Mangga", "Jus Jambu", "Teh Tarik", "Milo", "Lychee Tea", "Lemon Tea",
+            "Air Mineral"
     };
-    static int []hargaMinuman={
-        800,900
+    static int[] hargaMinuman = {
+            8000, 10000, 8000, 10000, 10000, 8000, 10000, 10000, 10000, 6000
     };
     static String[] keranjangMakan = new String[5];
     static int[] keranjangPorsi = new int[5];
-    static String[]keranjangMinumana = new String[5];
+    static String[] keranjangMinumanan = new String[5];
     static int[] keranjangPorsiMinuman = new int[5];
     static int[][] porsi = new int[100][10];
     static String[][] makan = new String[100][10];
-    static int totalHarga;
+    static int totalHargaMakan,totalHargaMinum,total;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -28,13 +31,23 @@ public class kasir {
         System.out.println("================================");
         System.out.println("Selamat datang di Kasir Restoran");
         System.out.println("================================");
-        System.out.print("Masukkan username: ");
-        String username = sc.nextLine();
-        System.out.print("Masukkan Password: ");
-        String password = sc.nextLine();
 
-        if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
-            System.out.println("Login Berhasil");
+        boolean loginSuccces = false;
+
+        while (!loginSuccces) {
+
+            System.out.print("Masukkan username: ");
+            String username = sc.nextLine();
+            System.out.print("Masukkan Password: ");
+            String password = sc.nextLine();
+
+            if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
+                System.out.println("Login Berhasil");
+                loginSuccces = true;
+            } else {
+                System.out.println("Username atau Password salah. Silahkan coba lagi. ");
+            }
+
         }
 
         int pilihan;
@@ -59,10 +72,12 @@ public class kasir {
 
                     break;
                 case 4:
-
+                    struk();
                     break;
                 case 5:
                     System.out.println("Terima kasih");
+
+                    break;
                 default:
                     System.out.println("Menu tidak tersedia!");
                     break;
@@ -80,8 +95,6 @@ public class kasir {
             System.out.printf("|%d. %-15s %-13s|\n", (i + 1), daftarMakanan[i], "Rp " + hargaMakanan[i]);
         }
         System.out.println("|================================|\n");
-      
-    
 
         System.out.println("|================================|");
         System.out.println("|       MENU MINUMAN             |");
@@ -93,19 +106,64 @@ public class kasir {
         }
         System.out.println("|================================|\n");
     }
+
     public static void transaksi(Scanner sc) {
-        System.out.println("Pilih Makanan: ");
-        int pilihanMakanan = sc.nextInt() -1 ;
-        System.out.println("Berapa porsi: ");
+        System.out.print("Pilih Makanan: ");
+        int pilihanMakanan = sc.nextInt() - 1;
+        System.out.print("Berapa porsi: ");
         int jumlahPorsi = sc.nextInt();
 
-      keranjangMakan[nilai]=daftarMakanan[pilihanMakanan];
-      keranjangPorsi[nilai]=jumlahPorsi;
-    totalHarga=hargaMakanan[pilihanMakanan]*keranjangPorsi[nilai];
-    System.out.println("Makanan yang di pesan: "+keranjangMakan[nilai]);
-    System.out.println("Jumlah Porsi :"+keranjangPorsi[nilai]+" porsi");
-    System.out.println("Total Harga"+totalHarga);
-    nilai++;
-    
+        keranjangMakan[nilai] = daftarMakanan[pilihanMakanan];
+        keranjangPorsi[nilai] = jumlahPorsi;
+        totalHargaMakan += hargaMakanan[pilihanMakanan] * keranjangPorsi[nilai];
+        System.out.println("Makanan yang di pesan: " + keranjangMakan[nilai]);
+        System.out.println("Jumlah Porsi :" + keranjangPorsi[nilai] + " porsi");
+        System.out.println("Total Harga: " + totalHargaMakan);
+        System.out.print("Apakah Anda ingin membeli minuman? (y/t): ");
+        sc.nextLine(); // Clear the newline character
+        String beliMinuman = sc.nextLine();
+
+        if (beliMinuman.equalsIgnoreCase("y")) {
+            for (int i = 0; i < daftarMinuman.length; i++) {
+            }
+            System.out.print("Pilih Minuman: ");
+            int pilihanMinuman = sc.nextInt() - 1;
+            System.out.print("Berapa porsi: ");
+            int jumlahPorsiMinuman = sc.nextInt();
+
+            keranjangMinumanan[nilai] = daftarMinuman[pilihanMinuman];
+            keranjangPorsiMinuman[nilai] = jumlahPorsiMinuman;
+            totalHargaMinum += hargaMinuman[pilihanMinuman] * keranjangPorsiMinuman[nilai];
+            System.out.println("Minuman yang dipesan: " + keranjangMinumanan[nilai]);
+            System.out.println("Jumlah Porsi Minuman: " + keranjangPorsiMinuman[nilai] + " porsi");
+            System.out.println("Total Harga: " + totalHargaMinum);
+
+            total = totalHargaMakan + totalHargaMinum;
+            System.out.println("Total Bayar: " + total);
+        } 
+        nilai++;
+
+    }
+    static void struk(){
+        System.out.println("=====================================");
+        System.out.println("            STRUK PESANAN            ");
+        System.out.println("=====================================");
+        System.out.printf("%-20s %-10s %-10s\n", "Produk", "Jumlah", "Harga");
+
+         // Menambahkan variabel ini untuk mengecek apakah ada barang dalam keranjang
+
+        for (int i = 0; i <keranjangMakan.length ; i++) {
+             {
+                System.out.printf("%-20s %-10d %-10d\n", keranjangMakan[i], keranjangPorsi[i], hargaMakanan[i]);
+                break;
+        }
+    }
+    for (int j = 0; j < keranjangMinumanan.length; j++) {
+            System.out.printf("%-20s %-10d %-10d\n", keranjangMinumanan[j], keranjangPorsiMinuman[j], hargaMinuman[j]);
+                break;
+        }
+        System.out.println("-------------------------------------");
+        System.out.println("Total: "+total);
+        System.out.println("=====================================");
     }
 }

@@ -44,9 +44,7 @@ public class pengembalian {
     };
     public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void
-
-            main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");

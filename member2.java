@@ -2,17 +2,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class member {
+public class member2 {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
-    static boolean diskonid;
     public static LocalDate tanggalPengembalian2;
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public static String[][]identitasMember = new String[100][3];
-    public static String [][]member=new String[100][2];
+    public static String [][] member =new String[100][2];
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
     public static String[] riwayatNoHp = new String[100];
@@ -26,16 +24,15 @@ public class member {
     public static long[] riwayatTotalHarga = new long[100];
     public static String[] itemKeranjang2 = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang2 = new int[NUM_PRODUCTS];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable",
-            "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable","Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
-    public static String namaid, alamatid, masukkan, notelpid,user,password;
+    public static String namaid, alamatid, masukkan, notelpid, user, password;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
-    public static int estimasi, pengiriman, saldoCst;
+    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst=saldoCst-=totalHarga;
     public static String[][] dendaHilang = {
             { "Tenda camping", "2.500.000" },
             { "Tas Gunung", "800.000" },
@@ -46,19 +43,84 @@ public class member {
             { "Karpet tebal", "30.000" },
     };
     public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
+    
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void main(String[] args) {
+    public static void main(String[] args)          {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");
         System.out.println("=================================================");
-        System.out.print("Masukan user: ");
+        System.out.print("Masukan username: ");
         user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
         System.out.print("Masukan password: ");
         password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
+        for (int i = 0; i < member.length; i++) {
+            if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
+            System.out.println("\n               Login Berhasil (Member)              ");
+            System.out.println("\n");
 
-          for (int i = 0; i < member.length; i++) {
-        if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))||(user.equalsIgnoreCase("customer")&& password.equalsIgnoreCase("123")))
+            int pilihan;
+            do {
+                System.out.println("=================================================");
+                System.out.println("                   Menu Utama                   ");
+                System.out.println("=================================================");
+                System.out.println("\n1.Profil");
+                System.out.println("2.Persediaan alat camping");
+                System.out.println("3.Keranjang");
+                System.out.println("4.Hapus Produk Dari Keranjang ");
+                System.out.println("5.Peminjaman barang");
+                System.out.println("6.Opsi pengiriman");
+                System.out.println("7.Pembayaran");
+                System.out.println("8.Servis center");
+                System.out.println("9.Pengembalian barang");
+                System.out.println("10.Log Out");
+                System.out.println("11.Exit");
+                System.out.print("\nPilih Menu : ");
+                pilihan = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (pilihan) {
+                    case 1:
+                        Profil(scanner);
+                        break;
+                    case 2:
+                        persediaan(scanner);
+                        break;
+                    case 3:
+                        Keranjang(scanner);
+                        break;
+                    case 4:
+                        hapusProdukDariKeranjang(scanner);
+                        break;
+                    case 5:
+                        peminjamanBarang(scanner);
+                        break;
+                    case 6:
+                        pengiriman(scanner);
+                        break;
+                    case 7:
+                        pembayaran(scanner);
+                        break;
+                    case 8:
+                        service(scanner);
+                        break;
+                    case 9:
+                        pengembalian(scanner);
+                        break;
+                    case 10:
+                        LogOut(scanner);
+                        break;
+                    case 11:
+                        exit();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } while (pilihan != 11);
+            }
+        }
+        if ((user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")))// sebuah pemilihan yang akan dilakukan jika user dan password sama dengan yang tertera
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
@@ -68,8 +130,7 @@ public class member {
                 System.out.println("=================================================");
                 System.out.println("                   Menu Utama                   ");
                 System.out.println("=================================================");
-                System.out.println("\n0. Membership");
-                System.out.println("1.Profil");
+                System.out.println("\n1.Profil");
                 System.out.println("2.Persediaan alat camping");
                 System.out.println("3.Keranjang");
                 System.out.println("4.Hapus Produk Dari Keranjang ");
@@ -84,19 +145,12 @@ public class member {
                 pilihan = scanner.nextInt();// untuk membaca inputan yang dimasukkan
                 scanner.nextLine();
 
-                switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
-                                  // dengan sebuah inputan berupa angka
-                    case 0:
-                        membership(scanner);
-
-                        break;
+                switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka dengan sebuah inputan berupa angka
                     case 1:
-                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method
-                                        // yaitu profil
+                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method yaitu profil
                         break;
                     case 2:
-                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method
-                                            // yaitu persediaan
+                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method yaitu persediaan
                         break;
                     case 3:
                         Keranjang(scanner);// apabila pilihan yang di input itu 3 maka dia akan memanggil sebuah method
@@ -160,8 +214,9 @@ public class member {
                 System.out.println("11.Penambahan barang baru");
                 System.out.println("12.Denda");
                 System.out.println("13.Riwayat Pemesanan");
-                System.out.println("14.Log Out");
-                System.out.println("15.Exit");
+                System.out.println("14.Membership");
+                System.out.println("15.Log Out");
+                System.out.println("16.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
                 scanner.nextLine();
@@ -203,13 +258,16 @@ public class member {
                     case 12:
                         denda(scanner);
                         break;
-                    case 14:
-                        LogOut(scanner);
-                        break;
                     case 13:
                         cetakRiwayatPemesanan();
                         break;
+                    case 14:
+                        membership(scanner);
+                        break;
                     case 15:
+                        LogOut(scanner);
+                        break;
+                    case 16:
                         exit();
                         break;
 
@@ -221,80 +279,52 @@ public class member {
         } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
                 // yang di gunakan
             System.out.println("Login Gagal");
-          }  }
-    }
-
-
-    // method untuk membership
-
-    public static void membership(Scanner scanner){         
-        System.out.println("Apakah anda ingin join membership? (y/n)");
-        String join=scanner.nextLine();
-        if (join.equalsIgnoreCase("y")) {
-        System.out.print("\nMasukkan Nama Anda: ");
-        String nama=scanner.nextLine();
-        System.out.print("\nMasukkan Alamat Anda: ");
-        String alamat=scanner.nextLine();
-        System.out.print("\nMasukkan No HP Anda: ");
-        String noHP=scanner.nextLine();
-        System.out.print("\nMasukkan username anda: ");
-        String username= scanner.nextLine();
-        System.out.print("\nMasukkan password: ");
-        String pass = scanner.nextLine();
-        for (int i = 0; i < identitasMember.length; i++) {
-            identitasMember[i][0]=nama;
-            identitasMember[i][1]=alamat;
-            identitasMember[i][2]=noHP;
-        }  
-        for (int i = 0; i < member.length; i++) {
-            member[i][0]=username;
-            member[i][1]=pass;
+            main(args);
         }
-        System.out.println("anda menjadi member premium Silahkan login ulang");
-        main(itemKeranjang);
-    }else{
-        System.out.println("Anda menjadi Member biasa");
-    }
     }
 
     // Method untuk profil
-    public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada
-                                                // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
+    public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
         System.out.println("=================================================");
         System.out.println("                 Profil Customer                 ");
         System.out.println("=================================================");
-        boolean memberid=true;
-        for (int i = 0; i < member.length; i++) {
-        if (user.equalsIgnoreCase(member[i][0])&&(password.equalsIgnoreCase(member[i][1]))) {
-            diskonid=true;
-            memberid=false;
-            System.out.println("Nama: "+identitasMember[i][0]);
-            System.out.println("Alamat: "+identitasMember[i][1]);
-            System.out.println("No HP: "+identitasMember[i][2]);
-            namaid=identitasMember[i][0];
-            alamatid=identitasMember[i][1];
-            notelpid=identitasMember[i][2];
-            break;
-        }
-    }if (memberid) {
         System.out.print("Nama    :");
         namaid = scanner.nextLine();
         System.out.print("Alamat  :");
         alamatid = scanner.nextLine();
         System.out.print("No.Telp :");
         notelpid = scanner.nextLine();
-        diskonid=false;
-    }    
         System.out.println("=================================================");
         System.out.println();
-        System.out.println("Tekan enter untuk ke menu selanjutnya...");
-        System.out.println("Tekan selain enter untuk ke menu utama...");
-
-        String input = scanner.nextLine();
-        if (input.isEmpty()) { // Jika input kosong (hanya enter)
-            persediaan(scanner);
+        System.out.println("Apakah anda sudah memiliki membership?");
+        System.out.println("[Y] Ya / [N] Tidak");
+        System.out.println("=================================================");
+        System.out.print("pilihan: ");
+        String pilihanMember = scanner.nextLine();
+        if (pilihanMember.equalsIgnoreCase("n")) {
+            System.out.println("Apakah anda ingin join member?");
+            System.out.println("[Y] Ya / [N] Tidak");
+            System.out.println("=================================================");
+            System.out.print("pilihan: ");
+            String pilihanJoin = scanner.nextLine();
+            if (pilihanJoin.equalsIgnoreCase("y")) {
+                membership(scanner);
+                
+            } else {
+                System.out.println("Selamat berbelanja sebagai customer reguler!");
+                System.out.println("=================================================");
+                System.out.println("Tekan enter untuk ke menu selanjutnya...");
+                System.out.println("Tekan selain enter untuk ke menu utama...");
+                String input = scanner.nextLine();
+                if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                persediaan(scanner);
+                } else {
+                // Kembali ke menu utama atau lakukan apa yang diperlukan
+                }
+            } 
         } else {
-            // Kembali ke menu utama atau lakukan apa yang diperlukan
+            System.out.println("Masukkann username dan password member anda!");
+            main(itemKeranjang);
         }
     }
 
@@ -357,10 +387,8 @@ public class member {
                 System.out.println("Barang yang di sewa tidak mencukupi");
             } else {// jika tiidak ada pemilihan yang sesuai maka jalankan program tersebut
                 itemKeranjang[indexBarang] = barang;// array itemKeranjang diisi dengan barang
-                jmlBarangKeranjang[indexBarang] += jumlahBarang;// nilai awal array jumlahBarangKeranjang akan ditambah
-                                                                // sama dengan jumlahBarang
-                totalHarga += hargaid[indexBarang] * jumlahBarang;// nilai awal total harga akan ditambah sama dengan
-                                                                  // array hargaid di kali jumlahBarang
+                jmlBarangKeranjang[indexBarang] += jumlahBarang;// nilai awal array jumlahBarangKeranjang akan ditambah sama dengan jumlahBarang
+                totalHarga += hargaid[indexBarang] * jumlahBarang;// nilai awal total harga akan ditambah sama dengan array hargaid di kali jumlahBarang
 
                 jumlahid[indexBarang] -= jumlahBarang;// nilai awal array jumlahid akan dikurang sama dengan
                                                       // jumlahBarang yang di input
@@ -494,7 +522,6 @@ public class member {
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
-        
         System.out.println("======================================================");
         System.out.println("                Rincian Pembayaran                ");
         System.out.println("======================================================");
@@ -518,22 +545,16 @@ public class member {
         System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter));
         System.out.println("Tanggal Pengembalian: " + tanggalPengembalian.format(formatter));
         System.out.println("======================================================");
-        
+
         if (adaBarangDalamKeranjang) {
-            double diskon=0;
-             totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
-            if (diskonid=true) {
-                diskon+= (0.1 * totalHargaFinal);
-                System.out.println("Anda mendapatkan diskon sebanyak 10% karena anda anggota");
-                System.out.println("Total Awal: "+totalHargaFinal);
-            }
-            System.out.println("Total Harga: " + (totalHargaFinal-(int)diskon));
+            totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
+            System.out.println("Total Harga: " + totalHargaFinal);
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
                 if (jawaban.equalsIgnoreCase("y")) {
                 System.out.println("masukkan jumlah uang anda");
                 saldoCst = scanner.nextInt();
-                saldo += (saldoCst - (totalHargaFinal-(int)diskon));
+                saldo += (saldoCst - totalHargaFinal);
         
                 if (saldoCst == totalHargaFinal) {
                     System.out.println("uang anda pas");
@@ -585,7 +606,8 @@ public class member {
         itemKeranjang = new String[NUM_PRODUCTS];
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
         tanggalPeminjaman=null;
-        tanggalPengembalian=null;}}
+        tanggalPengembalian=null;}
+    }
     
     // method untuk service center
     public static void service(Scanner scanner) {
@@ -857,6 +879,32 @@ public class member {
             }
         }
     }
+    public static void membership(Scanner scanner) {
+        for (int i = 0; i < member.length; i++) {
+            if (user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1])) {
+                System.out.println("Anda sudah join member, silahkan memesan barang!");
+                persediaan(scanner);
+            } else if(user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")||user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")){
+                System.out.println("=================================================");
+            System.out.println("|                   JOIN MEMBER                 |");
+            System.out.println("=================================================");
+            System.out.println("Nama: " + namaid);
+            System.out.println("No.Telp: " + notelpid);
+            System.out.print("Masukkan username baru anda: ");
+            String userMember = scanner.nextLine();
+            System.out.print("Masukkan password baru anda: ");
+            String passwordMember = scanner.nextLine();
+                member[i][0]=userMember;
+                member[i][1]=passwordMember;
+        double diskon=0.1;
+        System.out.println("\nSelamat! Anda berhasil bergabung sebagai anggota.");
+        System.out.println("Terima kasih, " + namaid + "! Anda mendapatkan diskon " + (diskon * 100) + "% \npada pembelian berikutnya dengan memasukkan \nusername dan password member anda.");
+        System.out.println("=================================================");
+        System.out.println("      Memasukkan Username & Password kembali     ");
+        main(itemKeranjang);
+        }
+    } 
+}
 
     // Method untuk Log Out
     public static void LogOut(Scanner scanner) {
@@ -873,7 +921,9 @@ public class member {
             System.out.println("pilihan tidak tersedia");
             LogOut(scanner);
         }
-    }
+        }
+
+    
 
     // method riwayat pesanan
     public static void cetakRiwayatPemesanan() {

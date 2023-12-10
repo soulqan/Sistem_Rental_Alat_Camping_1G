@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "member2",
+            "request": "launch",
+            "mainClass": "member2",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "pengembalian",
+            "request": "launch",
+            "mainClass": "pengembalian",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "dd",
+            "request": "launch",
+            "mainClass": "dd",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "daspro2",
+            "request": "launch",
+            "mainClass": "daspro2",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "daspro",
+            "request": "launch",
+            "mainClass": "daspro",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
+            "name": "beol",
+            "request": "launch",
+            "mainClass": "beol",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_63759aad"
+        },
+        {
+            "type": "java",
             "name": "kasir",
             "request": "launch",
             "mainClass": "kasir",

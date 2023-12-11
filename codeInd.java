@@ -6,7 +6,7 @@ public class codeInd {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
-    static boolean diskonid=false;
+    static int[]nomorPesan=new int[100];
     static boolean telat=false;
     static Period keterlambatan;
     public static LocalDate tanggalPengembalian2;
@@ -26,8 +26,6 @@ public class codeInd {
     public static LocalDate[] riwayatTanggalPeminjaman = new LocalDate[100];
     public static int[] riwayatPengiriman = new int[100];
     public static long[] riwayatTotalHarga = new long[100];
-    public static String[] itemKeranjang2 = new String[NUM_PRODUCTS];
-    public static int[] jmlBarangKeranjang2 = new int[NUM_PRODUCTS];
     public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable",
             "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
@@ -36,18 +34,10 @@ public class codeInd {
     public static String namaid, alamatid, masukkan, notelpid, user, password;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0,dendaTelat;
-    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst = saldoCst -= totalHarga, totalDenda,hariTelat;
-    public static String[][] dendaHilang = {
-            { "Tenda camping", "2.500.000" },
-            { "Tas Gunung", "800.000" },
-            { "Sleeping Bag", "600.000" },
-            { "Kompor portable", "200.000" },
-            { "Alat memasak", "150.000" },
-            { "Senter", "50.000" },
-            { "Karpet tebal", "30.000" },
-    };
-    public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000 };
+    public static long totalHarga = 0, saldo = 0, totalHargaFinal = 0,dendaTelat;
+    public static int estimasi, pengiriman, saldoCst,hariTelat;
+    public static int[] dendaHilang = {2500000,800000,600000,200000,150000,50000,30000,45000,25000,50000};
+    public static int[] dendaRusak = { 750000,400000,300000,100000, 750000,25000,15000,23000,12000,25000 };
 
     // sebuah public static utama untuk login dan menampilkan menu
     public static void main(String[] args) {
@@ -61,7 +51,6 @@ public class codeInd {
         password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
         for (int i = 0; i < member.length; i++) {
             if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
-                diskonid=true;
                 System.out.println("\n               Login Berhasil (Member)              ");
                 System.out.println("\n");
 
@@ -645,13 +634,14 @@ public class codeInd {
             for (int i = 0; i < itemKeranjang.length; i++) {
                 riwayatBarang[jumlahPesanan][i] = itemKeranjang[i];
                 riwayatJumlah[jumlahPesanan][i] = jmlBarangKeranjang[i];
-                itemKeranjang2[i] = itemKeranjang[i];
-                jmlBarangKeranjang2[i] = jmlBarangKeranjang[i];
+                
 
             }
 
             jumlahPesanan++;
-
+          
+            nomorPesan[jumlahPesanan-1]=jumlahPesanan;
+            
             namaid = null;
             alamatid = null;
             notelpid = null;
@@ -701,7 +691,8 @@ public class codeInd {
             // Menampilkan daftar pesanan yang tersedia untuk pengembalian
             System.out.println("Daftar Pesanan yang Tersedia untuk Pengembalian:");
             for (int i = 0; i < jumlahPesanan; i++) {
-                System.out.println("Nomor Pesanan: " + (i + 1));
+                System.out.println("Nomor Pesanan: " + (nomorPesan[i]));
+                
                 // Tampilkan informasi lainnya yang relevan jika diperlukan
             }
 
@@ -710,10 +701,12 @@ public class codeInd {
             int nomorPesanan = scanner.nextInt();
 
             // Memastikan nomor pesanan yang dipilih valid
-            if (nomorPesanan <= 0 || nomorPesanan > jumlahPesanan) {
+            
+            if (nomorPesanan <= 0 || nomorPesanan != nomorPesan[nomorPesanan - 1]) {
                 System.out.println("Nomor pesanan tidak valid.");
                 return;
             }
+        
 
             // Ambil informasi dari array riwayat peminjaman sesuai nomor pesanan yang
             // dipilih
@@ -739,7 +732,9 @@ public class codeInd {
             String tanggalKembali = scanner.next();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
-    
+            
+                nomorPesan[nomorPesanan-1]=0;
+          
             // Perbandingan tanggal pengembalian dengan estimasi waktu peminjaman
             if (estimasiPeminjaman.isEqual(tanggalPengembalian2)) {
                 // Barang dikembalikan tepat waktu
@@ -894,14 +889,12 @@ public class codeInd {
                     System.out.println("Tidak ada barang yang terlambat, silahkan mengembalikan barang terlebih dahulu.");
                 }
             } else if (pilihanDenda == 2) {
-                System.out.println("List denda barang yang hilang : \n");
+                System.out.println("=====================================");
+                System.out.println("|   List denda barang yang hilang   |");
+                System.out.println("=====================================");
+                System.out.println("List denda : \n");
                 for (int i = 0; i < dendaHilang.length; i++) {
-                    for (int j = 0; j < dendaHilang[i].length; j++) {
-                        System.out.print(dendaHilang[i][j]);
-                        if (j < dendaHilang[i].length - 1) {
-                            System.out.print(" - ");
-                        }
-                    }
+                   System.out.printf("%-20s %-10d\n", produkid[i], dendaHilang[i]);
                     System.out.println();
                 }
                 System.out.println("Barang apa saja yang hilang?");
@@ -909,10 +902,19 @@ public class codeInd {
                 hilang = scanner.nextLine();
 
                 boolean found = false;
-                for (String[] item : dendaHilang) {
-                    if (item[0].equalsIgnoreCase(hilang)) {
-                        System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + item[1]);
+               for (int i = 0; i < dendaHilang.length; i++) {
+                    if (hilang.equalsIgnoreCase(produkid[i])) {
+                        System.out.println("Anda harus membayar kehilangan barang tersebut senilai " + dendaHilang[i]);
                         found = true;
+                        System.out.println("Masukkan uang yang ingin anda bayarkan: ");
+                        long bayar=scanner.nextLong();
+                        if (bayar>=dendaHilang[i]) {
+                            System.out.println("Pembayaran anda Berhasil, kembalian anda: "+(bayar-dendaHilang[i]));
+                            saldo+=dendaHilang[i];
+                            jumlahid[i]-=1;
+                        }else{
+                            System.out.println("Pembayaran anda invalid");
+                        }
                         break;
                     }
                 }
@@ -923,7 +925,7 @@ public class codeInd {
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
                 back = scanner.next();
                 if (back.equalsIgnoreCase("y")) {
-
+                    
                 } else {
                     denda = false;
                 }
@@ -941,7 +943,15 @@ public class codeInd {
                 for (int i = 0; i < dendaRusak.length; i++) {
                     if (rusak.equalsIgnoreCase(produkid[i])) {
                         System.out.println("Denda kerusakan yang harus anda bayar sebesar " + dendaRusak[i]);
-                        System.out.println("Untuk lebih detail harganya akan di cek pada saat pengembalian");
+                        System.out.println("Masukkan nilai yang anda bayarkan: ");
+                        long bayarDenda=scanner.nextLong();
+                        if (bayarDenda >= dendaRusak[i]){
+                            System.out.println("Pembayaran telah berhasil, kembalian anda adalah: "+(bayarDenda-dendaRusak[i]));
+                            saldo+=dendaRusak[i];
+                            jumlahid[i]-=1;
+                        }else{
+                            System.out.println("Pembayaran anda tidak valid!");
+                        }
                     }
                 }
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
@@ -961,6 +971,7 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.println("|                   JOIN MEMBER                 |");
         System.out.println("=================================================");
+        if (namaid!=null) {
         System.out.println("Nama: "+ namaid);
         System.out.println("Alamat: "+ alamatid);
         System.out.println("No.Hp: "+ notelpid);
@@ -984,6 +995,10 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.println("      Memasukkan Username & Password kembali     ");
         main(itemKeranjang);
+     }else{
+        System.out.println("Silahkan isi profil terlebih dahulu!");
+        Profil(scanner);
+     }
     }
 
     // Method untuk Log Out

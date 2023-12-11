@@ -524,6 +524,7 @@ public class member {
              totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
             if (diskonid=true) {
                 diskon+= (0.1 * totalHargaFinal);
+                System.out.println(diskon);
                 System.out.println("Anda mendapatkan diskon sebanyak 10% karena anda anggota");
                 System.out.println("Total Awal: "+totalHargaFinal);
             }
@@ -533,25 +534,25 @@ public class member {
                 if (jawaban.equalsIgnoreCase("y")) {
                 System.out.println("masukkan jumlah uang anda");
                 saldoCst = scanner.nextInt();
-                saldo += (saldoCst - (totalHargaFinal-(int)diskon));
+                saldo += ((totalHargaFinal-(int)diskon));
         
-                if (saldoCst == totalHargaFinal) {
+                if (saldoCst == (totalHargaFinal-(int)diskon)) {
                     System.out.println("uang anda pas");
-                } else if (saldoCst > totalHarga) {
+                } else if (saldoCst > (totalHargaFinal-(int)diskon)) {
                     System.out.println("Ambil kembalian? (y/n): ");
                     String pilihan = scanner.next();
                     if (pilihan.equalsIgnoreCase("y")) {
-                        System.out.println("Uang kembalian Anda: " + (saldoCst - totalHargaFinal));
+                        System.out.println("Uang kembalian Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     } else {
                         // ga ambil kembalian
-                        System.out.println("Sisa saldo Anda: " + (saldoCst - totalHargaFinal));
+                        System.out.println("Sisa saldo Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     }
                 } else {
-                    System.out.println("Uang Anda kurang"+ (saldoCst - totalHargaFinal));
+                    System.out.println("Uang Anda kurang"+ (saldoCst - (totalHargaFinal-(int)diskon)));
                 } 
-                if (saldoCst==totalHargaFinal||saldoCst>totalHargaFinal){
+                if (saldoCst==(totalHargaFinal-(int)diskon)||saldoCst>(totalHargaFinal-(int)diskon)){
                     System.out.println("---------------------------------------------------");
-                System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - totalHargaFinal));
+                System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - (totalHargaFinal-(int)diskon)));
                 System.out.println("---------------------------------------------------");
                 }}
       

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -6,10 +7,13 @@ public class denda {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
+    static boolean telat=false;
+    static Period keterlambatan;
     public static LocalDate tanggalPengembalian2;
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String [][] member =new String[100][2];
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
     public static String[] riwayatNoHp = new String[100];
@@ -23,16 +27,15 @@ public class denda {
     public static long[] riwayatTotalHarga = new long[100];
     public static String[] itemKeranjang2 = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang2 = new int[NUM_PRODUCTS];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable",
-            "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable","Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
     public static String namaid, alamatid, masukkan, notelpid;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
-    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst=saldoCst-=totalHarga;
+    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0,dendaTelat;
+    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst=saldoCst-=totalHarga, totalDenda,hariTelat;
     public static String[][] dendaHilang = {
             { "Tenda camping", "2.500.000" },
             { "Tas Gunung", "800.000" },
@@ -43,21 +46,85 @@ public class denda {
             { "Karpet tebal", "30.000" },
     };
     public static int[] dendaRusak = { 200000, 100000, 100000, 30000, 20000, 10000, 15000, 0, 5000, 10000};
+               
+    
     // sebuah public static utama untuk login dan menampilkan menu
-    public static void
-
-            main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=================================================");
         System.out.println("  Selamat datang di sistem rental alat camping          ");
         System.out.println("=================================================");
-        System.out.print("Masukan user: ");
+        System.out.print("Masukan username: ");
         String user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
         System.out.print("Masukan password: ");
-        int password = scanner.nextInt();// untuk membaca sebuah password yang di masukkan
+        String password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
+        for (int i = 0; i < member.length; i++) {
+            if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
+            System.out.println("\n               Login Berhasil (Member)              ");
+            System.out.println("\n");
 
-        if ((user.equalsIgnoreCase("customer") && password == 123))// sebuah pemilihan yang akan dilakukan jika user dan
-                                                                   // password sama dengan yang tertera
+            int pilihan;
+            do {
+                System.out.println("=================================================");
+                System.out.println("                   Menu Utama                   ");
+                System.out.println("=================================================");
+                System.out.println("\n1.Profil");
+                System.out.println("2.Persediaan alat camping");
+                System.out.println("3.Keranjang");
+                System.out.println("4.Hapus Produk Dari Keranjang ");
+                System.out.println("5.Peminjaman barang");
+                System.out.println("6.Opsi pengiriman");
+                System.out.println("7.Pembayaran");
+                System.out.println("8.Servis center");
+                System.out.println("9.Pengembalian barang");
+                System.out.println("10.Log Out");
+                System.out.println("11.Exit");
+                System.out.print("\nPilih Menu : ");
+                pilihan = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (pilihan) {
+                    case 1:
+                        Profil(scanner);
+                        break;
+                    case 2:
+                        persediaan(scanner);
+                        break;
+                    case 3:
+                        Keranjang(scanner);
+                        break;
+                    case 4:
+                        hapusProdukDariKeranjang(scanner);
+                        break;
+                    case 5:
+                        peminjamanBarang(scanner);
+                        break;
+                    case 6:
+                        pengiriman(scanner);
+                        break;
+                    case 7:
+                        pembayaran(scanner);
+                        break;
+                    case 8:
+                        service(scanner);
+                        break;
+                    case 9:
+                        pengembalian(scanner);
+                        break;
+                    case 10:
+                        LogOut(scanner);
+                        break;
+                    case 11:
+                        exit();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } while (pilihan != 11);
+            }
+        }
+        if ((user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")))// sebuah pemilihan yang akan dilakukan jika user dan password sama dengan yang tertera
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
@@ -78,19 +145,17 @@ public class denda {
                 System.out.println("9.Pengembalian barang");
                 System.out.println("10.Log Out");
                 System.out.println("11.Exit");
+                System.out.println("12. Denda");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();// untuk membaca inputan yang dimasukkan
                 scanner.nextLine();
 
-                switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
-                                  // dengan sebuah inputan berupa angka
+                switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka dengan sebuah inputan berupa angka
                     case 1:
-                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method
-                                        // yaitu profil
+                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method yaitu profil
                         break;
                     case 2:
-                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method
-                                            // yaitu persediaan
+                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method yaitu persediaan
                         break;
                     case 3:
                         Keranjang(scanner);// apabila pilihan yang di input itu 3 maka dia akan memanggil sebuah method
@@ -123,6 +188,9 @@ public class denda {
                     case 10:
                         LogOut(scanner);
                         break;
+                    case 12:
+                        denda(scanner);
+                        break;
                     case 11:
                         exit();// apabila pilihan yang di input itu 10 maka dia akan memanggil sebuah method
                                // yaitu exit
@@ -132,7 +200,7 @@ public class denda {
                         break;
                 }
             } while (pilihan != 11);// ujung dari statement do-while
-        } else if (user.equalsIgnoreCase("admin") && password == 123) {// sebuah pemilihan lain yang menuju ke admin
+        } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain yang menuju ke admin
             System.out.println("\n               Login Berhasil (Admin)              ");
             System.out.println("\n");
 
@@ -154,8 +222,9 @@ public class denda {
                 System.out.println("11.Penambahan barang baru");
                 System.out.println("12.Denda");
                 System.out.println("13.Riwayat Pemesanan");
-                System.out.println("14.Log Out");
-                System.out.println("15.Exit");
+                System.out.println("14.Membership");
+                System.out.println("15.Log Out");
+                System.out.println("16.Exit");
                 System.out.print("\nPilih Menu : ");
                 pilihan = scanner.nextInt();
                 scanner.nextLine();
@@ -197,13 +266,16 @@ public class denda {
                     case 12:
                         denda(scanner);
                         break;
-                    case 14:
-                        LogOut(scanner);
-                        break;
                     case 13:
                         cetakRiwayatPemesanan();
                         break;
+                    case 14:
+                        membership(scanner);
+                        break;
                     case 15:
+                        LogOut(scanner);
+                        break;
+                    case 16:
                         exit();
                         break;
 
@@ -219,8 +291,7 @@ public class denda {
     }
 
     // Method untuk profil
-    public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada
-                                                // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
+    public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
         System.out.println("=================================================");
         System.out.println("                 Profil Customer                 ");
         System.out.println("=================================================");
@@ -232,14 +303,35 @@ public class denda {
         notelpid = scanner.nextLine();
         System.out.println("=================================================");
         System.out.println();
-        System.out.println("Tekan enter untuk ke menu selanjutnya...");
-        System.out.println("Tekan selain enter untuk ke menu utama...");
-
-        String input = scanner.nextLine();
-        if (input.isEmpty()) { // Jika input kosong (hanya enter)
-            persediaan(scanner);
+        System.out.println("Apakah anda sudah memiliki membership?");
+        System.out.println("[Y] Ya / [N] Tidak");
+        System.out.println("=================================================");
+        System.out.print("pilihan: ");
+        String pilihanMember = scanner.nextLine();
+        if (pilihanMember.equalsIgnoreCase("n")) {
+            System.out.println("Apakah anda ingin join member?");
+            System.out.println("[Y] Ya / [N] Tidak");
+            System.out.println("=================================================");
+            System.out.print("pilihan: ");
+            String pilihanJoin = scanner.nextLine();
+            if (pilihanJoin.equalsIgnoreCase("y")) {
+                membership(scanner);
+                
+            } else {
+                System.out.println("Selamat berbelanja sebagai customer reguler!");
+                System.out.println("=================================================");
+                System.out.println("Tekan enter untuk ke menu selanjutnya...");
+                System.out.println("Tekan selain enter untuk ke menu utama...");
+                String input = scanner.nextLine();
+                if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                persediaan(scanner);
+                } else {
+                // Kembali ke menu utama atau lakukan apa yang diperlukan
+                }
+            } 
         } else {
-            // Kembali ke menu utama atau lakukan apa yang diperlukan
+            System.out.println("Masukkann username dan password member anda!");
+            main(itemKeranjang);
         }
     }
 
@@ -471,14 +563,15 @@ public class denda {
                 if (jawaban.equalsIgnoreCase("y")) {
                 System.out.println("masukkan jumlah uang anda");
                 saldoCst = scanner.nextInt();
-                saldo += totalHargaFinal;
+                saldo += (saldoCst - totalHargaFinal);
         
                 if (saldoCst == totalHargaFinal) {
                     System.out.println("uang anda pas");
                 } else if (saldoCst > totalHarga) {
-                    System.out.println("Ambil kembalian? (y/n): ");
-                    String pilihan = scanner.next();
-                    if (pilihan.equalsIgnoreCase("y")) {
+                   System.out.println("\nTekan enter untuk melihat sisa uang anda");
+                        String input = scanner.nextLine();
+                        input = scanner.nextLine();
+                    if (input.isEmpty()) { // Jika input kosong (hanya enter)
                         System.out.println("Uang kembalian Anda: " + (saldoCst - totalHargaFinal));
                     } else {
                         // ga ambil kembalian
@@ -487,6 +580,7 @@ public class denda {
                 } else {
                     System.out.println("Uang Anda kurang"+ (saldoCst - totalHargaFinal));
                 } 
+                saldoCst=0;
                 if (saldoCst==totalHargaFinal||saldoCst>totalHargaFinal){
                     System.out.println("---------------------------------------------------");
                 System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - totalHargaFinal));
@@ -523,7 +617,8 @@ public class denda {
         itemKeranjang = new String[NUM_PRODUCTS];
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
         tanggalPeminjaman=null;
-        tanggalPengembalian=null;}}
+        tanggalPengembalian=null;}
+    }
     
     // method untuk service center
     public static void service(Scanner scanner) {
@@ -578,6 +673,7 @@ public class denda {
             String[] barangDipinjam = riwayatBarang[nomorPesanan - 1];
             int[] jumlahDipinjam = riwayatJumlah[nomorPesanan - 1];
             LocalDate estimasiPeminjaman = riwayatTanggalPengembalian[nomorPesanan - 1];
+            dendaTelat=riwayatTotalHarga[nomorPesanan-1];
     
             // Menampilkan informasi pesanan sesuai nomor yang dipilih
             System.out.println("Informasi Pesanan Nomor " + nomorPesanan + ":");
@@ -604,7 +700,14 @@ public class denda {
             } else if (estimasiPeminjaman.isBefore(tanggalPengembalian2)) {
                 // Barang dikembalikan terlambat
                 System.out.println("Anda telat mengembalikan barang.");
-                System.out.println("Silahkan pergi ke menu denda untuk proses selanjutnya.");
+                telat=true;
+                keterlambatan = Period.between(estimasiPeminjaman, tanggalPengembalian2);
+                hariTelat=keterlambatan.getDays();
+               System.out.println("Tekan enter untuk ke menu denda");
+                String input = scanner.nextLine();
+                input = scanner.nextLine();
+                if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                denda(scanner);}
             } else {
                 // Barang dikembalikan sebelum waktu yang ditentukan
                 System.out.println("Anda telah mengembalikan barang sebelum waktu yang ditentukan.");
@@ -710,7 +813,7 @@ public class denda {
 
     public static void denda(Scanner scanner) {
         String back;
-        boolean denda = true;
+        boolean denda = true,notelat=true;
         while (denda) {
             System.out.println("=================================================");
             System.out.println("|                      DENDA                    |");
@@ -723,14 +826,25 @@ public class denda {
             int pilihanDenda = scanner.nextInt();
 
             if (pilihanDenda == 1) {
-                System.out.println("");
-                System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
-                back = scanner.next();
-
-                if (back.equalsIgnoreCase("y")) {
-
-                } else {
-                    denda = false;
+                if (telat) {
+                    System.out.println("Anda telat mengembalikan barang selama: "+hariTelat+" hari");
+                    long terlambat=dendaTelat*hariTelat;
+                    System.out.println("denda yang harus anda bayar kan adalah: "+terlambat);
+                    System.out.println("Masukkan jumlah yang ingin anda bayarkan: ");
+                    long jumlahDenda = scanner.nextLong();
+                    if (jumlahDenda >= terlambat) {
+                        System.out.println("Denda telah dibayarkan.");
+                        System.out.println("Kembalian anda adalah: " +(jumlahDenda-terlambat));
+                        saldo+=jumlahDenda;
+                        telat=false;
+                    }else{
+                        System.out.println("Jumlah yang anda masukkan tidak cukup");
+                        telat=true;
+                    }
+                    notelat=false;
+                }
+                if (notelat) {
+                    System.out.println("Tidak ada barang yang terlambat, silahkan mengembalikan barang terlebih dahulu.");
                 }
             } else if (pilihanDenda == 2) {
                 System.out.println("List denda barang yang hilang : \n");
@@ -780,16 +894,7 @@ public class denda {
                     for (int i = 0; i < dendaRusak.length; i++) {
                         if (rusak.equalsIgnoreCase(produkid[i])) {
                             System.out.println("Denda kerusakan yang harus anda bayar sebesar "+ dendaRusak[i]);
-                            System.out.println("Masukkan Jumlah uang yang anda bayar: ");
-                            int bayarDenda= scanner.nextInt();
-
-                            if (bayarDenda>=dendaRusak[i]) {
-                                int hargaDenda = bayarDenda-dendaRusak[i];
-                                System.out.println("Pembayaran denda berhasil, kembalian anda adalah: "+hargaDenda);
-                            saldo+=dendaRusak[i];
-                            }else{
-                                System.out.println("Uang yang dibayarkan kurang!");
-                            }
+                            System.out.println("Untuk lebih detail harganya akan di cek pada saat pengembalian");
                         }
                     }
                 System.out.println("Apakah anda ingin denda kesalahan kembali? (y/n)");
@@ -804,6 +909,28 @@ public class denda {
             }
         }
     }
+    public static void membership(Scanner scanner) {
+        System.out.println("=================================================");
+        System.out.println("|                   JOIN MEMBER                 |");
+        System.out.println("=================================================");
+        System.out.println("Nama: " + namaid);
+        System.out.println("No.Telp: " + notelpid);
+        System.out.print("Masukkan username baru anda: ");
+        String userMember = scanner.nextLine();
+        System.out.print("Masukkan password baru anda: ");
+        String passwordMember = scanner.nextLine();
+        for (int i = 0; i < member.length; i++) {
+            member[i][0]=userMember;
+            member[i][1]=passwordMember;
+        }
+        double diskon=0.1;
+        System.out.println("\nSelamat! Anda berhasil bergabung sebagai anggota.");
+        System.out.println("Terima kasih, " + namaid + "! Anda mendapatkan diskon " + (diskon * 100) + "% \npada pembelian berikutnya dengan memasukkan \nusername dan password member anda.");
+        System.out.println("=================================================");
+        System.out.println("      Memasukkan Username & Password kembali     ");
+        main(itemKeranjang);
+    } 
+    
 
     // Method untuk Log Out
     public static void LogOut(Scanner scanner) {

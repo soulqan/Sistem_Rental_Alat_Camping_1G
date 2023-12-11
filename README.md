@@ -5,13 +5,13 @@ Ini adalah sistem rental alat camping sederhana yang dibuat oleh 3 Mahasiswa Jur
 
 Cara kerja nya adalah:
 
-1. 
-2.
-3.
-4.
-5.
-6.
-7.
+1. login terlebih dahulu 
+2. lihat barang apa saja yang tersedia
+3. masukkan keranjang barang yang akan di sewa
+4. tentukan estimasi
+5. pilih pengiriman
+6. bayar biaya sewa barang
+7. kembalikan barang sesuai waktu yang telah ditentukan 
 8.
 9.
 10.

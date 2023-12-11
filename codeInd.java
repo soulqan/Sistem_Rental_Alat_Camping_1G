@@ -1,12 +1,14 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
 public class codeInd {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
     static boolean diskonid=false;
+    static boolean telat=false;
+    static Period keterlambatan;
     public static LocalDate tanggalPengembalian2;
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
@@ -34,8 +36,8 @@ public class codeInd {
     public static String namaid, alamatid, masukkan, notelpid, user, password;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
-    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
-    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst = saldoCst -= totalHarga;
+    public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0,dendaTelat;
+    public static int estimasi, pengiriman, saldoCst, sisaSaldoCst = saldoCst -= totalHarga, totalDenda,hariTelat;
     public static String[][] dendaHilang = {
             { "Tenda camping", "2.500.000" },
             { "Tas Gunung", "800.000" },
@@ -593,10 +595,12 @@ public class codeInd {
              totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
             if (diskonid=true) {
                 diskon+= (0.1 * totalHargaFinal);
-                System.out.println("Anda mendapatkan diskon sebanyak 10% karena anda member");
-                System.out.println("Total Awal: "+totalHargaFinal);
+                System.out.println("Anda mendapatkan diskon sebesar 10% karena sekarang anda adalah anggota member");
+                System.out.println("---------------------------------------------------");
+                System.out.println("Total harga Awal: "+totalHargaFinal);
             }
-            System.out.println("Total Harga: " + (totalHargaFinal-(int)diskon));
+            System.out.println("Total harga potongan: " + (totalHargaFinal-(int)diskon));
+            System.out.println("---------------------------------------------------");
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
                 if (jawaban.equalsIgnoreCase("y")) {
@@ -607,20 +611,21 @@ public class codeInd {
                 if (saldoCst == (totalHargaFinal-(int)diskon)) {
                     System.out.println("uang anda pas");
                 } else if (saldoCst > (totalHargaFinal-(int)diskon)) {
-                    System.out.println("Ambil kembalian? (y/n): ");
-                    String pilihan = scanner.next();
-                    if (pilihan.equalsIgnoreCase("y")) {
+                    System.out.println("\nTekan enter untuk melihat sisa uang anda");
+                        String input = scanner.nextLine();
+                        input = scanner.nextLine();
+                        if (input.isEmpty()) { // Jika input kosong (hanya enter)
                         System.out.println("Uang kembalian Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     } else {
                         // ga ambil kembalian
-                        System.out.println("Sisa saldo Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
+                        System.out.println("Sisa uang Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     }
                 } else {
                     System.out.println("Uang Anda kurang"+ (saldoCst - (totalHargaFinal-(int)diskon)));
                 } 
                 if (saldoCst==(totalHargaFinal-(int)diskon)||saldoCst>(totalHargaFinal-(int)diskon)){
                     System.out.println("---------------------------------------------------");
-                System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - (totalHargaFinal-(int)diskon)));
+                System.out.println("Pembayaran Berhasil, sisa uang anda adalah " + (saldoCst - (totalHargaFinal-(int)diskon)));
                 System.out.println("---------------------------------------------------");
                 }}
 
@@ -711,7 +716,8 @@ public class codeInd {
             String[] barangDipinjam = riwayatBarang[nomorPesanan - 1];
             int[] jumlahDipinjam = riwayatJumlah[nomorPesanan - 1];
             LocalDate estimasiPeminjaman = riwayatTanggalPengembalian[nomorPesanan - 1];
-
+            dendaTelat=riwayatTotalHarga[nomorPesanan-1];
+    
             // Menampilkan informasi pesanan sesuai nomor yang dipilih
             System.out.println("Informasi Pesanan Nomor " + nomorPesanan + ":");
             System.out.println("-------------------------------------");
@@ -722,14 +728,14 @@ public class codeInd {
                     jumlahid[i] += jumlahDipinjam[i];
                 }
             }
-
+            
             System.out.println("-------------------------------------");
             // Meminta pengguna memasukkan tanggal pengembalian
             System.out.print("\nMasukkan tanggal pengembalian (dd/MM/yyyy): ");
             String tanggalKembali = scanner.next();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
-
+    
             // Perbandingan tanggal pengembalian dengan estimasi waktu peminjaman
             if (estimasiPeminjaman.isEqual(tanggalPengembalian2)) {
                 // Barang dikembalikan tepat waktu
@@ -737,7 +743,14 @@ public class codeInd {
             } else if (estimasiPeminjaman.isBefore(tanggalPengembalian2)) {
                 // Barang dikembalikan terlambat
                 System.out.println("Anda telat mengembalikan barang.");
-                System.out.println("Silahkan pergi ke menu denda untuk proses selanjutnya.");
+                telat=true;
+                keterlambatan = Period.between(estimasiPeminjaman, tanggalPengembalian2);
+                hariTelat=keterlambatan.getDays();
+               System.out.println("Tekan enter untuk ke menu denda");
+                String input = scanner.nextLine();
+                input = scanner.nextLine();
+                if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                denda(scanner);}
             } else {
                 // Barang dikembalikan sebelum waktu yang ditentukan
                 System.out.println("Anda telah mengembalikan barang sebelum waktu yang ditentukan.");
@@ -752,6 +765,7 @@ public class codeInd {
             }
         }
     }
+    
 
     // method untuk pendapatan
     public static void pendapatan() {
@@ -842,7 +856,7 @@ public class codeInd {
 
     public static void denda(Scanner scanner) {
         String back;
-        boolean denda = true;
+        boolean denda = true,notelat=true;
         while (denda) {
             System.out.println("=================================================");
             System.out.println("|                      DENDA                    |");
@@ -855,14 +869,25 @@ public class codeInd {
             int pilihanDenda = scanner.nextInt();
 
             if (pilihanDenda == 1) {
-                System.out.println("");
-                System.out.println("Apakah anda ingin melaporkan denda kembali? (y/n)");
-                back = scanner.next();
-
-                if (back.equalsIgnoreCase("y")) {
-
-                } else {
-                    denda = false;
+                if (telat) {
+                    System.out.println("Anda telat mengembalikan barang selama: "+hariTelat+" hari");
+                    long terlambat=dendaTelat*hariTelat;
+                    System.out.println("denda yang harus anda bayar kan adalah: "+terlambat);
+                    System.out.println("Masukkan jumlah uang yang ingin anda bayarkan: ");
+                    long jumlahDenda = scanner.nextLong();
+                    if (jumlahDenda >= terlambat) {
+                        System.out.println("Denda telah dibayarkan.");
+                        System.out.println("Kembalian anda adalah: " +(jumlahDenda-terlambat));
+                        saldo+=jumlahDenda;
+                        telat=false;
+                    }else{
+                        System.out.println("Jumlah yang anda masukkan tidak cukup");
+                        telat=true;
+                    }
+                    notelat=false;
+                }
+                if (notelat) {
+                    System.out.println("Tidak ada barang yang terlambat, silahkan mengembalikan barang terlebih dahulu.");
                 }
             } else if (pilihanDenda == 2) {
                 System.out.println("List denda barang yang hilang : \n");

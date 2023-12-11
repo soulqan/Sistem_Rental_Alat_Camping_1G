@@ -353,8 +353,10 @@ public class codeInd {
                     } else {
                         System.out.println("Selamat berbelanja sebagai customer reguler!");
                     }
+                } else if (pilihanMember.equalsIgnoreCase("y" )){
+                    main(itemKeranjang);
                 }
-        } else {
+            }
             System.out.println("=================================================");
             System.out.println("Tekan enter untuk ke menu selanjutnya...");
             System.out.println("Tekan selain enter untuk ke menu utama...");
@@ -363,7 +365,6 @@ public class codeInd {
                 persediaan(scanner);
             } else {
                 // Kembali ke menu utama atau lakukan apa yang diperlukan
-            }
         }
 
     }
@@ -579,8 +580,7 @@ public class codeInd {
 
         for (int i = 0; i < NUM_PRODUCTS; i++) {
             if (itemKeranjang[i] != null && jmlBarangKeranjang[i] > 0) {
-                System.out.printf("%-20s %-10d %-10d %-10s\n", itemKeranjang[i], jmlBarangKeranjang[i], hargaid[i],
-                        estimasi);
+                System.out.printf("%-20s %-10d %-10d %-10s\n", itemKeranjang[i], jmlBarangKeranjang[i], hargaid[i], estimasi);
                 adaBarangDalamKeranjang = true;
             }
         }
@@ -593,14 +593,18 @@ public class codeInd {
         if (adaBarangDalamKeranjang) {
             double diskon=0;
              totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
-            if (diskonid=true) {
+             for (int i = 0; i < 1; i++) {
+                if (user.equalsIgnoreCase(member[i][0]) && (password.equalsIgnoreCase(member[i][1]))) {
                 diskon+= (0.1 * totalHargaFinal);
                 System.out.println("Anda mendapatkan diskon sebesar 10% karena sekarang anda adalah anggota member");
                 System.out.println("---------------------------------------------------");
                 System.out.println("Total harga Awal: "+totalHargaFinal);
+                System.out.println("Total harga potongan: " + (totalHargaFinal-(int)diskon));
+                System.out.println("---------------------------------------------------");
+                } else if (user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")||user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")){
+                    System.out.println("Total harga: " + totalHargaFinal);
+                }
             }
-            System.out.println("Total harga potongan: " + (totalHargaFinal-(int)diskon));
-            System.out.println("---------------------------------------------------");
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
                 if (jawaban.equalsIgnoreCase("y")) {

@@ -6,10 +6,12 @@ public class codeInd {
     // tempat deklarasi mulai variabel biasa hingga array
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
+    static boolean diskonid=false;
     public static LocalDate tanggalPengembalian2;
     public static LocalDate tanggalPeminjaman;
     public static LocalDate tanggalPengembalian;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String[][] identitasMember = new String[100][3];
     public static String[][] member = new String[100][2];
     public static String[] riwayatNama = new String[100];
     public static String[] riwayatAlamat = new String[100];
@@ -29,7 +31,7 @@ public class codeInd {
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
-    public static String namaid, alamatid, masukkan, notelpid;
+    public static String namaid, alamatid, masukkan, notelpid, user, password;
     public static String[] itemKeranjang = new String[NUM_PRODUCTS];
     public static int[] jmlBarangKeranjang = new int[NUM_PRODUCTS];
     public static long totalHarga = 0, saldo = 0, biayaPengiriman, totalHargaFinal = 0;
@@ -52,11 +54,12 @@ public class codeInd {
         System.out.println("  Selamat datang di sistem rental alat camping          ");
         System.out.println("=================================================");
         System.out.print("Masukan username: ");
-        String user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
+        user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
         System.out.print("Masukan password: ");
-        String password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
+        password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
         for (int i = 0; i < member.length; i++) {
             if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
+                diskonid=true;
                 System.out.println("\n               Login Berhasil (Member)              ");
                 System.out.println("\n");
 
@@ -126,7 +129,8 @@ public class codeInd {
             }
         }
         if ((user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")))// sebuah pemilihan yang akan
-        // dilakukan jika user dan password sama dengan yang tertera
+                                                                                    // dilakukan jika user dan password
+                                                                                    // sama dengan yang tertera
         {
             System.out.println("\n               Login Berhasil (Customer)              ");
             System.out.println("\n");
@@ -154,33 +158,42 @@ public class codeInd {
                 scanner.nextLine();
 
                 switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
-                // dengan sebuah inputan berupa angka
+                                  // dengan sebuah inputan berupa angka
                     case 1:
-                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method yaitu profil
+                        Profil(scanner);// apabila pilihan yang di input itu 1 maka dia akan memanggil sebuah method
+                                        // yaitu profil
                         break;
                     case 2:
-                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method yaitu persediaan
+                        persediaan(scanner);// apabila pilihan yang di input itu 2 maka dia akan memanggil sebuah method
+                                            // yaitu persediaan
                         break;
                     case 3:
-                        Keranjang(scanner);// apabila pilihan yang di input itu 3 maka dia akan memanggil sebuah method yaitu keranjang
+                        Keranjang(scanner);// apabila pilihan yang di input itu 3 maka dia akan memanggil sebuah method
+                                           // yaitu keranjang
                         break;
                     case 4:
-                        hapusProdukDariKeranjang(scanner); // apabila pilihan yang di input itu 4 maka dia akan memanggil sebuah method yaitu hapusProdukDariKeranjang
+                        hapusProdukDariKeranjang(scanner); // apabila pilihan yang di input itu 4 maka dia akan
+                                                           // memanggil sebuah method yaitu hapusProdukDariKeranjang
                         break;
                     case 5:
-                        peminjamanBarang(scanner);//apabila pilihan yang di input itu 5 maka dia akan memanggil sebuah method yaitu peminjamanBarang
+                        peminjamanBarang(scanner);// //apabila pilihan yang di input itu 5 maka dia akan memanggil
+                                                  // sebuah method yaitu peminjamanBarang
                         break;
                     case 6:
-                        pengiriman(scanner);// apabila pilihan yang di input itu 6 maka dia akan memanggil sebuah method yaitu pengiriman
+                        pengiriman(scanner);// apabila pilihan yang di input itu 6 maka dia akan memanggil sebuah method
+                                            // yaitu pengiriman
                         break;
                     case 7:
-                        pembayaran(scanner);// apabila pilihan yang di input itu 7 maka dia akan memanggil sebuah method yaitu pembayaran
+                        pembayaran(scanner);// apabila pilihan yang di input itu 7 maka dia akan memanggil sebuah method
+                                            // yaitu pembayaran
                         break;
                     case 8:
-                        service(scanner);// apabila pilihan yang di input itu 8 maka dia akan memanggil sebuah method yaitu service
+                        service(scanner);// apabila pilihan yang di input itu 8 maka dia akan memanggil sebuah method
+                                         // yaitu service
                         break;
                     case 9:
-                        pengembalian(scanner);// apabila pilihan yang di input itu 9 maka dia akan memanggil sebuah method yaitu pengembalian
+                        pengembalian(scanner);// apabila pilihan yang di input itu 9 maka dia akan memanggil sebuah
+                                              // method yaitu pengembalian
                         break;
                     case 10:
                         denda(scanner);
@@ -201,7 +214,7 @@ public class codeInd {
                 }
             } while (pilihan != 11);// ujung dari statement do-while
         } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain yang
-        // menuju ke admin
+                                                                                        // menuju ke admin
             System.out.println("\n               Login Berhasil (Admin)              ");
             System.out.println("\n");
 
@@ -288,53 +301,69 @@ public class codeInd {
         } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
                 // yang di gunakan
             System.out.println("Login Gagal");
+            main(args);
         }
     }
 
     // Method untuk profil
     public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada
-    // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
+                                                // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
+                                                // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
         System.out.println("=================================================");
         System.out.println("                 Profil Customer                 ");
         System.out.println("=================================================");
-        System.out.print("Nama    :");
-        namaid = scanner.nextLine();
-        System.out.print("Alamat  :");
-        alamatid = scanner.nextLine();
-        System.out.print("No.Telp :");
-        notelpid = scanner.nextLine();
-        System.out.println("=================================================");
-        System.out.println();
-        System.out.println("Apakah anda sudah memiliki membership?");
-        System.out.println("[Y] Ya / [N] Tidak");
-        System.out.println("=================================================");
-        System.out.print("pilihan: ");
-        String pilihanMember = scanner.nextLine();
-        if (pilihanMember.equalsIgnoreCase("n")) {
-            System.out.println("Apakah anda ingin join member?");
-            System.out.println("[Y] Ya / [N] Tidak");
-            System.out.println("=================================================");
-            System.out.print("pilihan: ");
-            String pilihanJoin = scanner.nextLine();
-            if (pilihanJoin.equalsIgnoreCase("y")) {
-                membership(scanner);
-
-            } else {
-                System.out.println("Selamat berbelanja sebagai customer reguler!");
-                System.out.println("=================================================");
-                System.out.println("Tekan enter untuk ke menu selanjutnya...");
-                System.out.println("Tekan selain enter untuk ke menu utama...");
-                String input = scanner.nextLine();
-                if (input.isEmpty()) { // Jika input kosong (hanya enter)
-                    persediaan(scanner);
-                } else {
-                    // Kembali ke menu utama atau lakukan apa yang diperlukan
-                }
+        boolean memberid = true;
+        for (int i = 0; i < member.length; i++) {
+            if (user.equalsIgnoreCase(member[i][0]) && (password.equalsIgnoreCase(member[i][1]))) {
+                memberid = false;
+                System.out.println("Nama: " + identitasMember[i][0]);
+                System.out.println("Alamat: " + identitasMember[i][1]);
+                System.out.println("No HP: " + identitasMember[i][2]);
+                System.out.println("Selamat berbelanja sebagai member!");
+                namaid = identitasMember[i][0];
+                alamatid = identitasMember[i][1];
+                notelpid = identitasMember[i][2];
+                break;
             }
-        } else {
-            System.out.println("Masukkann username dan password member anda!");
-            main(itemKeranjang);
         }
+        if (memberid) {
+            System.out.print("Nama    :");
+            namaid = scanner.nextLine();
+            System.out.print("Alamat  :");
+            alamatid = scanner.nextLine();
+            System.out.print("No.Telp :");
+            notelpid = scanner.nextLine();
+            System.out.println("=================================================");
+                System.out.println();
+                System.out.println("Apakah anda sudah memiliki membership?");
+                System.out.println("[Y] Ya / [N] Tidak");
+                System.out.println("=================================================");
+                System.out.print("pilihan: ");
+                String pilihanMember = scanner.nextLine();
+                if (pilihanMember.equalsIgnoreCase("n")) {
+                    System.out.println("Apakah anda ingin join member?");
+                    System.out.println("[Y] Ya / [N] Tidak");
+                    System.out.println("=================================================");
+                    System.out.print("pilihan: ");
+                    String pilihanJoin = scanner.nextLine();
+                    if (pilihanJoin.equalsIgnoreCase("y")) {
+                        membership(scanner);  
+                    } else {
+                        System.out.println("Selamat berbelanja sebagai customer reguler!");
+                    }
+                }
+        } else {
+            System.out.println("=================================================");
+            System.out.println("Tekan enter untuk ke menu selanjutnya...");
+            System.out.println("Tekan selain enter untuk ke menu utama...");
+            String input = scanner.nextLine();
+            if (input.isEmpty()) { // Jika input kosong (hanya enter)
+                persediaan(scanner);
+            } else {
+                // Kembali ke menu utama atau lakukan apa yang diperlukan
+            }
+        }
+
     }
 
     // method untuk persediaan alat camping
@@ -560,35 +589,40 @@ public class codeInd {
         System.out.println("======================================================");
 
         if (adaBarangDalamKeranjang) {
-            totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
-            System.out.println("Total Harga: " + totalHargaFinal);
+            double diskon=0;
+             totalHargaFinal = totalHarga * estimasi + hargaOngkirid[pengiriman];
+            if (diskonid=true) {
+                diskon+= (0.1 * totalHargaFinal);
+                System.out.println("Anda mendapatkan diskon sebanyak 10% karena anda member");
+                System.out.println("Total Awal: "+totalHargaFinal);
+            }
+            System.out.println("Total Harga: " + (totalHargaFinal-(int)diskon));
             System.out.println("Apakah anda ingin membayar sesuai harga yang tertera? (y/n)");
             String jawaban = scanner.nextLine();
-            if (jawaban.equalsIgnoreCase("y")) {
+                if (jawaban.equalsIgnoreCase("y")) {
                 System.out.println("masukkan jumlah uang anda");
                 saldoCst = scanner.nextInt();
-                saldo += (saldoCst - totalHargaFinal);
-
-                if (saldoCst == totalHargaFinal) {
+                saldo += ((totalHargaFinal-(int)diskon));
+        
+                if (saldoCst == (totalHargaFinal-(int)diskon)) {
                     System.out.println("uang anda pas");
-                } else if (saldoCst > totalHarga) {
+                } else if (saldoCst > (totalHargaFinal-(int)diskon)) {
                     System.out.println("Ambil kembalian? (y/n): ");
                     String pilihan = scanner.next();
                     if (pilihan.equalsIgnoreCase("y")) {
-                        System.out.println("Uang kembalian Anda: " + (saldoCst - totalHargaFinal));
+                        System.out.println("Uang kembalian Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     } else {
                         // ga ambil kembalian
-                        System.out.println("Sisa saldo Anda: " + (saldoCst - totalHargaFinal));
+                        System.out.println("Sisa saldo Anda: " + (saldoCst - (totalHargaFinal-(int)diskon)));
                     }
                 } else {
-                    System.out.println("Uang Anda kurang" + (saldoCst - totalHargaFinal));
-                }
-                if (saldoCst == totalHargaFinal || saldoCst > totalHargaFinal) {
+                    System.out.println("Uang Anda kurang"+ (saldoCst - (totalHargaFinal-(int)diskon)));
+                } 
+                if (saldoCst==(totalHargaFinal-(int)diskon)||saldoCst>(totalHargaFinal-(int)diskon)){
                     System.out.println("---------------------------------------------------");
-                    System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - totalHargaFinal));
-                    System.out.println("---------------------------------------------------");
-                }
-            }
+                System.out.println("Pembayaran Berhasil, sisa saldo anda adalah " + (saldoCst - (totalHargaFinal-(int)diskon)));
+                System.out.println("---------------------------------------------------");
+                }}
 
             riwayatNama[jumlahPesanan] = namaid;
             riwayatAlamat[jumlahPesanan] = alamatid;
@@ -898,8 +932,14 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.println("|                   JOIN MEMBER                 |");
         System.out.println("=================================================");
-        System.out.println("Nama: " + namaid);
-        System.out.println("No.Telp: " + notelpid);
+        System.out.println("Nama: "+ namaid);
+        System.out.println("Alamat: "+ alamatid);
+        System.out.println("No.Hp: "+ notelpid);
+        for (int i = 0; i < identitasMember.length; i++) {
+            identitasMember[i][0] = namaid;
+            identitasMember[i][1] = alamatid;
+            identitasMember[i][2] = notelpid;
+        }
         System.out.print("Masukkan username baru anda: ");
         String userMember = scanner.nextLine();
         System.out.print("Masukkan password baru anda: ");

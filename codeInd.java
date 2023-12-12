@@ -753,7 +753,10 @@ public class codeInd {
                 System.out.println("Anda telat mengembalikan barang.");
                 telat=true;
                 keterlambatan = Period.between(estimasiPeminjaman, tanggalPengembalian2);
-                hariTelat=keterlambatan.getDays();
+                int tahunKeterlambatan = keterlambatan.getYears();
+                int bulanKeterlambatan = keterlambatan.getMonths();
+                int hariKeterlambatan = keterlambatan.getDays();
+                hariTelat=(tahunKeterlambatan * 365) + (bulanKeterlambatan * 30) + hariKeterlambatan;
                System.out.println("Tekan enter untuk ke menu denda");
                 String input = scanner.nextLine();
                 input = scanner.nextLine();
@@ -922,7 +925,7 @@ public class codeInd {
                             saldo+=dendaHilang[i];
                             jumlahid[i]-=1;
                         }else{
-                            System.out.println("Pembayaran anda invalid");
+                            System.out.println("Uang anda kurang, Pembayaran anda invalid");
                         }
                         break;
                     }
@@ -1030,7 +1033,7 @@ public class codeInd {
     // method riwayat pesanan
     public static void cetakRiwayatPemesanan() {
         System.out.println("=======================================");
-        System.out.println("         Riwayat Pemesanan             ");
+        System.out.println("|         Riwayat Pemesanan            |");
         System.out.println("=======================================");
         for (int i = 0; i < jumlahPesanan; i++) {
             System.out.println("---------------------------------------");

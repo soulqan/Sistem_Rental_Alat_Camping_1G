@@ -555,9 +555,11 @@ public class codeInd {
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
+        
         System.out.println("======================================================");
         System.out.println("                Rincian Pembayaran                ");
         System.out.println("======================================================");
+        if (namaid!=null) {
         System.out.println("Nama   : " + namaid);
         System.out.println("Alamat : " + alamatid);
         System.out.println("No.Telp: " + notelpid);
@@ -654,6 +656,10 @@ public class codeInd {
             tanggalPeminjaman = null;
             tanggalPengembalian = null;
         }
+    }else{
+        System.out.println("Silahkan isi identitas terlebih dahulu.");
+        System.out.println("\n\n");
+    }
     }
 
     // method untuk service center
@@ -691,8 +697,11 @@ public class codeInd {
             // Menampilkan daftar pesanan yang tersedia untuk pengembalian
             System.out.println("Daftar Pesanan yang Tersedia untuk Pengembalian:");
             for (int i = 0; i < jumlahPesanan; i++) {
+                if (nomorPesan[i]==0) {
+                    
+                }else{
                 System.out.println("Nomor Pesanan: " + (nomorPesan[i]));
-                
+                }
                 // Tampilkan informasi lainnya yang relevan jika diperlukan
             }
 

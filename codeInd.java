@@ -672,17 +672,14 @@ public class codeInd {
         System.out.println("email      : hanifahkurniasari0512@gmail.com");
         System.out.println("ingin memberi masukkan?(y/n)");
         String masukan = scanner.nextLine();
-        masukan = scanner.nextLine();
+
         if (masukan.equals("y")) {
-            System.out.println("Beri Masukkan Anda: ");
+            System.out.println("Beri tahu kami apa yang anda inginkan: ");
             masukkan = scanner.nextLine();
             System.out.println("terima kasih telah memberi masukkan");
-
-        } else if (masukan == "n") {
-
-        } else {
-            System.out.println("pemilihan tidak tersedia!");
-        }
+        } else { 
+         
+        } 
     }
 
     public static void pengembalian(Scanner scanner) {

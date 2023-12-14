@@ -50,81 +50,9 @@ public class codeInd {
         System.out.print("Masukan password: ");
         password = scanner.nextLine();// untuk membaca sebuah password yang di masukkan
         for (int i = 0; i < member.length; i++) {
-            if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
-                System.out.println("\n               Login Berhasil (Member)              ");
+            if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))||(user.equalsIgnoreCase("customer")&&(password.equalsIgnoreCase("123")))) {
+                System.out.println("\n               Login Berhasil              ");
                 System.out.println("\n");
-
-                int pilihan;
-                do {
-                    System.out.println("=================================================");
-                    System.out.println("                   Menu Utama                   ");
-                    System.out.println("=================================================");
-                    System.out.println("\n1.Profil");
-                    System.out.println("2.Persediaan alat camping");
-                    System.out.println("3.Keranjang");
-                    System.out.println("4.Hapus Produk Dari Keranjang ");
-                    System.out.println("5.Peminjaman barang");
-                    System.out.println("6.Opsi pengiriman");
-                    System.out.println("7.Pembayaran");
-                    System.out.println("8.Servis center");
-                    System.out.println("9.Pengembalian barang");
-                    System.out.println("10.Denda");
-                    System.out.println("11.Log Out");
-                    System.out.println("12.Exit");
-                    System.out.print("\nPilih Menu : ");
-                    pilihan = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (pilihan) {
-                        case 1:
-                            Profil(scanner);
-                            break;
-                        case 2:
-                            persediaan(scanner);
-                            break;
-                        case 3:
-                            Keranjang(scanner);
-                            break;
-                        case 4:
-                            hapusProdukDariKeranjang(scanner);
-                            break;
-                        case 5:
-                            peminjamanBarang(scanner);
-                            break;
-                        case 6:
-                            pengiriman(scanner);
-                            break;
-                        case 7:
-                            pembayaran(scanner);
-                            break;
-                        case 8:
-                            service(scanner);
-                            break;
-                        case 9:
-                            pengembalian(scanner);
-                            break;
-                        case 10:
-                            denda(scanner);
-                            break;
-                        case 11:
-                            LogOut(scanner);
-                            break;
-                        case 12:
-                            exit();
-                            break;
-                        default:
-                            System.out.println("Invalid choice. Please try again.");
-                            break;
-                    }
-                } while (pilihan != 11);
-            }
-        }
-        if ((user.equalsIgnoreCase("customer") && password.equalsIgnoreCase("123")))// sebuah pemilihan yang akan
-                                                                                    // dilakukan jika user dan password
-                                                                                    // sama dengan yang tertera
-        {
-            System.out.println("\n               Login Berhasil (Customer)              ");
-            System.out.println("\n");
 
             int pilihan; // deklarasi untuk pilihan
             do {// apabila if sesuai maka akan di lakukan sebuah do while
@@ -293,6 +221,7 @@ public class codeInd {
                 // yang di gunakan
             System.out.println("Login Gagal");
             main(args);
+        }
         }
     }
 
@@ -986,6 +915,17 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.println("|                   JOIN MEMBER                 |");
         System.out.println("=================================================");
+        boolean join=true;
+       for (int i = 0; i < member.length; i++) {
+            if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))){
+                System.out.println("Anda sudah menjadi member");
+                join=false;
+                break;
+            }
+            
+        }
+    
+        if (join) {
         if (namaid!=null) {
         System.out.println("Nama: "+ namaid);
         System.out.println("Alamat: "+ alamatid);
@@ -1014,6 +954,8 @@ public class codeInd {
         System.out.println("Silahkan isi profil terlebih dahulu!");
         Profil(scanner);
      }
+    }
+    
     }
 
     // Method untuk Log Out

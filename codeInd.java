@@ -7,7 +7,7 @@ public class codeInd {
     public static int NUM_PRODUCTS = 10;
     public static int jumlahPesanan = 0;
     static int[]nomorPesan=new int[100];
-    static boolean telat=false;
+    static boolean telat=false,menu=true;
     static Period keterlambatan;
     public static LocalDate tanggalPengembalian2;
     public static LocalDate tanggalPeminjaman;
@@ -54,8 +54,30 @@ public class codeInd {
                 System.out.println("\n               Login Berhasil              ");
                 System.out.println("\n");
                 System.out.println("\t");
+                menu=true;
+                menu(scanner);
 
-            int pilihan; // deklarasi untuk pilihan
+        }else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain yang
+                                                                                        // menuju ke admin
+            System.out.println("\n               Login Berhasil (Admin)              ");
+            System.out.println("\n");
+            menu=false;
+            menu(scanner);
+        } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
+                // yang di gunakan
+            System.out.println("Login Gagal");
+            main(args);
+        }
+        }
+    }
+
+
+
+    // Method menu
+    public static  void menu(Scanner scanner){
+    int pilihan; // deklarasi untuk pilihan
+
+    if (menu) {
             do {// apabila if sesuai maka akan di lakukan sebuah do while
                 System.out.println("=================================================");
                 System.out.println("                   Menu Utama                   ");
@@ -133,12 +155,10 @@ public class codeInd {
                         break;
                 }
             } while (pilihan != 11);// ujung dari statement do-while
-        } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain yang
-                                                                                        // menuju ke admin
-            System.out.println("\n               Login Berhasil (Admin)              ");
-            System.out.println("\n");
+        }
 
-            int pilihan;
+        if (!menu) {
+            
             do {
                 System.out.println("=================================================");
                 System.out.println("                   Menu Utama                   ");
@@ -218,13 +238,9 @@ public class codeInd {
                         break;
                 }
             } while (pilihan != 15);
-        } else {// apabila login tidak sesuai dengan kedua pemilihan maka pemilihan terakhir
-                // yang di gunakan
-            System.out.println("Login Gagal");
-            main(args);
-        }
         }
     }
+    
 
     // Method untuk profil
     public static void Profil(Scanner scanner) {// (Scanner scanner) berfungsi untuk mendeklarasikan scanner yang ada
@@ -283,6 +299,7 @@ public class codeInd {
             if (input.isEmpty()) { // Jika input kosong (hanya enter)
                 persediaan(scanner);
             } else {
+            
                 // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
 
@@ -313,6 +330,7 @@ public class codeInd {
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
             Keranjang(scanner);
         } else {
+          
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
@@ -369,6 +387,7 @@ public class codeInd {
         } else if (input.equalsIgnoreCase("b")) {
             Keranjang(scanner);
         } else {
+      
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
@@ -380,7 +399,6 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.print("Masukan nama produk: ");
         String productName = scanner.nextLine();
-        productName = scanner.nextLine();
 
         int productIndex = -1;
         for (int i = 0; i < NUM_PRODUCTS; i++) {
@@ -448,6 +466,7 @@ public class codeInd {
         if (input.isEmpty()) {
             pengiriman(scanner); // Jika input kosong (hanya enter), lanjut ke menu pengiriman
         } else {
+          
             // Kembali ke menu utama atau lakukan apa yang diperlukan sesuai dengan logika
             // yang belum diimplementasikan di sini
         }
@@ -479,6 +498,7 @@ public class codeInd {
         if (input.isEmpty()) { // Jika input kosong (hanya enter)
             pembayaran(scanner);
         } else {
+        
             // Kembali ke menu utama atau lakukan apa yang diperlukan
         }
     }
@@ -590,6 +610,7 @@ public class codeInd {
         System.out.println("Silahkan isi identitas terlebih dahulu.");
         System.out.println("\n\n");
     }
+
     }
 
     // method untuk service center
@@ -608,7 +629,7 @@ public class codeInd {
             masukkan = scanner.nextLine();
             System.out.println("terima kasih telah memberi masukkan");
         } else { 
-         
+      
         } 
     }
 
@@ -708,6 +729,7 @@ public class codeInd {
                 statusPengembalian[nomorPesanan - 1] = "Dikembalikan terlambat";
             }}
         }
+    
     }
     
 
@@ -720,6 +742,7 @@ public class codeInd {
         System.out.println("       pendapatan Anda adalah Rp. " + saldo);
         System.out.println("=================================================");
         System.out.println("feedback:" + masukkan);
+        
     }
 
     // method tambah barang
@@ -795,6 +818,7 @@ public class codeInd {
             }
         } else {
             System.out.println("Penambahan barang dibatalkan.");
+            
         }
     }
 
@@ -905,9 +929,11 @@ public class codeInd {
 
                 } else {
                     denda = false;
+                    
                 }
             } else if (pilihanDenda == 4) {
                 denda = false;
+                
             }
         }
     }

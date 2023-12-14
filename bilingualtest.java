@@ -27,8 +27,8 @@ public class bilingualtest {
     public static LocalDate[] riwayatTanggalPeminjaman = new LocalDate[100];
     public static int[] riwayatPengiriman = new int[100];
     public static long[] riwayatTotalHarga = new long[100];
-    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable",
-            "Alat memasak", "Senter", "Karpet tebal", "Obat obatan & P3K", "Pisau jelajah", "Sekop" };
+    public static String[] produkid = { "Tenda camping", "Tas Gunung", "Sleeping Bag", "Kompor portable", "Alat memasak", "Senter", "Karpet tebal", "Obat obatan", "Pisau jelajah", "Sekop" };
+    public static String[] productIng = {"Camping Tent", "Mountain Bag", "Sleeping Bag", "Portable Stove", "Cooking Utensils", "Flashlight", "Thick Carpet", "Medicine", "Hiking Knife", "Shovel"};
     public static int[] jumlahid = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     public static long[] hargaid = { 250000, 75000, 60000, 20000, 40000, 15000, 30000, 15000, 10000, 20000 };
     public static long[] hargaOngkirid = { 1000, 30000 };
@@ -79,7 +79,9 @@ public class bilingualtest {
                     menu(scanner);
 
                 } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
-                    System.out.println("\n               Login Berhasil (Admin)              ");
+                    System.out.println("==================================================");
+                    System.out.println("|             Login Berhasil (Admin)             |");
+                    System.out.println("==================================================");
                     System.out.println("\n");
                     menu = false;
                     menu(scanner);
@@ -648,9 +650,9 @@ public class bilingualtest {
 
             for (int i = 0; i < NUM_PRODUCTS; i++) {
                 if (jumlahid[i] == 0) {
-                    System.out.printf("%-20s %-10s %-15s\n", produkid[i], "Sold out", hargaid[i]);
+                    System.out.printf("%-20s %-10s %-15s\n", productIng[i], "Sold out", hargaid[i]);
                 } else {
-                    System.out.printf("%-20s %-10d %-15d\n", produkid[i], jumlahid[i], hargaid[i]);
+                    System.out.printf("%-20s %-10d %-15d\n", productIng[i], jumlahid[i], hargaid[i]);
                 }
             }
             System.out.println("------------------------------------------------------");
@@ -737,7 +739,7 @@ public class bilingualtest {
 
             int itemIndex = -1; // declaration for an itemIndex with a value of -1
             for (int i = 0; i < NUM_PRODUCTS; i++) {
-                if (produkid[i].equalsIgnoreCase(item)) { // if the content of the produkid array is the same as the
+                if (productIng[i].equalsIgnoreCase(item)) { // if the content of the produkid array is the same as the
                                                           // input item, then
                                                           // it will be executed
                     itemIndex = i; // item index is changed to i, which is 0
@@ -1020,7 +1022,7 @@ public class bilingualtest {
                 System.out.println("Address : " + alamatid);
                 System.out.println("Phone Number : " + notelpid);
                 System.out.println("=======================================================");
-                System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
+                System.out.printf("%-20s %-10s %-10s %-10s\n", "Product", "Amount", "Price", "Estimate");
 
                 boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang
                                                          // dalam
@@ -1487,17 +1489,17 @@ public class bilingualtest {
             String tambahBarang = scanner.next();
 
             if (tambahBarang.equalsIgnoreCase("y")) {
-                if (NUM_PRODUCTS >= produkid.length) {
-                    int newLengthid = produkid.length + 1;
+                if (NUM_PRODUCTS >= productIng.length) {
+                    int newLengthid = productIng.length + 1;
 
-                    String[] newProdukid = new String[newLengthid];
+                    String[] newProductIng = new String[newLengthid];
                     int[] newJumlahid = new int[newLengthid];
                     long[] newHargaid = new long[newLengthid];
                     String[] newItem = new String[newLengthid];
                     int[] newJmlBarang = new int[newLengthid];
 
                     for (int i = 0; i < NUM_PRODUCTS; i++) {
-                        newProdukid[i] = produkid[i];
+                        newProductIng[i] = productIng[i];
                         newJumlahid[i] = jumlahid[i];
                         newHargaid[i] = hargaid[i];
                         newItem[i] = itemKeranjang[i];
@@ -1505,7 +1507,7 @@ public class bilingualtest {
 
                     }
 
-                    produkid = newProdukid;
+                    productIng = newProductIng;
                     jumlahid = newJumlahid;
                     hargaid = newHargaid;
                     jmlBarangKeranjang = newJmlBarang;
@@ -1518,7 +1520,7 @@ public class bilingualtest {
 
                 int indexBarang = -1;
                 for (int i = 0; i < NUM_PRODUCTS; i++) {
-                    if (produkid[i].equalsIgnoreCase(namaBarangBaru)) {
+                    if (productIng[i].equalsIgnoreCase(namaBarangBaru)) {
                         indexBarang = i;
                         break;
                     }
@@ -1541,7 +1543,7 @@ public class bilingualtest {
                     System.out.print("Enter the price of the new product: ");
                     long hargaBarangBaru = scanner.nextLong();
 
-                    produkid[NUM_PRODUCTS] = namaBarangBaru;
+                    productIng[NUM_PRODUCTS] = namaBarangBaru;
                     jumlahid[NUM_PRODUCTS] = jumlahBarangBaru;
                     hargaid[NUM_PRODUCTS] = hargaBarangBaru;
 
@@ -1672,7 +1674,7 @@ public class bilingualtest {
                     System.out.println("=====================================");
                     System.out.println("Fines list : \n");
                     for (int i = 0; i < dendaHilang.length; i++) {
-                        System.out.printf("%-20s %-10d\n", produkid[i], dendaHilang[i]);
+                        System.out.printf("%-20s %-10d\n", productIng[i], dendaHilang[i]);
                         System.out.println();
                     }
                     System.out.println("What items are lost?");
@@ -1681,7 +1683,7 @@ public class bilingualtest {
 
                     boolean found = false;
                     for (int i = 0; i < dendaHilang.length; i++) {
-                        if (hilang.equalsIgnoreCase(produkid[i])) {
+                        if (hilang.equalsIgnoreCase(productIng[i])) {
                             System.out.println("You must pay for the loss of the item's value " + dendaHilang[i]);
                             found = true;
                             System.out.println("Enter the amount of money you want to pay: ");
@@ -1712,15 +1714,15 @@ public class bilingualtest {
                     System.out.println("=====================================");
                     System.out.println("|  List of fines for damaged items  |");
                     System.out.println("=====================================");
-                    for (int i = 0; i < produkid.length; i++) {
-                        System.out.println(produkid[i]);
+                    for (int i = 0; i < productIng.length; i++) {
+                        System.out.println(productIng[i]);
                     }
                     System.out.println("--------------------------------------");
                     System.out.println("What items are damaged?");
                     String rusak = scanner.nextLine();
                     rusak = scanner.nextLine();
                     for (int i = 0; i < dendaRusak.length; i++) {
-                        if (rusak.equalsIgnoreCase(produkid[i])) {
+                        if (rusak.equalsIgnoreCase(productIng[i])) {
                             System.out.println("The fine for the damaged item is " + dendaRusak[i]);
                             System.out.println("Enter the amount you paid: ");
                             long bayarDenda = scanner.nextLong();

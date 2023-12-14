@@ -1953,7 +1953,7 @@ public class bilingual {
                             + "% \npada pembelian berikutnya dengan memasukkan \nusername dan password member anda.");
                     System.out.println("==================================================");
                     System.out.println("      Memasukkan Username & Password kembali     ");
-                    main(itemKeranjang);
+                    login(scanner);
                 } else {
                     System.out.println("Silahkan isi profil terlebih dahulu!");
                     Profil(scanner);

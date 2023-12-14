@@ -53,6 +53,7 @@ public class codeInd {
             if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))||(user.equalsIgnoreCase("customer")&&(password.equalsIgnoreCase("123")))) {
                 System.out.println("\n               Login Berhasil              ");
                 System.out.println("\n");
+                System.out.println("\t");
 
             int pilihan; // deklarasi untuk pilihan
             do {// apabila if sesuai maka akan di lakukan sebuah do while

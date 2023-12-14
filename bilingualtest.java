@@ -60,9 +60,9 @@ public class bilingualtest {
     // sebuah public static utama untuk login dan menampilkan menu
     public static void login(Scanner scanner) {
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("  Selamat datang di sistem rental alat camping          ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|  Selamat datang di sistem rental alat camping  |");
+            System.out.println("==================================================");
             System.out.print("Masukan username: ");
             user = scanner.nextLine();// untuk membaca sebuah user yang di masukkan
             System.out.print("Masukan password: ");
@@ -70,15 +70,15 @@ public class bilingualtest {
             for (int i = 0; i < member.length; i++) {
                 if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))
                         || (user.equalsIgnoreCase("customer") && (password.equalsIgnoreCase("123")))) {
-                    System.out.println("\n               Login Berhasil              ");
+                    System.out.println("==================================================");
+                    System.out.println("|                 Login Berhasil                 |");
+                    System.out.println("==================================================");
                     System.out.println("\n");
                     System.out.println("\t");
                     menu = true;
                     menu(scanner);
 
-                } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {// sebuah pemilihan lain
-                                                                                                // yang
-                                                                                                // menuju ke admin
+                } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
                     System.out.println("\n               Login Berhasil (Admin)              ");
                     System.out.println("\n");
                     menu = false;
@@ -92,9 +92,9 @@ public class bilingualtest {
         }
 
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("  Welcome to the camping equipment rental system  ");
-            System.out.println("=================================================");
+            System.out.println("===================================================");
+            System.out.println("| Welcome to the camping equipment rental system |");
+            System.out.println("===================================================");
             System.out.print(" username: ");
             user = scanner.nextLine(); // Read the entered username
             System.out.print(" password: ");
@@ -103,7 +103,9 @@ public class bilingualtest {
             for (int i = 0; i < member.length; i++) {
                 if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))
                         || (user.equalsIgnoreCase("customer") && (password.equalsIgnoreCase("123")))) {
-                    System.out.println("\n               Login Successful              ");
+                    System.out.println("==================================================");
+                    System.out.println("|                 Login Successful               |");
+                    System.out.println("==================================================");
                     System.out.println("\n");
                     System.out.println("\t");
                     menu = true;
@@ -111,13 +113,16 @@ public class bilingualtest {
 
                 } else if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")) {
                     // Another option that leads to the admin
-                    System.out.println("\n               Login Successful (Admin)              ");
+                    System.out.println("==================================================");
+                    System.out.println("|            Login Successful (Admin)            |");
+                    System.out.println("==================================================");
                     System.out.println("\n");
                     menu = false;
                     menu(scanner);
                 } else {
                     // If the login does not match the two options, then the last option is used
-                    System.out.println("Login Failed");
+
+                    System.out.println("--- Login Failed ---");
                     login(scanner);
                 }
             }
@@ -132,9 +137,9 @@ public class bilingualtest {
 
             if (menu) {
                 do {// apabila if sesuai maka akan di lakukan sebuah do while
-                    System.out.println("=================================================");
-                    System.out.println("                   Menu Utama                   ");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
+                    System.out.println("|                   Menu Utama                   |");
+                    System.out.println("==================================================");
                     System.out.println("\n1.Profil");
                     System.out.println("2.Persediaan alat camping");
                     System.out.println("3.Keranjang");
@@ -148,7 +153,9 @@ public class bilingualtest {
                     System.out.println("11.Membership");
                     System.out.println("12.Log Out");
                     System.out.println("13.Exit");
-                    System.out.print("\nPilih Menu : ");
+                    System.out.println();
+                    System.out.println("==================================================");
+                    System.out.print("Pilih Menu : ");
                     pilihan = scanner.nextInt();// untuk membaca inputan yang dimasukkan
                     scanner.nextLine();
 
@@ -218,9 +225,9 @@ public class bilingualtest {
             if (!menu) {
 
                 do {
-                    System.out.println("=================================================");
-                    System.out.println("                   Menu Utama                   ");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
+                    System.out.println("|                   Menu Utama                   |");
+                    System.out.println("==================================================");
                     System.out.println("\n1.Profil");
                     System.out.println("2.Persediaan alat camping");
                     System.out.println("3.Keranjang");
@@ -237,7 +244,9 @@ public class bilingualtest {
                     System.out.println("14.Membership");
                     System.out.println("15.Log Out");
                     System.out.println("16.Exit");
-                    System.out.print("\nPilih Menu : ");
+                    System.out.println();
+                    System.out.println("==================================================");
+                    System.out.print("Pilih Menu : ");
                     pilihan = scanner.nextInt();
                     scanner.nextLine();
 
@@ -303,9 +312,9 @@ public class bilingualtest {
             if (menu) {
                 do {
                     // If 'menu' is true, execute a do-while loop
-                    System.out.println("=================================================");
-                    System.out.println("                   Main Menu                    ");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
+                    System.out.println("|                   Main Menu                    |");
+                    System.out.println("==================================================");
                     System.out.println("\n1. Profile");
                     System.out.println("2. Camping Equipment Inventory");
                     System.out.println("3. Shopping Cart");
@@ -319,7 +328,9 @@ public class bilingualtest {
                     System.out.println("11. Membership");
                     System.out.println("12. Log Out");
                     System.out.println("13. Exit");
-                    System.out.print("\nSelect Menu : ");
+                    System.out.println();
+                    System.out.println("==================================================");
+                    System.out.print("Select Menu : ");
                     pilihan = scanner.nextInt();
                     scanner.nextLine();
                     switch (pilihan) {// sebuah fungsi switch case yag berguna untuk memilih method yang ingin dibuka
@@ -386,9 +397,9 @@ public class bilingualtest {
             }
             if (!menu) {
                 do {
-                    System.out.println("=================================================");
-                    System.out.println("                   Main Menu                    ");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
+                    System.out.println("|                    Main Menu                   |");
+                    System.out.println("==================================================");
                     System.out.println("\n1. Profile");
                     System.out.println("2. Camping Equipment Inventory");
                     System.out.println("3. Shopping Cart");
@@ -405,7 +416,9 @@ public class bilingualtest {
                     System.out.println("14. Membership");
                     System.out.println("15. Log Out");
                     System.out.println("16. Exit");
-                    System.out.print("\nSelect Menu : ");
+                    System.out.println();
+                    System.out.println("==================================================");
+                    System.out.print("Select Menu : ");
                     pilihan = scanner.nextInt();
                     scanner.nextLine();
                     switch (pilihan) {
@@ -472,9 +485,9 @@ public class bilingualtest {
                                                 // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
                                                 // pada method tersebut itu ganti dari ddeklarasi scanner pada umum nya
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                 Profil Customer                 ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                 Profil Customer                |");
+            System.out.println("==================================================");
             boolean memberid = true;
             for (int i = 0; i < member.length; i++) {
                 if (user.equalsIgnoreCase(member[i][0]) && (password.equalsIgnoreCase(member[i][1]))) {
@@ -496,17 +509,16 @@ public class bilingualtest {
                 alamatid = scanner.nextLine();
                 System.out.print("No.Telp :");
                 notelpid = scanner.nextLine();
-                System.out.println("=================================================");
-                System.out.println();
+                System.out.println("==================================================");
                 System.out.println("Apakah anda sudah memiliki membership?");
                 System.out.println("[Y] Ya / [N] Tidak");
-                System.out.println("=================================================");
+                System.out.println("==================================================");
                 System.out.print("pilihan: ");
                 String pilihanMember = scanner.nextLine();
                 if (pilihanMember.equalsIgnoreCase("n")) {
                     System.out.println("Apakah anda ingin join member?");
                     System.out.println("[Y] Ya / [N] Tidak");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
                     System.out.print("pilihan: ");
                     String pilihanJoin = scanner.nextLine();
                     if (pilihanJoin.equalsIgnoreCase("y")) {
@@ -518,7 +530,7 @@ public class bilingualtest {
                     main(itemKeranjang);
                 }
             }
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("Tekan enter untuk ke menu selanjutnya...");
             System.out.println("Tekan selain enter untuk ke menu utama...");
             String input = scanner.nextLine();
@@ -531,9 +543,9 @@ public class bilingualtest {
 
         }
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                 Customer Profile                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                Customer Profile                |");
+            System.out.println("==================================================");
             boolean isMemberId = true;
 
             for (int i = 0; i < member.length; i++) {
@@ -558,18 +570,17 @@ public class bilingualtest {
                 System.out.print("Phone Number :");
                 notelpid = scanner.nextLine();
 
-                System.out.println("=================================================");
-                System.out.println();
+                System.out.println("==================================================");
                 System.out.println("Do you already have a membership?");
                 System.out.println("[Y] Yes / [N] No");
-                System.out.println("=================================================");
+                System.out.println("==================================================");
                 System.out.print("Choice: ");
                 String memberChoice = scanner.nextLine();
 
                 if (memberChoice.equalsIgnoreCase("n")) {
                     System.out.println("Do you want to join as a member?");
                     System.out.println("[Y] Yes / [N] No");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
                     System.out.print("Choice: ");
                     String joinChoice = scanner.nextLine();
 
@@ -583,7 +594,7 @@ public class bilingualtest {
                 }
             }
 
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("Press Enter to proceed to the next menu...");
             System.out.println("Press any key other than Enter to return to the main menu...");
             String input = scanner.nextLine();
@@ -600,9 +611,9 @@ public class bilingualtest {
     // method untuk persediaan alat camping
     public static void persediaan(Scanner scanner) {
         if (bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                 Persediaan Alat                    ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|                   Persediaan Alat                   |");
+            System.out.println("=======================================================");
             System.out.println("------------------------------------------------------");
             System.out.printf("%-20s %-10s %-15s\n", "Nama", "Tersedia", "Harga");
             System.out.println("------------------------------------------------------");
@@ -628,9 +639,9 @@ public class bilingualtest {
             }
         }
         if (!bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                 Camping Equipment Inventory                    ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|             Camping Equipment Inventory             |");
+            System.out.println("=======================================================");
             System.out.println("------------------------------------------------------");
             System.out.printf("%-20s %-10s %-15s\n", "Name", "Available", "Price");
             System.out.println("------------------------------------------------------");
@@ -660,9 +671,9 @@ public class bilingualtest {
     // Method untuk keranjang
     public static void Keranjang(Scanner scanner) {
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                    keranjang                 ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                     keranjang                  |");
+            System.out.println("==================================================");
             System.out.println("Masukkan barang yang akan disewa:");
             String barang = scanner.nextLine();// inputan barang
 
@@ -718,9 +729,9 @@ public class bilingualtest {
             }
         }
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                     Shopping Cart                 ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                  Shopping Cart                 |");
+            System.out.println("==================================================");
             System.out.println("Enter the item to rent:");
             String item = scanner.nextLine(); // item input
 
@@ -782,9 +793,9 @@ public class bilingualtest {
     // method hapus barang dari keranjang
     public static void hapusProdukDariKeranjang(Scanner scanner) {
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("           Hapus Produk Dari Keranjang                 ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|          Hapus Produk Dari Keranjang           |");
+            System.out.println("==================================================");
             System.out.print("Masukan nama produk: ");
             String productName = scanner.nextLine();
 
@@ -814,9 +825,9 @@ public class bilingualtest {
             }
         }
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("          Remove Product From Cart                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|            Remove Product From Cart            |");
+            System.out.println("==================================================");
             System.out.print("Enter the product name: ");
             String productName = scanner.nextLine();
 
@@ -852,9 +863,9 @@ public class bilingualtest {
     public static void peminjamanBarang(Scanner scanner) {
         if (bahasa) {
             // Menampilkan judul layar untuk proses peminjaman barang
-            System.out.println("=================================================");
-            System.out.println("                Peminjaman Barang               ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|               Peminjaman Barang                |");
+            System.out.println("==================================================");
 
             // Menampilkan informasi bahwa peminjaman dihitung per hari
             System.out.println("Peminjaman Dihitung Perhari");
@@ -895,9 +906,9 @@ public class bilingualtest {
             }
         }
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("               Item Rental                   ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                  Rental Item                   |");
+            System.out.println("==================================================");
 
             // Display information that rental is calculated per day
             System.out.println("Rental Calculated Per Day");
@@ -939,9 +950,9 @@ public class bilingualtest {
     // method untuk opsi pengiriman
     public static void pengiriman(Scanner scanner) {
         if (bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                      Pengiriman                ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|                      Pengiriman                     |");
+            System.out.println("=======================================================");
             System.out.println("1. Ambil Di tempat   :1000 \n2. Kurir             :30000");
             System.out.print("Masukkan opsi pengiriman: ");
             pengiriman = scanner.nextInt();
@@ -968,9 +979,9 @@ public class bilingualtest {
             }
         }
         if (!bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                     Shipping                  ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|                       Shipping                      |");
+            System.out.println("=======================================================");
             System.out.println("1. Pick Up In-Store   : 1000 \n2. Courier            : 30000");
             System.out.print("Enter shipping option: ");
             pengiriman = scanner.nextInt();
@@ -1001,14 +1012,14 @@ public class bilingualtest {
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
         if (!bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                    Payment Details                   ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|                   Payment Details                   |");
+            System.out.println("=======================================================");
             if (namaid != null) {
                 System.out.println("Name    : " + namaid);
                 System.out.println("Address : " + alamatid);
                 System.out.println("Phone Number : " + notelpid);
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
                 System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
 
                 boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang
@@ -1023,11 +1034,11 @@ public class bilingualtest {
                         adaBarangDalamKeranjang = true;
                     }
                 }
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
                 System.out.println("Shipping Cost   : " + hargaOngkirid[pengiriman]);
                 System.out.println("Rental Date     : " + tanggalPeminjaman.format(formatter));
                 System.out.println("Return Date     : " + tanggalPengembalian.format(formatter));
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
 
                 if (adaBarangDalamKeranjang) {
                     double diskon = 0;
@@ -1086,14 +1097,14 @@ public class bilingualtest {
             }
         }
         if (bahasa) {
-            System.out.println("======================================================");
-            System.out.println("                Rincian Pembayaran                ");
-            System.out.println("======================================================");
+            System.out.println("=======================================================");
+            System.out.println("|                  Rincian Pembayaran                 |");
+            System.out.println("=======================================================");
             if (namaid != null) {
                 System.out.println("Nama   : " + namaid);
                 System.out.println("Alamat : " + alamatid);
                 System.out.println("No.Telp: " + notelpid);
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
                 System.out.printf("%-20s %-10s %-10s %-10s\n", "Produk", "Jumlah", "Harga", "Estimasi");
 
                 boolean adaBarangDalamKeranjang = false; // Menambahkan variabel ini untuk mengecek apakah ada barang
@@ -1108,11 +1119,11 @@ public class bilingualtest {
                         adaBarangDalamKeranjang = true;
                     }
                 }
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
                 System.out.println("Harga Ongkir : " + hargaOngkirid[pengiriman]);
                 System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter));
                 System.out.println("Tanggal Pengembalian: " + tanggalPengembalian.format(formatter));
-                System.out.println("======================================================");
+                System.out.println("=======================================================");
 
                 if (adaBarangDalamKeranjang) {
                     double diskon = 0;
@@ -1203,9 +1214,9 @@ public class bilingualtest {
     // method untuk service center
     public static void service(Scanner scanner) {
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                 Customer Service                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                Customer Service                |");
+            System.out.println("==================================================");
             System.out.println("Do you have a problem? Contact us via:");
             System.out.println("Phone Number: 082178174040");
             System.out.println("Email: hanifahkurniasari0512@gmail.com");
@@ -1221,9 +1232,9 @@ public class bilingualtest {
             }
         }
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                 Customer Service                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                Customer Service                |");
+            System.out.println("==================================================");
             System.out.println("Ada masalah? Hubungi kami melalui:");
             System.out.println("No. Telpon : 082178174040");
             System.out.println("email      : hanifahkurniasari0512@gmail.com");
@@ -1243,9 +1254,9 @@ public class bilingualtest {
     public static void pengembalian(Scanner scanner) {
         // Menampilkan judul dan pilihan untuk pengembalian barang
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                 Return Items               ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                   Return Items                 |");
+            System.out.println("==================================================");
             System.out.println("Do you want to return all items? (y/n)");
             String kembali = scanner.next();
 
@@ -1343,9 +1354,9 @@ public class bilingualtest {
             }
         }
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("               Pengembalian Barang               ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|              Pengembalian Barang               |");
+            System.out.println("==================================================");
             System.out.println("Apakah Anda Ingin Mengembalikan Semua Barang? (y/n)");
             String kembali = scanner.next();
 
@@ -1447,21 +1458,21 @@ public class bilingualtest {
     // method untuk pendapatan
     public static void pendapatan() {
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                Income & Feedback                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|               Income & Feedback                |");
+            System.out.println("==================================================");
             System.out.println("                  Cek pendapatan                 ");
             System.out.println("          Your Income is Rp. " + saldo);
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("feedback:" + masukkan);
         }
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("               Pendapatan & Feedback             ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|             Pendapatan & Feedback              |");
+            System.out.println("==================================================");
             System.out.println("               Cek pendapatan                   ");
             System.out.println("       pendapatan Anda adalah Rp. " + saldo);
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("feedback:" + masukkan);
         }
     }
@@ -1469,9 +1480,9 @@ public class bilingualtest {
     // method tambah barang
     public static void tambahBarang(Scanner scanner) {
         if (!bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                  Product Addition               ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|                Product Addition                |");
+            System.out.println("==================================================");
             System.out.print("Do you need to add a new product? (y/n): ");
             String tambahBarang = scanner.next();
 
@@ -1543,9 +1554,9 @@ public class bilingualtest {
             }
         }
         if (bahasa) {
-            System.out.println("=================================================");
-            System.out.println("                Penambahan Barang                ");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
+            System.out.println("|               Penambahan Barang                |");
+            System.out.println("==================================================");
             System.out.print("perlu menambahkan barang baru? (y/n): ");
             String tambahBarang = scanner.next();
 
@@ -1624,9 +1635,9 @@ public class bilingualtest {
             String back;
             boolean denda = true, notelat = true;
             while (denda) {
-                System.out.println("=================================================");
+                System.out.println("==================================================");
                 System.out.println("|                      Fines                    |");
-                System.out.println("=================================================");
+                System.out.println("==================================================");
                 System.out.println("1. Late return items");
                 System.out.println("2. Lost Items");
                 System.out.println("3. Damaged Items");
@@ -1741,9 +1752,9 @@ public class bilingualtest {
             String back;
             boolean denda = true, notelat = true;
             while (denda) {
-                System.out.println("=================================================");
-                System.out.println("|                      DENDA                    |");
-                System.out.println("=================================================");
+                System.out.println("==================================================");
+                System.out.println("|                      Denda                     |");
+                System.out.println("==================================================");
                 System.out.println("1. Telat mengembalikan barang");
                 System.out.println("2. Kehilangan barang");
                 System.out.println("3. Kerusakan barang");
@@ -1861,9 +1872,9 @@ public class bilingualtest {
 
     public static void membership(Scanner scanner) {
         if (!bahasa) {
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("|                   Membership                  |");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             boolean join = true;
             for (int i = 0; i < member.length; i++) {
                 if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
@@ -1894,7 +1905,7 @@ public class bilingualtest {
                     System.out.println("\nCongratulations! You have successfully registered as a member.");
                     System.out.println("Thank you, " + namaid + "! You will get a discount of " + (diskon * 100)
                             + "% \non your next purchase by entering \nyour member username and password.");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
                     System.out.println("      Entering Username & Password again     ");
                     login(scanner);
                 } else {
@@ -1905,9 +1916,9 @@ public class bilingualtest {
 
         }
         if (bahasa) {
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             System.out.println("|                   Membership                  |");
-            System.out.println("=================================================");
+            System.out.println("==================================================");
             boolean join = true;
             for (int i = 0; i < member.length; i++) {
                 if ((user.equalsIgnoreCase(member[i][0]) && password.equalsIgnoreCase(member[i][1]))) {
@@ -1938,7 +1949,7 @@ public class bilingualtest {
                     System.out.println("\nSelamat! Anda berhasil bergabung sebagai anggota.");
                     System.out.println("Terima kasih, " + namaid + "! Anda mendapatkan diskon " + (diskon * 100)
                             + "% \npada pembelian berikutnya dengan memasukkan \nusername dan password member anda.");
-                    System.out.println("=================================================");
+                    System.out.println("==================================================");
                     System.out.println("      Memasukkan Username & Password kembali     ");
                     main(itemKeranjang);
                 } else {
@@ -2018,7 +2029,7 @@ public class bilingualtest {
         }
         if (bahasa) {
             System.out.println("=======================================");
-            System.out.println("|         Riwayat Pemesanan            |");
+            System.out.println("|          Riwayat Pemesanan          |");
             System.out.println("=======================================");
             for (int i = 0; i < jumlahPesanan; i++) {
                 System.out.println("---------------------------------------");

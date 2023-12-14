@@ -731,6 +731,12 @@ public class codeInd {
                     jumlahid[i] += jumlahDipinjam[i];
                 }
             }
+            System.out.println("--jika barang dalam keadaan rusak atau jika barang hilang silahkan tekan ENTER untuk melaporkannya pada kami-- \n--jika tidak tekan SELAIN ENTER untuk melanjutkan proses pengembalian--");
+            String input1 = scanner.nextLine();
+                        input1 = scanner.nextLine();
+                        if (input1.isEmpty()) { // Jika input kosong (hanya enter)
+                        denda(scanner);;
+                    }else{
             
             System.out.println("-------------------------------------");
             // Meminta pengguna memasukkan tanggal pengembalian
@@ -770,7 +776,7 @@ public class codeInd {
             } else {
                 // Barang dikembalikan terlambat
                 statusPengembalian[nomorPesanan - 1] = "Dikembalikan terlambat";
-            }
+            }}
         }
     }
     
@@ -791,7 +797,7 @@ public class codeInd {
         System.out.println("=================================================");
         System.out.println("              penambahan barang         ");
         System.out.println("=================================================");
-        System.out.print("Apakah Anda ingin menambahkan barang baru? (y/n): ");
+        System.out.print("perlu menambahkan barang baru? (y/n): ");
         String tambahBarang = scanner.next();
 
         if (tambahBarang.equalsIgnoreCase("y")) {

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "bilingual",
+            "request": "launch",
+            "mainClass": "bilingual",
+            "projectName": "Sistem_Rental_Alat_Camping_1G_3bc80115"
+        },
+        {
+            "type": "java",
             "name": "bilingualtest",
             "request": "launch",
             "mainClass": "bilingualtest",

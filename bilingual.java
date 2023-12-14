@@ -1013,6 +1013,7 @@ public class bilingual {
 
     // Logika pembayaran
     public static void pembayaran(Scanner scanner) {
+        boolean bayar=true;
         if (!bahasa) {
             System.out.println("=======================================================");
             System.out.println("|                   Payment Details                   |");
@@ -1064,10 +1065,11 @@ public class bilingual {
                     if (jawaban.equalsIgnoreCase("y")) {
                         System.out.println("Enter your amount");
                         saldoCst = scanner.nextInt();
-                        saldo += ((totalHargaFinal - (int) diskon));
+                        
 
                         if (saldoCst == (totalHargaFinal - (int) diskon)) {
                             System.out.println("Your money is enough");
+                            saldo += ((totalHargaFinal - (int) diskon));
                         } else if (saldoCst > (totalHargaFinal - (int) diskon)) {
                             System.out.println("\nPress enter to see your remaining money");
                             String input = scanner.nextLine();
@@ -1075,14 +1077,17 @@ public class bilingual {
                             if (input.isEmpty()) { // Jika input kosong (hanya enter)
                                 System.out.println(
                                         "Your change money : " + (saldoCst - (totalHargaFinal - (int) diskon)));
+                                        saldo += ((totalHargaFinal - (int) diskon));
                             } else {
                                 // ga ambil kembalian
                                 System.out.println(
                                         "Your remaining balance: " + (saldoCst - (totalHargaFinal - (int) diskon)));
+                                        saldo += ((totalHargaFinal - (int) diskon));
                             }
                         } else {
                             System.out.println(
                                     "Your money is not enough" + (saldoCst - (totalHargaFinal - (int) diskon)));
+                                    bayar=false;
                         }
                         if (saldoCst == (totalHargaFinal - (int) diskon)
                                 || saldoCst > (totalHargaFinal - (int) diskon)) {
@@ -1091,6 +1096,9 @@ public class bilingual {
                                     + (saldoCst - (totalHargaFinal - (int) diskon)));
                             System.out.println("---------------------------------------------------");
                         }
+                    }else{
+                        System.out.println("Sorry, your payment is not valid.");
+                        bayar=false;
                     }
                 }
             } else {
@@ -1149,10 +1157,11 @@ public class bilingual {
                     if (jawaban.equalsIgnoreCase("y")) {
                         System.out.println("masukkan jumlah uang anda");
                         saldoCst = scanner.nextInt();
-                        saldo += ((totalHargaFinal - (int) diskon));
+                        
 
                         if (saldoCst == (totalHargaFinal - (int) diskon)) {
                             System.out.println("uang anda pas");
+                            saldo += ((totalHargaFinal - (int) diskon));
                         } else if (saldoCst > (totalHargaFinal - (int) diskon)) {
                             System.out.println("\nTekan enter untuk melihat sisa uang anda");
                             String input = scanner.nextLine();
@@ -1160,12 +1169,15 @@ public class bilingual {
                             if (input.isEmpty()) { // Jika input kosong (hanya enter)
                                 System.out.println(
                                         "Uang kembalian Anda: " + (saldoCst - (totalHargaFinal - (int) diskon)));
+                                        saldo += ((totalHargaFinal - (int) diskon));
                             } else {
                                 // ga ambil kembalian
                                 System.out.println("Sisa uang Anda: " + (saldoCst - (totalHargaFinal - (int) diskon)));
+                                saldo += ((totalHargaFinal - (int) diskon));
                             }
                         } else {
                             System.out.println("Uang Anda kurang" + (saldoCst - (totalHargaFinal - (int) diskon)));
+                            bayar=false;
                         }
                         if (saldoCst == (totalHargaFinal - (int) diskon)
                                 || saldoCst > (totalHargaFinal - (int) diskon)) {
@@ -1174,6 +1186,9 @@ public class bilingual {
                                     + (saldoCst - (totalHargaFinal - (int) diskon)));
                             System.out.println("---------------------------------------------------");
                         }
+                    }else{
+                        System.out.println("Maaf, pembayaran Anda tidak valid.");
+                        bayar=false;
                     }
                 }
             } else {
@@ -1181,6 +1196,7 @@ public class bilingual {
                 System.out.println("\n\n");
             }
         }
+        if (bayar) {
         riwayatNama[jumlahPesanan] = namaid;
         riwayatAlamat[jumlahPesanan] = alamatid;
         riwayatNoHp[jumlahPesanan] = notelpid;
@@ -1211,6 +1227,7 @@ public class bilingual {
         jmlBarangKeranjang = new int[NUM_PRODUCTS];
         tanggalPeminjaman = null;
         tanggalPengembalian = null;
+    }
     }
 
     // method untuk service center

@@ -1997,7 +1997,7 @@ public class bilingual {
             }
         }
         if (bahasa) {
-            System.out.println("Apakah anad ingin Log Out? (y/n) ");
+            System.out.println("Apakah anda ingin Log Out? (y/n) ");
             String logout = scanner.next();
             if (logout.equalsIgnoreCase("y")) {
                 System.out.println("Sampai jumpa lagi !");

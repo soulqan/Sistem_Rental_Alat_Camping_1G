@@ -882,12 +882,11 @@ public class bilingual {
             String inputTanggalPeminjaman = scanner.next(); // Membaca input tanggal
             // Parsing input tanggal peminjaman menjadi objek LocalDate
 
-            tanggalPeminjaman = LocalDate.parse(inputTanggalPeminjaman, formatter);
-            System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal
-                                                                                              // peminjaman
+            tanggalPeminjaman = LocalDate.parse(inputTanggalPeminjaman, formatter);//mengonversi input tanggal peminjaman dari string ke objek LocalDate
+            System.out.println("Tanggal Peminjaman: " + tanggalPeminjaman.format(formatter)); // Menampilkan tanggal peminjaman berdasarkan format nya
 
             // Menghitung dan menampilkan tanggal pengembalian berdasarkan estimasi hari
-            tanggalPengembalian = tanggalPeminjaman.plusDays(estimasi);
+            tanggalPengembalian = tanggalPeminjaman.plusDays(estimasi);//Tanggal pengembalian dihitung dengan menambahkan estimasi hari peminjaman ke tanggal peminjaman
             System.out.println("Tanggal Pengembalian: " + tanggalPengembalian.format(formatter));
 
             // Memberikan instruksi kepada pengguna untuk melanjutkan atau kembali ke menu
@@ -1332,7 +1331,6 @@ public class bilingual {
                     // Meminta pengguna memasukkan tanggal pengembalian
                     System.out.print("\nEnter the return date (dd/MM/yyyy): ");
                     String tanggalKembali = scanner.next();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
 
                     nomorPesan[nomorPesanan - 1] = 0;
@@ -1432,7 +1430,6 @@ public class bilingual {
                     // Meminta pengguna memasukkan tanggal pengembalian
                     System.out.print("\nMasukkan tanggal pengembalian (dd/MM/yyyy): ");
                     String tanggalKembali = scanner.next();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     tanggalPengembalian2 = LocalDate.parse(tanggalKembali, formatter);
 
                     nomorPesan[nomorPesanan - 1] = 0;
@@ -1441,15 +1438,16 @@ public class bilingual {
                     if (estimasiPeminjaman.isEqual(tanggalPengembalian2)) {
                         // Barang dikembalikan tepat waktu
                         System.out.println("Anda telah mengembalikan barang tepat waktu.");
-                    } else if (estimasiPeminjaman.isBefore(tanggalPengembalian2)) {
+                    } else if (estimasiPeminjaman.isBefore(tanggalPengembalian2)) { // maksudnya sebelum. jadi telat estimasiPeminjaman itu tanggal harus di kembalikan kalo tanggalPengembalian2 itu yang kita input
                         // Barang dikembalikan terlambat
                         System.out.println("Anda telat mengembalikan barang.");
-                        telat = true;
+                        telat = true;//boolean true biar nanti di denda perintah ny bakal di jalankan
                         keterlambatan = Period.between(estimasiPeminjaman, tanggalPengembalian2);
-                        int tahunKeterlambatan = keterlambatan.getYears();
-                        int bulanKeterlambatan = keterlambatan.getMonths();
-                        int hariKeterlambatan = keterlambatan.getDays();
+                        int tahunKeterlambatan = keterlambatan.getYears();//ambil perbedaan tahun antara estimasi peminjaman dengan tanggal pengembalian
+                        int bulanKeterlambatan = keterlambatan.getMonths();//ambil perbedaan bulan antara estimasi peminjaman dengan tanggal pengembalian
+                        int hariKeterlambatan = keterlambatan.getDays();//ambil perbedaan hari antara estimasi peminjaman dengan tanggal pengembalian
                         hariTelat = (tahunKeterlambatan * 365) + (bulanKeterlambatan * 30) + hariKeterlambatan;
+
                         System.out.println("Tekan enter untuk ke menu denda");
                         String input = scanner.nextLine();
                         input = scanner.nextLine();
